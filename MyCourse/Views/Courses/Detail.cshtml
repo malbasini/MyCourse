@@ -57,14 +57,20 @@
 			<i class="far fa-clock"></i><time>@lesson.Duration.ToString("m'm 's's'")</time>
 		</div>
 	</div>
+    <div class="row col-md-8">
+        <p>@lesson.Description</p>
+        <div class="col-md-4">
+
+        </div>
+    </div>
 	}
     <hr>
     <div class="row course-duration">
-		<div class="col-md-9 d-flex align-items-center">
-            Totale
+        <div  class="col-md-9">
+
         </div>
         <div class="col-md-3 d-flex align-items-center">
-            <i class="far fa-clock"></i><time>@Model.TotalCourseDuration.ToString("m'm 's's'")</time>
+            Totale <i class="far fa-clock"></i><time>@Model.TotalCourseDuration.ToString("h'h 'm'm 's's'")</time>
         </div>
     </div>
 </section>
