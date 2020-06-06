@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using MyCourse.Models.Options;
 using MyCourse.Models.Services.Infrastucture;
 using MyCourse.Models.ViewModels;
 
@@ -10,12 +12,17 @@ namespace MyCourse.Models.Services.Application
     public class AdoNetCourseService : ICourseService
     {
         private readonly IDatabaseAccessor db;
-        public AdoNetCourseService(IDatabaseAccessor db)
+        private readonly IOptionsMonitor<CoursesOptions> courseOptions;
+        private readonly ILogger<AdoNetCourseService> logger;
+        public AdoNetCourseService(ILogger<AdoNetCourseService> logger, IDatabaseAccessor db, IOptionsMonitor<CoursesOptions> courseOptions)
         {
+            this.logger = logger;
+            this.courseOptions = courseOptions;
             this.db = db;
         }
         public async Task<CourseDetailViewModel> GetCourseAsync(int id)
         {
+            logger.
             FormattableString query = $@"SELECT Id, Title, Description, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency FROM Courses WHERE Id={id}
             ; SELECT Id, Title, Description, Duration FROM Lessons WHERE CourseId={id}";
 

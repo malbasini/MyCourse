@@ -33,7 +33,7 @@ namespace MyCourse.Models.Services.Infrastucture
                    .HasColumnName("CurrentPrice_Currency");
                    builder.Property(money => money.Amount).HasColumnName("CurrentPrice_Amount");
                 });
-                 entity.OwnsOne(course => course.FullPrice, builder => 
+                entity.OwnsOne(course => course.FullPrice, builder => 
                 {
                    builder.Property(money => money.Currency)
                    .HasConversion<string>()
