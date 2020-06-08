@@ -2,6 +2,8 @@ using System;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MyCourse.Models.Exceptions;
+using MyCourse.Models.Services.Application;
+
 namespace MyCourse.Controllers
 {
     public class ErrorController : Controller
@@ -9,21 +11,11 @@ namespace MyCourse.Controllers
         public IActionResult Index()
         {
             var feature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            switch(feature.Error)
-            {
-                case CourseNotFoundException exc:
-                {
-                    ViewData["Title"] = "Corso non trovato.";
-                    Response.StatusCode = 404;
-                    return View("CourseNotFound");
-                }
-                default:
-                {
-                    ViewData["Title"] = "Errore";
-                    return View();
-                }
-            }
-            
+            ManageError error = new ManageError(feature);
+            error.Manage();
+            ViewData["Title"] = error.Title;
+            Response.StatusCode = error.StatusCode;
+            return View(error.ViewName);  
         }
     }
 }
