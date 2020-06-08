@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-
+using MyCourse.Models.Exceptions;
 namespace MyCourse.Controllers
 {
     public class ErrorController : Controller
@@ -11,7 +11,7 @@ namespace MyCourse.Controllers
             var feature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
             switch(feature.Error)
             {
-                case InvalidOperationException exc:
+                case CourseNotFoundException exc:
                 {
                     ViewData["Title"] = "Corso non trovato.";
                     Response.StatusCode = 404;

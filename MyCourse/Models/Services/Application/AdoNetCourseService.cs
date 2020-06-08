@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Infrastucture;
 using MyCourse.Models.ViewModels;
+using MyCourse.Models.Exceptions;
 
 namespace MyCourse.Models.Services.Application
 {
@@ -35,7 +36,7 @@ namespace MyCourse.Models.Services.Application
             if (courseTable.Rows.Count != 1)
             {
                 logger.LogWarning("Corso {id} non trovato",id);
-                throw new InvalidOperationException();
+                throw new CourseNotFoundException(id);
             }
             var courseRow = courseTable.Rows[0];
             var courseDetailViewModel = CourseDetailViewModel.FromDataRow(courseRow);
