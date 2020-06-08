@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Infrastucture;
@@ -22,7 +23,8 @@ namespace MyCourse.Models.Services.Application
         }
         public async Task<CourseDetailViewModel> GetCourseAsync(int id)
         {
-            logger.
+            logger.LogInformation("Corso {id} richiesto.",id);
+
             FormattableString query = $@"SELECT Id, Title, Description, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency FROM Courses WHERE Id={id}
             ; SELECT Id, Title, Description, Duration FROM Lessons WHERE CourseId={id}";
 
@@ -32,6 +34,7 @@ namespace MyCourse.Models.Services.Application
             var courseTable = dataSet.Tables[0];
             if (courseTable.Rows.Count != 1)
             {
+                logger.LogWarning("Corso {id} non trovato",id);
                 throw new InvalidOperationException();
             }
             var courseRow = courseTable.Rows[0];
