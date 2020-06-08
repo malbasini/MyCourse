@@ -10,12 +10,11 @@ namespace MyCourse.Controllers
     {
         public IActionResult Index()
         {
-            var feature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            ManageError error = new ManageError(feature);
-            error.Manage();
-            ViewData["Title"] = error.Title;
-            Response.StatusCode = error.StatusCode;
-            return View(error.ViewName);  
+            ManageError handler = new ManageError(HttpContext);
+            handler.Manage();
+            ViewBag.Title = handler.Title;
+            Response.StatusCode = handler.StatusCode;
+            return View(handler.ViewName);  
         }
     }
 }

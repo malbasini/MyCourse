@@ -11,18 +11,19 @@ namespace MyCourse.Models.Services.Application
 {
     public class ManageError
     {
+        private readonly HttpContext context;
+
         public string ViewName { get; internal set; }
         public int StatusCode { get; internal set; }
 
         public string Title { get; internal set; }
-        private readonly IExceptionHandlerPathFeature feature;
-
-        public ManageError(IExceptionHandlerPathFeature feature)
+        public ManageError(HttpContext context)
         {
-            this.feature = feature;
+            this.context = context;
         }
         public void Manage()
         {
+            var feature = context.Features.Get<IExceptionHandlerPathFeature>();
             switch (feature.Error)
             {
                 case CourseNotFoundException ex:
