@@ -27,12 +27,19 @@ namespace MyCourse.Models.Services.Application
             switch (feature.Error)
             {
                 case CourseNotFoundException ex:
-                    {
-                        Title = "Corso non trovato.";
-                        StatusCode = 404;
-                        ViewName = "CourseNotFound";
-                        break;
-                    }
+                {
+                    Title = "Corso non trovato";
+                    StatusCode = 404;
+                    ViewName = "CourseNotFound";
+                    break;
+                }
+                case Microsoft.Data.Sqlite.SqliteException exc:
+                {
+                    Title = "Errore Database Sqlite";
+                    StatusCode = 500;
+                    ViewName = "DatabaseSqliteError";
+                    break;
+                }    
                 default:
                     {
                         Title = "Errore.";
