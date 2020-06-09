@@ -8,19 +8,17 @@ namespace MyCourse.Controllers
 {
     public class CoursesController : Controller
     {
-        private readonly ICourseService courseService;
-        public CoursesController(ICourseService courseService)
+        private readonly ICachedCourseService courseService;
+        public CoursesController(ICachedCourseService courseService)
         {
             this.courseService = courseService;
         }
-
         public async Task<IActionResult> Index()
         {
             ViewData["Title"] = "Catalogo dei corsi";
             List<CourseViewModel> courses = await courseService.GetCoursesAsync();
             return View(courses);
         }
-
         public async Task<IActionResult> Detail(int id)
         {
             CourseDetailViewModel course = await courseService.GetCourseAsync(id);

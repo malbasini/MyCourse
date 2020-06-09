@@ -33,14 +33,17 @@ namespace MyCourse
             services.AddTransient<ICourseService, AdoNetCourseService>();
             //services.AddTransient<ICourseService, EFCoreCourseService>();
             services.AddTransient<IDatabaseAccessor, SqliteDatabaseAccessor>();
+            services.AddTransient<ICachedCourseService,MemoryCacheCourseService>();
             services.AddDbContextPool<MyCourseDbContext>(optionsBuilder =>
             {
                 string connectionString = configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
                 optionsBuilder.UseSqlite(connectionString);
             });
             //Options
+            services.Configure<TimeFromSecondExpireCacheOptions>(configuration.GetSection("TimeExpireCacheFromSecond"));
             services.Configure<ConnectionStringOptions>(configuration.GetSection("ConnectionStrings"));
             services.Configure<CoursesOptions>(configuration.GetSection("Courses"));
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
