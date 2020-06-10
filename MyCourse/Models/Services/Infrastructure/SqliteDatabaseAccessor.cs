@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 using MyCourse.Models.Options;
 using MyCourse.Models.ValueTypes;
 
-namespace MyCourse.Models.Services.Infrastucture
+namespace MyCourse.Models.Services.Infrastructure
 {
     public class SqliteDatabaseAccessor : IDatabaseAccessor
     {

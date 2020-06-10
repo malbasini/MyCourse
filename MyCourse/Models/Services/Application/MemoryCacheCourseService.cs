@@ -24,8 +24,9 @@ namespace MyCourse.Models.Services.Application
         {
             return memoryCache.GetOrCreateAsync($"Course{id}", cacheEntry =>
             {
+                cacheEntry.SetSize(1);
                 int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
-                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second)); //Esercizio: provate a recuperare il valore 60 usando il servizio di configurazione
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second)); 
                 return courseService.GetCourseAsync(id);
             });
         }
@@ -33,7 +34,9 @@ namespace MyCourse.Models.Services.Application
         {
             return memoryCache.GetOrCreateAsync($"Courses", cacheEntry =>
             {
-                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60));
+                cacheEntry.SetSize(1);
+                int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second));
                 return courseService.GetCoursesAsync();
             });
         }
