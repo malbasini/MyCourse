@@ -32,7 +32,7 @@ namespace MyCourse.Models.Services.Application
         }
         public Task<List<CourseViewModel>> GetCoursesAsync(string search)
         {
-            return memoryCache.GetOrCreateAsync($"Courses", cacheEntry =>
+            return memoryCache.GetOrCreateAsync($"Courses{search}", cacheEntry =>
             {
                 cacheEntry.SetSize(1);
                 int second = memoryCacheCourseServiceOptions.CurrentValue.Default;

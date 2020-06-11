@@ -44,6 +44,7 @@ namespace MyCourse.Models.Services.Application
         }
         public async Task<List<CourseViewModel>> GetCoursesAsync(string search)
         {
+            search = search ?? "";
             IQueryable<CourseViewModel> queryLinq = dbContext.Courses.AsNoTracking().Select(course => new CourseViewModel
             { 
                 Id=course.Id,
