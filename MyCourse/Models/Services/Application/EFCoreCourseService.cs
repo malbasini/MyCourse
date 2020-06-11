@@ -42,7 +42,7 @@ namespace MyCourse.Models.Services.Application
                 .SingleAsync();//Metodo che accede al Database. Se l'elenco contiene 0 o più di un'occorrenza solleva un'eccezione.
               return viewModel;
         }
-        public async Task<List<CourseViewModel>> GetCoursesAsync()
+        public async Task<List<CourseViewModel>> GetCoursesAsync(string search)
         {
             IQueryable<CourseViewModel> queryLinq = dbContext.Courses.AsNoTracking().Select(course => new CourseViewModel
             { 
@@ -53,7 +53,7 @@ namespace MyCourse.Models.Services.Application
                 CurrentPrice=course.CurrentPrice,
                 FullPrice=course.FullPrice,
                 ImagePath=course.ImagePath
-            });
+            }).Where(course=>course.Title.Contains(search));
             List<CourseViewModel> courses = await queryLinq.ToListAsync();//La query al database viene invocata quì.
             return courses;
         }

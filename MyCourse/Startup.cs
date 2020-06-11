@@ -74,7 +74,7 @@ namespace MyCourse
             services.Configure<ConnectionStringOptions>(configuration.GetSection("ConnectionStrings"));
             services.Configure<CoursesOptions>(configuration.GetSection("Courses"));
             services.Configure<MemoryCacheOptions>(configuration.GetSection("MemoryCache"));
-           
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
