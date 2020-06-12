@@ -51,7 +51,7 @@ namespace MyCourse.Models.Services.Application
               .SingleAsync();//Metodo che accede al Database. Se l'elenco contiene 0 o più di un'occorrenza solleva un'eccezione.
             return viewModel;
         }
-        public async Task<List<CourseViewModel>> GetCoursesAsync(CourseListInputModel model)
+        public async Task<ListViewModel<CourseViewModel>> GetCoursesAsync(CourseListInputModel model)
         {
             IQueryable<Course> baseQuery = dbContext.Courses;
             switch(model.OrderBy)
@@ -82,8 +82,6 @@ namespace MyCourse.Models.Services.Application
                     break;
             }   
             IQueryable<CourseViewModel> queryLinq = baseQuery
-            .Skip(model.Offset)
-            .Take(model.Limit)
             .AsNoTracking()
             .Select(course => new CourseViewModel
             {
@@ -95,8 +93,17 @@ namespace MyCourse.Models.Services.Application
                 FullPrice = course.FullPrice,
                 ImagePath = course.ImagePath
             }).Where(course => course.Title.Contains(model.Search));
-            List<CourseViewModel> courses = await queryLinq.ToListAsync();//La query al database viene invocata quì.
-            return courses;
+            List<CourseViewModel> courses = await queryLinq
+            .Skip(model.Offset)
+            .Take(model.Limit)
+            .ToListAsync();//La query al database viene invocata quì.
+            int totalCount = await queryLinq.CountAsync();
+            ListViewModel<CourseViewModel> result = new ListViewModel<CourseViewModel>
+            {
+                 Results = courses,
+                 TotalCount = totalCount
+            }; 
+            return result;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace MyCourse.Models.Services.Application
                 return courseService.GetCourseAsync(id);
             });
         }
-        Task<List<CourseViewModel>> ICourseService.GetCoursesAsync(CourseListInputModel model)
+        Task<ListViewModel<CourseViewModel>> ICourseService.GetCoursesAsync(CourseListInputModel model)
         {
             //Metto in cache i risultati solo per le prime 5 pagine del catalogo, che reputo essere
             //le più visitate dagli utenti, e che perciò mi permettono di avere il maggior beneficio dalla cache.
