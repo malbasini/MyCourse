@@ -88,5 +88,15 @@ namespace MyCourse.Models.Services.Application
             //Riconvertiamo una stringa JSON in un oggetto
             return JsonConvert.DeserializeObject<T>(serializedObject);
         }
+
+        Task<List<CourseViewModel>> ICourseService.GetMostRecentCoursesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<CourseViewModel>> ICourseService.GetBestRatingCoursesAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

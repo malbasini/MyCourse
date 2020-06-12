@@ -34,5 +34,7 @@ namespace MyCourse.Models.InputModels
 
         public int Limit { get; }
         public int Offset { get; }
+
+        public int Id {get;}
     }
 }
