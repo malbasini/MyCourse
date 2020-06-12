@@ -57,7 +57,7 @@ namespace MyCourse.Models.Services.Application
             return course;
         }
 
-        public async Task<List<CourseViewModel>> GetCoursesAsync(string search)
+        public async Task<List<CourseViewModel>> GetCoursesAsync(string search, int page, string orderby, bool ascending)
         {
             string key = $"Courses";
             string serializedObject = await distributedCache.GetStringAsync(key);
@@ -66,7 +66,7 @@ namespace MyCourse.Models.Services.Application
                 return Deserialize<List<CourseViewModel>>(serializedObject);
             }
             
-            List<CourseViewModel> courses = await courseService.GetCoursesAsync(search);
+            List<CourseViewModel> courses = await courseService.GetCoursesAsync(search,page,orderby,ascending);
             serializedObject = Serialize(courses);
 
             var cacheOptions = new DistributedCacheEntryOptions();
