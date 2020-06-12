@@ -45,6 +45,7 @@ namespace MyCourse.Models.Services.Application
                 return memoryCache.GetOrCreateAsync($"Courses{model.Page}-{model.OrderBy}-{model.Ascending}", cacheEntry => 
                 {
                     cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60));
+                    cacheEntry.SetSize(1);
                     return courseService.GetCoursesAsync(model);
                 });
             }
