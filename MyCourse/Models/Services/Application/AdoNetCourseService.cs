@@ -10,6 +10,7 @@ using MyCourse.Models.ViewModels;
 using MyCourse.Models.Exceptions;
 using System.Linq;
 using MyCourse.Models.ValueTypes;
+using MyCourse.Models.InputModels;
 
 namespace MyCourse.Models.Services.Application
 {
@@ -54,22 +55,12 @@ namespace MyCourse.Models.Services.Application
             return courseDetailViewModel;
         }
 
-        public async Task<List<CourseViewModel>> GetCoursesAsync(string search, int page, string orderby, bool ascending)
+        public async Task<List<CourseViewModel>> GetCoursesAsync(CourseListInputModel model)
         {
-            page = Math.Max(1,page);
-            int limit = courseOptions.CurrentValue.PerPage;
-            int offset = (page -1)*limit;
-            var orderOptions = courseOptions.CurrentValue.Order;
-            if(!orderOptions.Allow.Contains(orderby)) 
-            {
-                orderby = orderOptions.By; 
-                ascending = orderOptions.Ascending;   
-            }
-            if(orderby=="CurrentPrice")
-                orderby="CurrentPrice_Amount"; 
-            string direction = ascending ? "ASC" : "DESC";     
+            string orderby = model.OrderBy == "CurrentPrice" ? "CurrentPrice_Amount" : model.OrderBy;
+            string direction = model.Ascending ? "ASC" : "DESC";
             List<CourseViewModel> courseList = new List<CourseViewModel>();
-            FormattableString query = $"SELECT Id,Title,ImagePath,Author,Rating,FullPrice_Amount,FullPrice_Currency,CurrentPrice_Amount,CurrentPrice_Currency FROM Courses WHERE Title LIKE {"%" + search + "%"} ORDER BY {(Sql)orderby} {(Sql)direction} LIMIT {limit} OFFSET {offset}";
+            FormattableString query = $"SELECT Id,Title,ImagePath,Author,Rating,FullPrice_Amount,FullPrice_Currency,CurrentPrice_Amount,CurrentPrice_Currency FROM Courses WHERE Title LIKE {"%" + model.Search + "%"} ORDER BY {(Sql)orderby} {(Sql)direction} LIMIT {model.Limit} OFFSET {model.Offset}";
             DataSet dataSet = await db.QueryAsync(query);
             DataTable dataTable = dataSet.Tables[0];
             foreach (DataRow courseRow in dataTable.Rows)

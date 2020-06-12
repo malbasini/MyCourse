@@ -10,6 +10,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyCourse.Models.Exceptions;
+using MyCourse.Models.InputModels;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Infrastructure;
 using MyCourse.Models.ViewModels;
@@ -57,7 +58,7 @@ namespace MyCourse.Models.Services.Application
             return course;
         }
 
-        public async Task<List<CourseViewModel>> GetCoursesAsync(string search, int page, string orderby, bool ascending)
+        public async Task<List<CourseViewModel>> GetCoursesAsync(CourseListInputModel model)
         {
             string key = $"Courses";
             string serializedObject = await distributedCache.GetStringAsync(key);
@@ -66,7 +67,7 @@ namespace MyCourse.Models.Services.Application
                 return Deserialize<List<CourseViewModel>>(serializedObject);
             }
             
-            List<CourseViewModel> courses = await courseService.GetCoursesAsync(search,page,orderby,ascending);
+            List<CourseViewModel> courses = await courseService.GetCoursesAsync(model);
             serializedObject = Serialize(courses);
 
             var cacheOptions = new DistributedCacheEntryOptions();
