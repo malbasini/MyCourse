@@ -25,7 +25,6 @@ namespace MyCourse.Models.Services.Application
         {
             return memoryCache.GetOrCreateAsync($"Course{id}", cacheEntry =>
             {
-                cacheEntry.SetSize(1);
                 int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
                 cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second)); 
                 return courseService.GetCourseAsync(id);
@@ -45,8 +44,8 @@ namespace MyCourse.Models.Services.Application
             {
                 return memoryCache.GetOrCreateAsync($"Courses{model.Page}-{model.OrderBy}-{model.Ascending}", cacheEntry => 
                 {
-                    cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60));
-                    cacheEntry.SetSize(1);
+                    int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
+                    cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second));
                     return courseService.GetCoursesAsync(model);
                 });
             }
@@ -59,8 +58,8 @@ namespace MyCourse.Models.Services.Application
         {
             return memoryCache.GetOrCreateAsync($"BestRatingCourses", cacheEntry => 
             {
-                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60));
-                cacheEntry.SetSize(1);
+                int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second));
                 return courseService.GetBestRatingCoursesAsync();
             });
         }
@@ -68,8 +67,8 @@ namespace MyCourse.Models.Services.Application
         {
             return memoryCache.GetOrCreateAsync($"MostRecentCourses", cacheEntry => 
             {
-                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60));
-                cacheEntry.SetSize(1);
+                int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second));
                 return courseService.GetMostRecentCoursesAsync();
             });
         }
