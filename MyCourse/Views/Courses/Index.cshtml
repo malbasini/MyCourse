@@ -17,9 +17,9 @@
 
 <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-5"><a asp-route-orderby="Title" asp-route-ascending="@(Model.Input.OrderBy == "Title" ? !Model.Input.Ascending : true)" asp-route-search="@Model.Input.Search">Titolo @if(Model.Input.OrderBy == "Title") { <i class="fas fa-caret-@(Model.Input.Ascending ? "up" : "down")"></i> }</a></div>
-    <div class="col-md-2"><a asp-route-orderby="Rating" asp-route-ascending="@(Model.Input.OrderBy == "Rating" ? !Model.Input.Ascending : true)" asp-route-search="@Model.Input.Search">Valutazione @if(Model.Input.OrderBy == "Rating") { <i class="fas fa-caret-@(Model.Input.Ascending ? "up" : "down")"></i> }</a></div>
-    <div class="col-md-2"><a asp-route-orderby="CurrentPrice" asp-route-ascending="@(Model.Input.OrderBy == "CurrentPrice" ? !Model.Input.Ascending : true)" asp-route-search="@Model.Input.Search">Prezzo @if(Model.Input.OrderBy == "CurrentPrice") { <i class="fas fa-caret-@(Model.Input.Ascending ? "up" : "down")"></i> }</a></div>
+    <div class="col-md-5"><order-link order-by="Title" Input="@Model.Input">Titolo</order-link></div>
+    <div class="col-md-2"><order-link order-by="Title" Input="@Model.Input">Rating</order-link></div>
+    <div class="col-md-2"><order-link order-by="Title" Input="@Model.Input">CurrentPrice</order-link></div>
     <div class="col-md-2"></div>
 </div>
 @foreach (CourseViewModel course in Model.Courses.Results)
@@ -34,32 +34,10 @@
         <author class="author">@course.Author</author>
     </div>
     <div class="col-md-2 rating">
-        @for(int i = 1; i<=5; i++)
-        {
-            if(course.Rating >=i)
-            {
-                <i class="fas fa-star"></i>
-            }
-            else if(course.Rating > i - 1)
-            {
-                <i class="fas fa-star-half-alt"></i>
-            } 
-            else
-            {
-                 <i class="far fa-star"></i>
-            }
-        }
+       <rating value="@course.Rating"></rating>
     </div>
     <div class="col-md-2 price" >
-       
-        @if(course.CurrentPrice.Equals(course.FullPrice))
-        {
-              @course.FullPrice
-        }
-        else
-        {
-              @course.CurrentPrice  <br><s>@course.FullPrice</s>
-        }
+        <price current-price="@course.CurrentPrice" full-price="@course.FullPrice"></price>
     </div>
     <div class="col-md-2">
         <a class="btn btn-outline-primary" asp-action="Detail" asp-controller="Courses" asp-route-id=@course.Id>Dettaglio corso</a>
@@ -68,41 +46,8 @@
 }
 <br>
 <br>
-@{
-    int totalPage = (int)Math.Ceiling(Model.Courses.TotalCount / (decimal) Model.Input.Limit);
-    int currentPage = Model.Input.Page;
-}
-<nav aria-label="Page navigation">
-    <ul class="pagination d-flex justify-content-center mt-3">
-        @if(currentPage > 1)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-page=@(currentPage-1) asp-route-search = "@Model.Input.Search" asp-route-orderby = "@Model.Input.OrderBy" asp-route-ascending = "@Model.Input.Ascending"><i class="fas fa-angle-left"></i></a>
-            </li>
-        }
-        @for(int p = Math.Max(1,currentPage - 4);p <= (Math.Min(totalPage, currentPage + 4));p++)
-        {
-            if(p==currentPage)
-            {
-                 <li class="page-item active" aria-current="page">
-                    <a class="page-link" asp-route-page="@p"asp-route-search = "@Model.Input.Search" asp-route-orderby = "@Model.Input.OrderBy" asp-route-ascending = "@Model.Input.Ascending" >@p<span class="sr-only">(current)</span></a>
-                </li>
-            }
-            else
-            {
-                  <li class="page-item">
-                     <a class="page-link" asp-route-page="@p" asp-route-search = "@Model.Input.Search" asp-route-orderby = "@Model.Input.OrderBy" asp-route-ascending = "@Model.Input.Ascending">@p</a>
-                  </li>
-            }
-        }
-        @if(currentPage < totalPage)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-page=@(currentPage+1) asp-route-search = "@Model.Input.Search" asp-route-orderby = "@Model.Input.OrderBy" asp-route-ascending = "@Model.Input.Ascending"><i class="fas fa-angle-right"></i></a>
-            </li>
-        }
-    </ul>
-</nav>
+<vc:Pagination-bar model="@Model"></vc:Pagination-bar>
+
 
 
 
