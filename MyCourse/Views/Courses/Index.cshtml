@@ -14,7 +14,6 @@
         </form>
     </div>
 </div>
-
 <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-5"><order-link order-by="Title" Input="@Model.Input">Titolo</order-link></div>
@@ -24,25 +23,7 @@
 </div>
 @foreach (CourseViewModel course in Model.Courses.Results)
 {
-<hr>
-<div class="row">
-    <div class="col-md-1">
-        <img src = @course.ImagePath width="70px" height="70px">
-    </div>
-    <div class="col-md-5">
-        <h2>@course.Title</h2>
-        <author class="author">@course.Author</author>
-    </div>
-    <div class="col-md-2 rating">
-       <rating value="@course.Rating"></rating>
-    </div>
-    <div class="col-md-2 price" >
-        <price current-price="@course.CurrentPrice" full-price="@course.FullPrice"></price>
-    </div>
-    <div class="col-md-2">
-        <a class="btn btn-outline-primary" asp-action="Detail" asp-controller="Courses" asp-route-id=@course.Id>Dettaglio corso</a>
-    </div>
-</div>
+    <partial name="Courses/_CourseLine" model="@course"></partial>
 }
 <br>
 <br>
