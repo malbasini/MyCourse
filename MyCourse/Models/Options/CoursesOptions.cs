@@ -4,8 +4,8 @@ namespace MyCourse.Models.Options
     public partial class CoursesOptions
     {
         public int PerPage { get; set; }
+        public int InHome { get; set; }
         public CoursesOrderOptions Order { get; set; }
-        public int InHome {get;set;}
     }
 
     public partial class CoursesOrderOptions
