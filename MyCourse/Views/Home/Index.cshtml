@@ -3,25 +3,32 @@
     <h1 class="display-4">@ViewData["Title"]</h1>
     <p class="lead">Impara in maniera facile e divertente con i nostri corsi online!<br>
 Scegli da un vasto catalogo sempre a tua disposizione.</p>
-    <hr class="my-4">
     <p><a asp-controller="Courses" asp-action="Index" class="btn btn-primary">Sfoglia il catalogo dei corsi <i class="fas fa-angle-right"></i></a></p>
 </div>
 
 <section>
     <h2>Aggiunti di recente</h2>
-    @foreach (var course in Model.MostRecentCourses)
+    @foreach (CourseViewModel course in Model.MostRecentCourses)
     {
         <partial name="Courses/_CourseLine" model="@course"></partial>
     }
 </section>
+
+
 <section>
     <h2>I migliori di sempre</h2>
-    @foreach (var course in Model.BestRatingCourses)
+    @foreach (CourseViewModel course in Model.BestRatingCourses)
     {
+<<<<<<< HEAD
        <partial name="Courses/_CourseLine" model="@course"></partial>
     }
 <<<<<<< HEAD
 </section>   
 =======
 </section>   
+>>>>>>> sezione14
+=======
+        <partial name="Courses/_CourseLine" model="@course"></partial>
+    }
+</section>
 >>>>>>> sezione14

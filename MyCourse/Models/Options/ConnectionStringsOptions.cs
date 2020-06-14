@@ -1,6 +1,6 @@
 namespace MyCourse.Models.Options
 {
-    public class ConnectionStringOptions
+    public class ConnectionStringsOptions
     {
         public string Default { get; set; }
     }

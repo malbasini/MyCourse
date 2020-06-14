@@ -19,8 +19,9 @@ namespace MyCourse.Customizations.ModelBinders
             //Recuperiamo i valori grazie ai value provider
             string search = bindingContext.ValueProvider.GetValue("Search").FirstValue;
             string orderBy = bindingContext.ValueProvider.GetValue("OrderBy").FirstValue;
-            int page = Convert.ToInt32(bindingContext.ValueProvider.GetValue("Page").FirstValue);
-            bool ascending = Convert.ToBoolean(bindingContext.ValueProvider.GetValue("Ascending").FirstValue);
+            int.TryParse(bindingContext.ValueProvider.GetValue("Page").FirstValue, out int page);
+            bool.TryParse(bindingContext.ValueProvider.GetValue("Ascending").FirstValue, out bool ascending);
+
             //Creiamo l'istanza del CourseListInputModel
             CoursesOptions options = coursesOptions.CurrentValue;
             var inputModel = new CourseListInputModel(search, page, orderBy, ascending, options.PerPage, options.Order);

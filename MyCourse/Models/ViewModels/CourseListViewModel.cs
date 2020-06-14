@@ -5,10 +5,13 @@ namespace MyCourse.Models.ViewModels
 {
     public class CourseListViewModel : IPaginationInfo
     {
-        public ListViewModel<CourseViewModel> Courses {get;set;}
-        public CourseListInputModel Input {get;set;}
+        public ListViewModel<CourseViewModel> Courses { get; set; }
+        public CourseListInputModel Input { get; set; }
 
-        #region "Implementazione IPaginationInfo"
+
+
+
+        #region Implementazione IPaginationInfo
         int IPaginationInfo.CurrentPage => Input.Page;
 
         int IPaginationInfo.TotalResults => Courses.TotalCount;
@@ -20,9 +23,6 @@ namespace MyCourse.Models.ViewModels
         string IPaginationInfo.OrderBy => Input.OrderBy;
 
         bool IPaginationInfo.Ascending => Input.Ascending;
-
         #endregion
     }
 }
-
-        
