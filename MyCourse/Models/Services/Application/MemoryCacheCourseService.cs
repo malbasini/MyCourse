@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Caching.Memory;
-using MyCourse.Models.ViewModels;
-using MyCourse.Models.Services.Application;
-using Microsoft.Extensions.Options;
-using MyCourse.Models.Options;
 using MyCourse.Models.InputModels;
+using MyCourse.Models.ViewModels;
 
 namespace MyCourse.Models.Services.Application
 {
@@ -14,24 +12,42 @@ namespace MyCourse.Models.Services.Application
     {
         private readonly ICourseService courseService;
         private readonly IMemoryCache memoryCache;
-        private readonly IOptionsMonitor<TimeFromSecondExpireCacheOptions> memoryCacheCourseServiceOptions;
-        public MemoryCacheCourseService(IOptionsMonitor<TimeFromSecondExpireCacheOptions> memoryCacheCourseServiceOptions, ICourseService courseService, IMemoryCache memoryCache)
+        public MemoryCacheCourseService(ICourseService courseService, IMemoryCache memoryCache)
         {
-            this.memoryCacheCourseServiceOptions = memoryCacheCourseServiceOptions;
             this.courseService = courseService;
             this.memoryCache = memoryCache;
         }
+
+        //TODO: ricordati di usare memoryCache.Remove($"Course{id}") quando aggiorni il corso
+
         public Task<CourseDetailViewModel> GetCourseAsync(int id)
         {
-            return memoryCache.GetOrCreateAsync($"Course{id}", cacheEntry =>
+            return memoryCache.GetOrCreateAsync($"Course{id}", cacheEntry => 
             {
-                int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
-                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second)); 
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60)); //Esercizio: provate a recuperare il valore 60 usando il servizio di configurazione
                 return courseService.GetCourseAsync(id);
             });
         }
 
-        Task<ListViewModel<CourseViewModel>> ICourseService.GetCoursesAsync(CourseListInputModel model)
+        public Task<List<CourseViewModel>> GetBestRatingCoursesAsync()
+        {
+            return memoryCache.GetOrCreateAsync($"BestRatingCourses", cacheEntry => 
+            {
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60));
+                return courseService.GetBestRatingCoursesAsync();
+            });
+        }
+        
+        public Task<List<CourseViewModel>> GetMostRecentCoursesAsync()
+        {
+            return memoryCache.GetOrCreateAsync($"MostRecentCourses", cacheEntry => 
+            {
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60));
+                return courseService.GetMostRecentCoursesAsync();
+            });
+        }
+
+        public Task<ListViewModel<CourseViewModel>> GetCoursesAsync(CourseListInputModel model)
         {
             //Metto in cache i risultati solo per le prime 5 pagine del catalogo, che reputo essere
             //le più visitate dagli utenti, e che perciò mi permettono di avere il maggior beneficio dalla cache.
@@ -44,33 +60,13 @@ namespace MyCourse.Models.Services.Application
             {
                 return memoryCache.GetOrCreateAsync($"Courses{model.Page}-{model.OrderBy}-{model.Ascending}", cacheEntry => 
                 {
-                    int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
-                    cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second));
+                    cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60));
                     return courseService.GetCoursesAsync(model);
                 });
             }
 
             //Altrimenti uso il servizio applicativo sottostante, che recupererà sempre i valori dal database
             return courseService.GetCoursesAsync(model);
-        }
-
-        public Task<List<CourseViewModel>> GetBestRatingCoursesAsync()
-        {
-            return memoryCache.GetOrCreateAsync($"BestRatingCourses", cacheEntry => 
-            {
-                int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
-                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second));
-                return courseService.GetBestRatingCoursesAsync();
-            });
-        }
-        public Task<List<CourseViewModel>> GetMostRecentCoursesAsync()
-        {
-            return memoryCache.GetOrCreateAsync($"MostRecentCourses", cacheEntry => 
-            {
-                int second = memoryCacheCourseServiceOptions.CurrentValue.Default;
-                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(second));
-                return courseService.GetMostRecentCoursesAsync();
-            });
         }
     }
 }

@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using MyCourse.Models.Enums;
@@ -15,8 +14,6 @@ namespace MyCourse.Models.Services.Application
             var rand = new Random();
             for (int i = 1; i <= 20; i++)
             {
-                /*--NextDouble Numero a virgola mobile e precisione doppia maggiore o uguale a 0,0 e minore di 1,0.*/
-                /*-- Next Restituisce un intero casuale tra 10 e 50.*/
                 var price = Convert.ToDecimal(rand.NextDouble() * 10 + 10);
                 var course = new CourseViewModel
                 {
@@ -33,7 +30,7 @@ namespace MyCourse.Models.Services.Application
             return courseList;
         }
 
-       public CourseDetailViewModel GetCourse(int id)
+        public CourseDetailViewModel GetCourse(int id)
         {
             var rand = new Random();
             var price = Convert.ToDecimal(rand.NextDouble() * 10 + 10);

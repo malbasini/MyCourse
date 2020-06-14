@@ -6,13 +6,11 @@ using MyCourse.Models.Options;
 
 namespace MyCourse.Models.InputModels
 {
-    [ModelBinder(BinderType=typeof(CourseListInputModelBinder))]
+    [ModelBinder(BinderType = typeof(CourseListInputModelBinder))]
     public class CourseListInputModel
     {
-        private readonly CoursesOrderOptions orderOptions;
         public CourseListInputModel(string search, int page, string orderby, bool ascending, int limit, CoursesOrderOptions orderOptions)
         {
-            this.orderOptions = orderOptions;
             if (!orderOptions.Allow.Contains(orderby))
             {
                 orderby = orderOptions.By;
@@ -31,10 +29,8 @@ namespace MyCourse.Models.InputModels
         public int Page { get; }
         public string OrderBy { get; }
         public bool Ascending { get; }
-
+        
         public int Limit { get; }
         public int Offset { get; }
-
-        public int Id {get;}
     }
 }
