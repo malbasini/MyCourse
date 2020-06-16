@@ -28,7 +28,7 @@ namespace MyCourse
         {
             services.AddResponseCaching();
 
-            IMvcBuilder mvcBuilder = services.AddMvc(options => 
+            IMvcBuilder mvcBuilder = services.AddMvc(options =>
             {
                 var homeProfile = new CacheProfile();
                 //homeProfile.Duration = Configuration.GetValue<int>("ResponseCache:Home:Duration");
@@ -36,8 +36,12 @@ namespace MyCourse
                 //homeProfile.VaryByQueryKeys = new string[] { "page" };
                 Configuration.Bind("ResponseCache:Home", homeProfile);
                 options.CacheProfiles.Add("Home", homeProfile);
-                
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            #if DEBUG
+            .AddRazorRuntimeCompilation();
+            #endif
             //services.AddTransient<ICourseService, AdoNetCourseService>();
             services.AddTransient<ICourseService, EfCoreCourseService>();
             services.AddTransient<IDatabaseAccessor, SqliteDatabaseAccessor>();
