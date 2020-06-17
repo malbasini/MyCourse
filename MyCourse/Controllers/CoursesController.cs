@@ -34,11 +34,19 @@ namespace MyCourse.Controllers
             ViewData["Title"] = viewModel.Title;
             return View(viewModel);
         }
+        [HttpGet]
         public IActionResult Create()
         {
             ViewData["Title"] = "Nuovo corso";
             var inputModel = new CourseCreateInputModel();
             return View(inputModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(CourseCreateInputModel inputModel)
+        {
+            //Gestione servizio applicativo di inserimento nel DB.
+            CourseDetailViewModel viewModel = await courseService.CreateCourseAsync(inputModel);
+            return RedirectToAction("Index");
         }
     }
 }
