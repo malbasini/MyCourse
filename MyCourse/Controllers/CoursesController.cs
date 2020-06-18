@@ -43,9 +43,10 @@ namespace MyCourse.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CourseCreateInputModel inputModel)
         {
-            //Gestione servizio applicativo di inserimento nel DB.
+            if(!ModelState.IsValid)
+                return View(inputModel);
             CourseDetailViewModel viewModel = await courseService.CreateCourseAsync(inputModel);
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }
