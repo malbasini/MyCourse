@@ -38,8 +38,7 @@ namespace MyCourse.Controllers
         public IActionResult Create()
         {
             ViewData["Title"] = "Nuovo corso";
-            var inputModel = new CourseCreateInputModel();
-            return View(inputModel);
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(CourseCreateInputModel inputModel)
