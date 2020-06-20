@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MyCourse.Models.Exceptions;
 using MyCourse.Models.InputModels;
 using MyCourse.Models.Services.Application;
 using MyCourse.Models.ViewModels;
@@ -28,6 +30,12 @@ namespace MyCourse.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> IsTitleAvailable(string title)
+        {
+            bool result = await courseService.IsTitleAvailableAsync(title);
+            return Json(result);
+        }
+
         public async Task<IActionResult> Detail(int id)
         {
             CourseDetailViewModel viewModel = await courseService.GetCourseAsync(id);
@@ -43,10 +51,18 @@ namespace MyCourse.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CourseCreateInputModel inputModel)
         {
-            if(!ModelState.IsValid)
-                return View(inputModel);
-            CourseDetailViewModel viewModel = await courseService.CreateCourseAsync(inputModel);
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            try
+            {
+                 CourseDetailViewModel viewModel = await courseService.CreateCourseAsync(inputModel);
+                 return RedirectToAction(nameof(Index));
+            }
+            catch(CourseTitleUnavailableException ex)
+            {
+                 ModelState.AddModelError(nameof(CourseDetailViewModel.Title), "Questo titolo esiste già");        
+            }
+            ViewData["Title"] = "Nuovo corso";
+            return View(inputModel);
         }
     }
 }

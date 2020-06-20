@@ -73,5 +73,9 @@ namespace MyCourse.Models.Services.Application
         {
             return courseService.CreateCourseAsync(inputModel);
         }
+        public Task<bool> IsTitleAvailableAsync(string title)
+        {
+            return courseService.IsTitleAvailableAsync(title);
+        }
     }
 }
