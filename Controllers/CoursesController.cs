@@ -30,9 +30,9 @@ namespace MyCourse.Controllers
             return View(viewModel);
         }
 
-        public async Task<IActionResult> IsTitleAvailable(string title)
+        public async Task<IActionResult> IsTitleAvailable(string title, int id=0)
         {
-            bool result = await courseService.IsTitleAvailableAsync(title);
+            bool result = await courseService.IsTitleAvailableAsync(title,id);
             return Json(result);
         }
 
@@ -81,7 +81,8 @@ namespace MyCourse.Controllers
                 try
                 {
                     CourseDetailViewModel course = await courseService.EditCourseAsync(inputModel);
-                    return RedirectToAction(nameof(Index));
+                    TempData["ConfirmationMessage"] = "Aggiornamento eseguito correttamente";
+                    return RedirectToAction(nameof(Detail), new {id= inputModel.Id});
                 }
                 catch(CourseTitleUnavailableException)
                 {
