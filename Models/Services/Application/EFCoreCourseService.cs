@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -131,6 +132,45 @@ namespace MyCourse.Models.Services.Application
             //await dbContext.Courses.AnyAsync(course => course.Title == title);
             bool titleExists = await dbContext.Courses.AnyAsync(course => EF.Functions.Like(course.Title, title));
             return !titleExists;
+        }
+
+        public async Task<CourseEditInputModel> GetCourseForEditingAsync(int id)
+        {
+            IQueryable<CourseEditInputModel> queryLinq = dbContext.Courses
+                .AsNoTracking()
+                .Where(course => course.Id == id)
+                .Select(course => CourseEditInputModel.FromEntity(course)); //Usando metodi statici come FromEntity, la query potrebbe essere inefficiente. Mantenere il mapping nella lambda oppure usare un extension method personalizzato
+            CourseEditInputModel viewModel = await queryLinq.FirstOrDefaultAsync();
+            if (viewModel == null)
+            {
+                logger.LogWarning("Course {id} not found", id);
+                throw new CourseNotFoundException(id);
+            }
+            return viewModel;
+        }
+        public async Task<CourseDetailViewModel> EditCourseAsync(CourseEditInputModel inputModel)
+        {
+           Course course = await dbContext.Courses.FindAsync(inputModel.Id);
+            
+            if (course == null)
+            {
+                throw new CourseNotFoundException(inputModel.Id);
+            }
+
+            course.ChangeTitle(inputModel.Title);
+            course.ChangePrices(inputModel.FullPrice, inputModel.CurrentPrice);
+            course.ChangeDescription(inputModel.Description);
+            course.ChangeEmail(inputModel.Email);
+            try
+            {
+                await dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException exc) when ((exc.InnerException as SqliteException)?.SqliteErrorCode == 19)
+            {
+                throw new CourseTitleUnavailableException(inputModel.Title, exc);
+            }
+
+            return CourseDetailViewModel.FromEntity(course);
         }
     }
 }
