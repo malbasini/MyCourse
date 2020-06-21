@@ -20,8 +20,10 @@ namespace MyCourse.Models.Services.Application
         private readonly ILogger<AdoNetCourseService> logger;
         private readonly IDatabaseAccessor db;
         private readonly IOptionsMonitor<CoursesOptions> coursesOptions;
-        public AdoNetCourseService(ILogger<AdoNetCourseService> logger, IDatabaseAccessor db, IOptionsMonitor<CoursesOptions> coursesOptions)
+        private readonly IImagePersister imagePersister;
+        public AdoNetCourseService(ILogger<AdoNetCourseService> logger, IDatabaseAccessor db, IOptionsMonitor<CoursesOptions> coursesOptions, IImagePersister imagePersister)
         {
+            this.imagePersister = imagePersister;
             this.coursesOptions = coursesOptions;
             this.logger = logger;
             this.db = db;
@@ -152,7 +154,7 @@ namespace MyCourse.Models.Services.Application
         }
         public async Task<CourseDetailViewModel> EditCourseAsync(CourseEditInputModel inputModel)
         {
-             DataSet dataSet = await db.QueryAsync($"SELECT COUNT(*) FROM Courses WHERE Id={inputModel.Id}");
+            DataSet dataSet = await db.QueryAsync($"SELECT COUNT(*) FROM Courses WHERE Id={inputModel.Id}");
             if (Convert.ToInt32(dataSet.Tables[0].Rows[0][0]) == 0)
             {
                 throw new CourseNotFoundException(inputModel.Id);
@@ -164,6 +166,18 @@ namespace MyCourse.Models.Services.Application
             catch (SqliteException exc) when (exc.SqliteErrorCode == 19)
             {
                 throw new CourseTitleUnavailableException(inputModel.Title, exc);
+            }
+            if (inputModel.Image != null)
+            {
+                try 
+                {
+                    string imagePath = await imagePersister.SaveCourseImageAsync(inputModel.Id, inputModel.Image);
+                    dataSet = await db.QueryAsync($"UPDATE Courses SET ImagePath={imagePath} WHERE Id={inputModel.Id}");
+                }
+                catch(Exception exc)
+                {
+                    throw new CourseImageInvalidException(inputModel.Id, exc);
+                }
             }
             CourseDetailViewModel course = await GetCourseAsync(inputModel.Id);
             return course;
