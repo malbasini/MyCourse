@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyCourse.Customizations.ModelBinders;
+using MyCourse.Models.Enums;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Application;
 using MyCourse.Models.Services.Infrastructure;
@@ -46,16 +47,26 @@ namespace MyCourse
             #if DEBUG
             .AddRazorRuntimeCompilation();
             #endif
-            services.AddTransient<ICourseService, AdoNetCourseService>();
-            //services.AddTransient<ICourseService, EfCoreCourseService>();
-            services.AddTransient<IDatabaseAccessor, SqliteDatabaseAccessor>();
+
+            //Usiamo ADO.NET o Entity Framework Core per l'accesso ai dati?
+            var persistence = Persistence.AdoNet;
+            switch (persistence)
+            {
+                case Persistence.AdoNet:
+                    services.AddTransient<ICourseService, AdoNetCourseService>();
+                    services.AddTransient<IDatabaseAccessor, SqliteDatabaseAccessor>();
+                break;
+
+                case Persistence.EfCore:
+                    services.AddTransient<ICourseService, EfCoreCourseService>();
+                    services.AddDbContextPool<MyCourseDbContext>(optionsBuilder => {
+                        string connectionString = Configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
+                        optionsBuilder.UseSqlite(connectionString);
+                });
+                break;
+            }
             services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
-
-            services.AddDbContextPool<MyCourseDbContext>(optionsBuilder => {
-                string connectionString = Configuration.GetSection("ConnectionStrings").GetValue<string>("Default");
-                optionsBuilder.UseSqlite(connectionString);
-            });
-
+            services.AddSingleton<IImagePersister, MagickNetImagePersister>();
             //Options
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection("ConnectionStrings"));
