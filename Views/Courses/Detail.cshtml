@@ -1,0 +1,57 @@
+@model CourseDetailViewModel
+<section class="course-info">
+    <div class="row">
+        <div class="col-md-9">
+            <h1>@Model.Title <a class="btn btn-outline-primary btn-sm" asp-action="Edit" asp-route-id="@Model.Id"><i class="fas fa-pencil-alt"></i> Modifica</a></h1>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+            <a href="#" class="btn btn-warning btn-lg btn-block subscribe-course">Iscriviti</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <p html-sanitize>@Model.Description</p>
+        </div>
+        <div class="col-md-3">
+            <aside>
+                <author>di @Model.Author</author>
+                <div class="rating" title="@Model.Rating">
+                    <rating value="@Model.Rating"></rating>
+                </div>
+                <div class="price">
+                    <price current-price="@Model.CurrentPrice" full-price="@Model.FullPrice"></price>
+                </div>
+                <img src="@Model.ImagePath" class="img-fluid course-image" alt="@Model.Title" asp-append-version="true">
+            </aside>
+        </div>
+    </div>
+</section>
+
+<section class="course-lessons">
+    <h2>Lezioni (@Model.Lessons.Count)</h2>
+    @foreach (var lesson in Model.Lessons)
+    {
+<hr>
+        <div class="row">
+            <div class="col-md-9 d-flex align-items-center">
+                <a href="#">@lesson.Title</a>
+            </div>
+            <div class="col-md-3 d-flex align-items-center lesson-duration">
+                <i class="far fa-clock"></i><time>@lesson.Duration.ToString("m'm 's's'")</time>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <p>@lesson.Description</p>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    }
+    <hr>
+    <div class="row course-duration">
+        <div class="col-md-9 d-flex align-items-center"></div>
+        <div class="col-md-3 d-flex align-items-center">
+            Totale  <i class="far fa-clock"></i><time>@Model.TotalCourseDuration.ToString("h'h 'm'm 's's'")</time>
+        </div>
+    </div>
+</section>
