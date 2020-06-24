@@ -38,6 +38,7 @@ namespace MyCourse.Models.Services.Infrastructure
                     builder.Property(money => money.Currency).HasConversion<string>();
                 });
                 entity.Property(Course => Course.RowVersion).IsRowVersion();
+                entity.HasIndex(course => course.Title).IsUnique();
                 //Mapping per le relazioni
                 entity.HasMany(course => course.Lessons)
                       .WithOne(lesson => lesson.Course)

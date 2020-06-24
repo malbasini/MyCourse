@@ -167,15 +167,15 @@ namespace MyCourse.Models.Services.Application
             {
                 await dbContext.SaveChangesAsync();
             }
-            catch (DbUpdateException exc) when ((exc.InnerException as SqliteException)?.SqliteErrorCode == 19)
-            {
-                throw new CourseTitleUnavailableException(inputModel.Title, exc);
-            }
             catch (DbUpdateConcurrencyException)
             {
                 throw new OptimisticConcurrencyException();
             }
-
+            catch (DbUpdateException exc) when ((exc.InnerException as SqliteException)?.SqliteErrorCode == 19)
+            {
+                throw new CourseTitleUnavailableException(inputModel.Title, exc);
+            }
+           
             return CourseDetailViewModel.FromEntity(course);
         }
     }
