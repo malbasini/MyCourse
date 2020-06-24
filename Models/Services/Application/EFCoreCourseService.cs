@@ -162,6 +162,7 @@ namespace MyCourse.Models.Services.Application
             course.ChangePrices(inputModel.FullPrice, inputModel.CurrentPrice);
             course.ChangeDescription(inputModel.Description);
             course.ChangeEmail(inputModel.Email);
+            dbContext.Entry(course).Property(course => course.RowVersion).OriginalValue=inputModel.RowVersion;
             try
             {
                 await dbContext.SaveChangesAsync();
@@ -169,6 +170,10 @@ namespace MyCourse.Models.Services.Application
             catch (DbUpdateException exc) when ((exc.InnerException as SqliteException)?.SqliteErrorCode == 19)
             {
                 throw new CourseTitleUnavailableException(inputModel.Title, exc);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new OptimisticConcurrencyException();
             }
 
             return CourseDetailViewModel.FromEntity(course);

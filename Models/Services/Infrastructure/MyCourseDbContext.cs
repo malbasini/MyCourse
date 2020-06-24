@@ -37,7 +37,7 @@ namespace MyCourse.Models.Services.Infrastructure
                 entity.OwnsOne(course => course.FullPrice, builder => {
                     builder.Property(money => money.Currency).HasConversion<string>();
                 });
-
+                entity.Property(Course => Course.RowVersion).IsRowVersion();
                 //Mapping per le relazioni
                 entity.HasMany(course => course.Lessons)
                       .WithOne(lesson => lesson.Course)

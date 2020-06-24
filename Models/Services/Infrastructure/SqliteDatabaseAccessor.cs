@@ -24,7 +24,7 @@ namespace MyCourse.Models.Services.Infrastructure
 
         public async Task<int> CommandAsync(FormattableString formattableCommand)
         {
-             try
+            try
             {
                 using SqliteConnection conn = await GetOpenedConnection();
                 using SqliteCommand cmd = GetCommand(formattableCommand, conn);
@@ -36,59 +36,25 @@ namespace MyCourse.Models.Services.Infrastructure
                 throw new ConstraintViolationException(exc);
             }
         }
-
         public async Task<DataSet> QueryAsync(FormattableString formattableQuery)
         {
             logger.LogInformation(formattableQuery.Format, formattableQuery.GetArguments());
-
-            //Creiamo dei SqliteParameter a partire dalla FormattableString
-            var queryArguments = formattableQuery.GetArguments();
-            var sqliteParameters = new List<SqliteParameter>();
-            for (var i = 0; i < queryArguments.Length; i++)
+            using SqliteConnection conn = await GetOpenedConnection();
+            using SqliteCommand cmd = GetCommand(formattableQuery, conn);
+            //Inviamo la query al database e otteniamo un SqliteDataReader
+            //per leggere i risultati
+            using var reader = await cmd.ExecuteReaderAsync();
+            var dataSet = new DataSet();
+            //Creiamo tanti DataTable per quante sono le tabelle
+            //di risultati trovate dal SqliteDataReader
+            do
             {
-                if (queryArguments[i] is Sql) {
-                    continue;
-                }
-                var parameter = new SqliteParameter(i.ToString(), queryArguments[i]);
-                sqliteParameters.Add(parameter);
-                queryArguments[i] = "@" + i;
-            }
-            string query = formattableQuery.ToString();
+                var dataTable = new DataTable();
+                dataSet.Tables.Add(dataTable);
+                dataTable.Load(reader);
+            } while (!reader.IsClosed);
 
-            //Colleghiamoci al database Sqlite, inviamo la query e leggiamo i risultati
-            string connectionString = connectionStringOptions.CurrentValue.Default;
-
-            using (var conn = new SqliteConnection(connectionString))
-            {
-                await conn.OpenAsync();
-                using (var cmd = new SqliteCommand(query, conn))
-                {
-                    //Aggiungiamo i SqliteParameters al SqliteCommand
-                    cmd.Parameters.AddRange(sqliteParameters);
-
-                    //Inviamo la query al database e otteniamo un SqliteDataReader
-                    //per leggere i risultati
-                    using (var reader = await cmd.ExecuteReaderAsync())
-                    {
-                        var dataSet = new DataSet();
-
-                        //TODO: La riga qui sotto va rimossa quando la issue sarà risolta
-                        //https://github.com/aspnet/EntityFrameworkCore/issues/14963
-                        dataSet.EnforceConstraints = false;
-
-                        //Creiamo tanti DataTable per quante sono le tabelle
-                        //di risultati trovate dal SqliteDataReader
-                        do
-                        {
-                            var dataTable = new DataTable();
-                            dataSet.Tables.Add(dataTable);
-                            dataTable.Load(reader);
-                        } while (!reader.IsClosed);
-
-                        return dataSet;
-                    }
-                }
-            }
+            return dataSet;   
         }
         public async Task<T> QueryScalarAsync<T>(FormattableString formattableQuery)
         {

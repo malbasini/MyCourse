@@ -31,6 +31,7 @@ namespace MyCourse.Models.Entities
         public double Rating { get; private set; }
         public Money FullPrice { get; private set; }
         public Money CurrentPrice { get; private set; }
+        public string RowVersion { get; private set; }
 
        public void ChangeTitle(string newTitle)
         {

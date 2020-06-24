@@ -85,9 +85,17 @@ namespace MyCourse.Controllers
                     TempData["ConfirmationMessage"] = "Aggiornamento eseguito correttamente";
                     return RedirectToAction(nameof(Detail), new {id= inputModel.Id});
                 }
-                catch(CourseTitleUnavailableException)
+                catch (CourseImageInvalidException)
                 {
-                    ModelState.AddModelError(nameof(CourseDetailViewModel.Title), "Questo titolo esiste gi�");        
+                    ModelState.AddModelError(nameof(CourseEditInputModel.Image), "L'immagine selezionata non è valida");
+                }
+                catch (CourseTitleUnavailableException)
+                {
+                    ModelState.AddModelError(nameof(CourseEditInputModel.Title), "Questo titolo già esiste");
+                }
+                catch (OptimisticConcurrencyException)
+                {
+                    ModelState.AddModelError("", "Spiacenti, il salvataggio non è andato a buon fine perché nel frattempo un altro utente ha aggiornato il corso. Ti preghiamo di aggiornare la pagina e ripetere le modifiche.");
                 }
             }
             ViewData["Title"] = "Modifica corso";
