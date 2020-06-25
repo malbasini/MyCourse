@@ -30,7 +30,7 @@ namespace MyCourse.Models.Services.Application.Lessons
 
         public async Task<LessonDetailViewModel> EditLessonAsync(LessonEditInputModel inputModel)
         {
-            int affectedRows = await db.CommandAsync($"UPDATE Lessons SET Title={inputModel.Title}, Description={inputModel.Description}, Duration={inputModel.Duration:HH':'mm':'ss} WHERE Id={inputModel.Id}");
+            int affectedRows = await db.CommandAsync($"UPDATE Lessons SET Title={inputModel.Title}, Description={inputModel.Description}, Duration={inputModel.Duration:HH':'mm':'ss}, [Order]={inputModel.Order} WHERE Id={inputModel.Id} AND RowVersion={inputModel.RowVersion}");
             if (affectedRows == 0)
             {
                 bool lessonExists = await db.QueryScalarAsync<bool>($"SELECT COUNT(*) FROM Lessons WHERE Id={inputModel.Id}");
@@ -67,7 +67,7 @@ namespace MyCourse.Models.Services.Application.Lessons
 
         public async Task<LessonEditInputModel> GetLessonForEditingAsync(int id)
         {
-            FormattableString query = $@"SELECT Id, CourseId, Title, Description, Duration FROM Lessons WHERE ID={id}";
+            FormattableString query = $@"SELECT Id, CourseId, Title, Description, Duration, RowVersion, [Order] FROM Lessons WHERE ID={id}";
 
             DataSet dataSet = await db.QueryAsync(query);
 

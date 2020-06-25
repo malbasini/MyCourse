@@ -45,8 +45,8 @@ namespace MyCourse.Models.InputModels.Lessons
                 Title = Convert.ToString(courseRow["Title"]),
                 Description = Convert.ToString(courseRow["Description"]),
                 Duration = TimeSpan.Parse(Convert.ToString(courseRow["Duration"])),
-                //Order = Convert.ToInt32(courseRow["Order"]),
-                //RowVersion = Convert.ToString(courseRow["RowVersion"])
+                Order = Convert.ToInt32(courseRow["Order"]),
+                RowVersion = Convert.ToString(courseRow["RowVersion"])
             };
             return lessonEditInputModel;
         }
@@ -60,8 +60,8 @@ namespace MyCourse.Models.InputModels.Lessons
                 Title = lesson.Title,
                 Description = lesson.Description,
                 Duration = lesson.Duration,
-                //Order = lesson.Order,
-                //RowVersion = lesson.RowVersion
+                Order = lesson.Order,
+                RowVersion = lesson.RowVersion
             };
         }
     }

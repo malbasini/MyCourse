@@ -28,24 +28,27 @@
 </section>
 
 <section class="course-lessons">
-    <h2>Lezioni (@Model.Lessons.Count)<a class="btn btn-outline-primary btn-sm" asp-controller="Lessons" asp-action="Create" asp-route-id="@Model.Id"><i class="fas fa-plus"></i> Crea nuova</a></h2>
-    @foreach (var lesson in Model.Lessons)
-    {
-<hr>
-        <div class="row">
-            <div class="col-md-9 d-flex align-items-center">
-                <a href="#">@lesson.Title</a>
-            </div>
-            <div class="col-md-3 d-flex align-items-center lesson-duration">
-                <i class="far fa-clock"></i><time>@lesson.Duration.ToString("m'm 's's'")</time>
-            </div>
-        </div>
-    }
+	<h2>Lezioni (@Model.Lessons.Count) <a class="btn btn-outline-primary btn-sm" asp-controller="Lessons" asp-action="Create" asp-route-id="@Model.Id"><i class="fas fa-plus"></i> Crea nuova</a></h2>
+	@foreach (var lesson in Model.Lessons)
+	{
+	<hr>
+	<div class="row">
+		<div class="col-md-9 d-flex align-items-center">
+		    <a asp-controller="Lessons" asp-action="Detail" asp-route-id="@lesson.Id">@lesson.Title</a>
+		</div>
+		<div class="col-md-3 d-flex align-items-center justify-content-end lesson-duration">
+			<i class="far fa-clock"></i><time>@lesson.Duration.ToString("m'm 's's'")</time>
+            <a class="btn btn-outline-primary btn-sm ml-3" asp-controller="Lessons" asp-action="Edit" asp-route-id="@lesson.Id"><i class="fas fa-pencil-alt"></i></a>
+		</div>
+	</div>
+	}
     <hr>
     <div class="row course-duration">
-        <div class="col-md-9 d-flex align-items-center"></div>
-        <div class="col-md-3 d-flex align-items-center">
-            Totale  <i class="far fa-clock"></i><time>@Model.TotalCourseDuration.ToString("h'h 'm'm 's's'")</time>
+		<div class="col-md-9 d-flex align-items-center">
+            Totale
+        </div>
+        <div class="col-md-3 d-flex align-items-center justify-content-end">
+            <i class="far fa-clock"></i><time>@Model.TotalCourseDuration.ToString("h'h 'm'm 's's'")</time>
         </div>
     </div>
 </section>
