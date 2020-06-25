@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MyCourse.Models.Enums;
 using MyCourse.Models.ValueTypes;
 
 namespace MyCourse.Models.Entities
@@ -40,6 +41,11 @@ namespace MyCourse.Models.Entities
                 throw new ArgumentException("The course must have a title");
             }
             Title = newTitle;
+        }
+        public void ChangeStatus(CourseStatus status)
+        {
+            //TODO: logica di validazione
+            Status = status;
         }
         public void ChangePrices(Money newFullPrice, Money newCurrentPrice)
         {
@@ -88,5 +94,6 @@ namespace MyCourse.Models.Entities
 
 
         public virtual ICollection<Lesson> Lessons { get; private set; }
+        public CourseStatus Status { get; private set; }
     }
 }

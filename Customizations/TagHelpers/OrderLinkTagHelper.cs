@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc.TagHelpers;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using MyCourse.Models.InputModels;
+using MyCourse.Models.InputModels.Courses;
 
 namespace MyCourse.Customizations.TagHelpers
 {

@@ -7,28 +7,30 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyCourse.Models.Entities;
-using MyCourse.Models.Exceptions;
+using MyCourse.Models.Enums;
 using MyCourse.Models.Exceptions.Application;
-using MyCourse.Models.InputModels;
+using MyCourse.Models.InputModels.Courses;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Infrastructure;
 using MyCourse.Models.ViewModels;
+using MyCourse.Models.ViewModels.Courses;
 
-namespace MyCourse.Models.Services.Application
+namespace MyCourse.Models.Services.Application.Courses
 {
     public class EfCoreCourseService : ICourseService
     {
         private readonly ILogger<EfCoreCourseService> logger;
         private readonly MyCourseDbContext dbContext;
         private readonly IOptionsMonitor<CoursesOptions> coursesOptions;
+        private readonly IImagePersister imagePersister;
 
-        public EfCoreCourseService(ILogger<EfCoreCourseService> logger, MyCourseDbContext dbContext, IOptionsMonitor<CoursesOptions> coursesOptions)
+        public EfCoreCourseService(ILogger<EfCoreCourseService> logger, IImagePersister imagePersister, MyCourseDbContext dbContext, IOptionsMonitor<CoursesOptions> coursesOptions)
         {
+            this.imagePersister = imagePersister;
             this.coursesOptions = coursesOptions;
             this.logger = logger;
             this.dbContext = dbContext;
         }
-
         public async Task<CourseDetailViewModel> GetCourseAsync(int id)
         {
             IQueryable<CourseDetailViewModel> queryLinq = dbContext.Courses
@@ -51,7 +53,6 @@ namespace MyCourse.Models.Services.Application
 
             return viewModel;
         }
-
         public async Task<List<CourseViewModel>> GetBestRatingCoursesAsync()
         {
             CourseListInputModel inputModel = new CourseListInputModel(
@@ -62,10 +63,9 @@ namespace MyCourse.Models.Services.Application
                 limit: coursesOptions.CurrentValue.InHome,
                 orderOptions: coursesOptions.CurrentValue.Order);
 
-                ListViewModel<CourseViewModel> result = await GetCoursesAsync(inputModel);
-                return result.Results;
+            ListViewModel<CourseViewModel> result = await GetCoursesAsync(inputModel);
+            return result.Results;
         }
-        
         public async Task<List<CourseViewModel>> GetMostRecentCoursesAsync()
         {
             CourseListInputModel inputModel = new CourseListInputModel(
@@ -76,10 +76,9 @@ namespace MyCourse.Models.Services.Application
                 limit: coursesOptions.CurrentValue.InHome,
                 orderOptions: coursesOptions.CurrentValue.Order);
 
-                ListViewModel<CourseViewModel> result = await GetCoursesAsync(inputModel);
-                return result.Results;
+            ListViewModel<CourseViewModel> result = await GetCoursesAsync(inputModel);
+            return result.Results;
         }
-
         public async Task<ListViewModel<CourseViewModel>> GetCoursesAsync(CourseListInputModel model)
         {
             IQueryable<Course> baseQuery = dbContext.Courses;
@@ -87,7 +86,7 @@ namespace MyCourse.Models.Services.Application
             baseQuery = (model.OrderBy, model.Ascending) switch
             {
                 ("Title", true) => baseQuery.OrderBy(course => course.Title),
-                ("Title", false) => baseQuery.OrderByDescending(course => course.Title),               
+                ("Title", false) => baseQuery.OrderByDescending(course => course.Title),
                 ("Rating", true) => baseQuery.OrderBy(course => course.Rating),
                 ("Rating", false) => baseQuery.OrderByDescending(course => course.Rating),
                 ("CurrentPrice", true) => baseQuery.OrderBy(course => course.CurrentPrice.Amount),
@@ -101,7 +100,7 @@ namespace MyCourse.Models.Services.Application
                 .Where(course => course.Title.Contains(model.Search))
                 .AsNoTracking();
 
-            List<CourseViewModel> courses = await queryLinq                
+            List<CourseViewModel> courses = await queryLinq
                 .Skip(model.Offset)
                 .Take(model.Limit)
                 .Select(course => CourseViewModel.FromEntity(course)) //Usando metodi statici come FromEntity, la query potrebbe essere inefficiente. Mantenere il mapping nella lambda oppure usare un extension method personalizzato
@@ -121,13 +120,65 @@ namespace MyCourse.Models.Services.Application
         {
             string title = inputModel.Title;
             string author = "Mario Rossi";
-            var course = new Course(title,author);
-            dbContext.Add(course);
-            await dbContext.SaveChangesAsync();
-            CourseDetailViewModel viewModel = CourseDetailViewModel.FromEntity(course);
-            return viewModel;
-        }
 
+            var course = new Course(title, author);
+            dbContext.Add(course);
+            try
+            {
+                await dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException exc) when ((exc.InnerException as SqliteException)?.SqliteErrorCode == 19)
+            {
+                throw new CourseTitleUnavailableException(title, exc);
+            }
+
+            return CourseDetailViewModel.FromEntity(course);
+        }
+        public async Task<CourseDetailViewModel> EditCourseAsync(CourseEditInputModel inputModel)
+        {
+            Course course = await dbContext.Courses.FindAsync(inputModel.Id);
+            
+            if (course == null)
+            {
+                throw new CourseNotFoundException(inputModel.Id);
+            }
+
+            course.ChangeTitle(inputModel.Title);
+            course.ChangePrices(inputModel.FullPrice, inputModel.CurrentPrice);
+            course.ChangeDescription(inputModel.Description);
+            course.ChangeEmail(inputModel.Email);
+
+            dbContext.Entry(course).Property(course => course.RowVersion).OriginalValue = inputModel.RowVersion;
+            
+            if (inputModel.Image != null)
+            {
+                try {
+                    string imagePath = await imagePersister.SaveCourseImageAsync(inputModel.Id, inputModel.Image);
+                    course.ChangeImagePath(imagePath);
+                }
+                catch(Exception exc)
+                {
+                    throw new CourseImageInvalidException(inputModel.Id, exc);
+                }
+            }
+
+            //dbContext.Update(course);
+
+            try
+            {
+                await dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new OptimisticConcurrencyException();
+            }
+            catch (DbUpdateException exc) when ((exc.InnerException as SqliteException)?.SqliteErrorCode == 19)
+            {
+                throw new CourseTitleUnavailableException(inputModel.Title, exc);
+            }
+
+            return CourseDetailViewModel.FromEntity(course);
+        }
         public async Task<bool> IsTitleAvailableAsync(string title, int id)
         {
             //await dbContext.Courses.AnyAsync(course => course.Title == title);
@@ -141,42 +192,29 @@ namespace MyCourse.Models.Services.Application
                 .AsNoTracking()
                 .Where(course => course.Id == id)
                 .Select(course => CourseEditInputModel.FromEntity(course)); //Usando metodi statici come FromEntity, la query potrebbe essere inefficiente. Mantenere il mapping nella lambda oppure usare un extension method personalizzato
+
             CourseEditInputModel viewModel = await queryLinq.FirstOrDefaultAsync();
+
             if (viewModel == null)
             {
                 logger.LogWarning("Course {id} not found", id);
                 throw new CourseNotFoundException(id);
             }
+
             return viewModel;
         }
-        public async Task<CourseDetailViewModel> EditCourseAsync(CourseEditInputModel inputModel)
+
+        public async Task DeleteCourseAsync(CourseDeleteInputModel inputModel)
         {
-           Course course = await dbContext.Courses.FindAsync(inputModel.Id);
+            Course course = await dbContext.Courses.FindAsync(inputModel.Id);
             
             if (course == null)
             {
                 throw new CourseNotFoundException(inputModel.Id);
             }
 
-            course.ChangeTitle(inputModel.Title);
-            course.ChangePrices(inputModel.FullPrice, inputModel.CurrentPrice);
-            course.ChangeDescription(inputModel.Description);
-            course.ChangeEmail(inputModel.Email);
-            dbContext.Entry(course).Property(course => course.RowVersion).OriginalValue=inputModel.RowVersion;
-            try
-            {
-                await dbContext.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new OptimisticConcurrencyException();
-            }
-            catch (DbUpdateException exc) when ((exc.InnerException as SqliteException)?.SqliteErrorCode == 19)
-            {
-                throw new CourseTitleUnavailableException(inputModel.Title, exc);
-            }
-           
-            return CourseDetailViewModel.FromEntity(course);
+            course.ChangeStatus(CourseStatus.Deleted);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

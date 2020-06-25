@@ -5,8 +5,9 @@ using System.Linq;
 using MyCourse.Models.Entities;
 using MyCourse.Models.Enums;
 using MyCourse.Models.ValueTypes;
+using MyCourse.Models.ViewModels.Lessons;
 
-namespace MyCourse.Models.ViewModels
+namespace MyCourse.Models.ViewModels.Courses
 {
     public class CourseDetailViewModel : CourseViewModel
     {
