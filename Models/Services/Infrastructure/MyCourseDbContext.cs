@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using MyCourse.Models.Entities;
+using MyCourse.Models.Enums;
 
 namespace MyCourse.Models.Services.Infrastructure
 {
@@ -38,6 +39,8 @@ namespace MyCourse.Models.Services.Infrastructure
                     builder.Property(money => money.Currency).HasConversion<string>();
                 });
                 entity.Property(Course => Course.RowVersion).IsRowVersion();
+                entity.Property(Course => Course.Status).HasConversion<string>();
+                entity.HasQueryFilter(Course => Course.Status != CourseStatus.Deleted);
                 entity.HasIndex(course => course.Title).IsUnique();
                 //Mapping per le relazioni
                 entity.HasMany(course => course.Lessons)
