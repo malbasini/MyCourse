@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <UserSecretsId>MyCourse</UserSecretsId>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="wwwroot\" />
