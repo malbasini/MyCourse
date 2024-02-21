@@ -41,7 +41,12 @@ namespace MyCourse
                  
                  Il Middleware di routing dovrà andarsi a trovare
                  una richiesta il cui Controller è courses, la sua
-                 Action è detail passando al controller il 5 come id.*/
+                 Action è detail passando al controller il 5 come id.
+                 Per non avere un errore HTTP 500 possiamo impostare
+                 dei valori di default. Creiamo l'HomeController e la
+                 sua action Index, la route può essere configurata 
+                 assegnando valori opzionali per il controller, e l'action.
+                 il ? sull'ultimo frammento, l'id indica che è opzionale.*/
                 routeBuilder.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
