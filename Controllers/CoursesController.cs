@@ -10,12 +10,15 @@ public class CoursesController : Controller
     {
         /*ASP.NET Core andrà a cercare una View che segue
          le convenzioni.*/
-        CourseService courseService = new CourseService();
+        var courseService = new CourseService();
         List<CourseViewModel> courses = courseService.GetCourses();
         return View(courses);
     }
-    public IActionResult Detail(string id)
+    public IActionResult Detail(int id)
     {
-        return View();
+        var courseService = new CourseService();
+        CourseDetailViewModel viewModel = courseService.GetCourse(id);
+        ViewData["Title"] = viewModel.Title;
+        return View(viewModel);
     }
 }
