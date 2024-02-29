@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using MyCourse.Models.Services.Applications;
 
 namespace MyCourse
 {
@@ -14,6 +15,17 @@ namespace MyCourse
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
+            /*--Con questa istruzione stiamo dicendo ai servizi di ASP.NET Core che
+                devono prepararsi alla gestione di oggetti di tipo CourseService,
+                quando incontra un componente come il nostro controller che ha una
+                dipendenza da un CourseService è lei stessa che deve costruirlo e 
+                passarlo al controller. Grazie alla dependency injection ASP.NET Core
+                può creare istanze di componenti e iniettarle in questo caso nel
+                controller. Ora però il problema dell'accoppiamento non è del tutto
+                risolto, ossia i due componenti si dice che sono fortemente accoppiati.
+                Il CoursesController non può funzionare se non si fornisce una istanza
+                di CourseService.*/
+            services.AddTransient<CourseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
