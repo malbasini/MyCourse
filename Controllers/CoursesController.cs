@@ -6,9 +6,9 @@ namespace MyCourse.Controllers;
 
 public class CoursesController : Controller
 {
-    private readonly CourseService courseService;
+    private readonly ICourseService courseService;
 
-    public CoursesController(CourseService courseService)
+    public CoursesController(ICourseService courseService)
     {
         this.courseService = courseService;
     }
@@ -21,6 +21,8 @@ public class CoursesController : Controller
     }
     public IActionResult Detail(int id)
     {
+        /*ASP.NET Core andrà a cercare una View che segue
+         le convenzioni.*/
         CourseDetailViewModel viewModel = courseService.GetCourse(id);
         ViewData["Title"] = viewModel.Title;
         return View(viewModel);
