@@ -6,7 +6,7 @@ using MyCourse.Models.ViewModels;
 
 namespace MyCourse.Models.Services.Applications;
 
-public class CourseService
+public class CourseService :ICourseService
 {
     /*
      * Il codice C# fornito è una definizione di funzione con il nome
