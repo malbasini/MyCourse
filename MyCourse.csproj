@@ -5,7 +5,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\Services\Infrastructure\" />
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="SQLite" Version="3.13.0" />
   </ItemGroup>
 </Project>
