@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using MyCourse.Models.ViewModels;
 using System.Data;
+using MyCourse.Models.Services.Infrastructure;
 
 namespace MyCourse.Models.Services.Applications;
 /*Se il nostro servizio applicativo vuole valorizzare i ViewModel dovrà interagire
@@ -17,8 +18,9 @@ public class AdoNetCourseService : ICourseService
     }
     public List<CourseViewModel> GetCourses()
     {
-        String query "SELECT * FROM Courses;"
+        string query = "SELECT * FROM Courses;";
         DataSet dataSet = db.Query(query);
+        throw new System.NotImplementedException();
     }
 
     public CourseDetailViewModel GetCourse(int id)
