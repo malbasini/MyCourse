@@ -5,9 +5,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\Courses\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SQLite" Version="3.13.0" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.2" />
   </ItemGroup>
 </Project>

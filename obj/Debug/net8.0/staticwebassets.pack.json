@@ -1,0 +1,529 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/1.jpg",
+      "PackagePath": "staticwebassets/Courses/1.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/10.jpg",
+      "PackagePath": "staticwebassets/Courses/10.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/11.jpg",
+      "PackagePath": "staticwebassets/Courses/11.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/12.jpg",
+      "PackagePath": "staticwebassets/Courses/12.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/13.jpg",
+      "PackagePath": "staticwebassets/Courses/13.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/14.jpg",
+      "PackagePath": "staticwebassets/Courses/14.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/15.jpg",
+      "PackagePath": "staticwebassets/Courses/15.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/16.jpg",
+      "PackagePath": "staticwebassets/Courses/16.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/17.jpg",
+      "PackagePath": "staticwebassets/Courses/17.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/18.jpg",
+      "PackagePath": "staticwebassets/Courses/18.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/19.jpg",
+      "PackagePath": "staticwebassets/Courses/19.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/2.jpg",
+      "PackagePath": "staticwebassets/Courses/2.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/20.jpg",
+      "PackagePath": "staticwebassets/Courses/20.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/21.jpg",
+      "PackagePath": "staticwebassets/Courses/21.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/22.jpg",
+      "PackagePath": "staticwebassets/Courses/22.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/23.jpg",
+      "PackagePath": "staticwebassets/Courses/23.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/24.jpg",
+      "PackagePath": "staticwebassets/Courses/24.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/25.jpg",
+      "PackagePath": "staticwebassets/Courses/25.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/26.jpg",
+      "PackagePath": "staticwebassets/Courses/26.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/27.jpg",
+      "PackagePath": "staticwebassets/Courses/27.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/28.jpg",
+      "PackagePath": "staticwebassets/Courses/28.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/29.jpg",
+      "PackagePath": "staticwebassets/Courses/29.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/3.jpg",
+      "PackagePath": "staticwebassets/Courses/3.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/30.jpg",
+      "PackagePath": "staticwebassets/Courses/30.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/31.jpg",
+      "PackagePath": "staticwebassets/Courses/31.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/32.jpg",
+      "PackagePath": "staticwebassets/Courses/32.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/4.jpg",
+      "PackagePath": "staticwebassets/Courses/4.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/5.jpg",
+      "PackagePath": "staticwebassets/Courses/5.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/6.jpg",
+      "PackagePath": "staticwebassets/Courses/6.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/7.jpg",
+      "PackagePath": "staticwebassets/Courses/7.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/8.jpg",
+      "PackagePath": "staticwebassets/Courses/8.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/9.jpg",
+      "PackagePath": "staticwebassets/Courses/9.jpg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/Courses/default.png",
+      "PackagePath": "staticwebassets/Courses/default.png"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/all.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/all.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/all.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/all.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/brands.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/brands.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/brands.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/brands.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/fontawesome.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/fontawesome.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/fontawesome.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/fontawesome.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/regular.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/regular.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/regular.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/regular.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/solid.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/solid.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/solid.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/solid.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/svg-with-js.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/svg-with-js.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/svg-with-js.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/svg-with-js.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/v4-font-face.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/v4-font-face.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/v4-font-face.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/v4-font-face.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/v4-shims.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/v4-shims.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/v4-shims.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/v4-shims.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/v5-font-face.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/v5-font-face.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/css/v5-font-face.min.css",
+      "PackagePath": "staticwebassets/lib/font-awesome/css/v5-font-face.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-brands-400.eot",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-brands-400.eot"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-brands-400.svg",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-brands-400.svg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-brands-400.ttf",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-brands-400.ttf"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-brands-400.woff",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-brands-400.woff"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-brands-400.woff2",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-brands-400.woff2"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-regular-400.eot",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-regular-400.eot"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-regular-400.svg",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-regular-400.svg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-regular-400.ttf",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-regular-400.ttf"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-regular-400.woff",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-regular-400.woff"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-regular-400.woff2",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-regular-400.woff2"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-solid-900.eot",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-solid-900.eot"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-solid-900.svg",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-solid-900.svg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-solid-900.ttf",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-solid-900.ttf"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-solid-900.woff",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-solid-900.woff"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/font-awesome/webfonts/fa-solid-900.woff2",
+      "PackagePath": "staticwebassets/lib/font-awesome/webfonts/fa-solid-900.woff2"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/jquery-validation/dist/localization/messages_it.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/localization/messages_it.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/jquery/dist/jquery.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/jquery/dist/jquery.slim.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/popper/dist/umd/popper.min.js",
+      "PackagePath": "staticwebassets/lib/popper/dist/umd/popper.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/qrcodejs/qrcode.min.js",
+      "PackagePath": "staticwebassets/lib/qrcodejs/qrcode.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/font/summernote.eot",
+      "PackagePath": "staticwebassets/lib/summernote/dist/font/summernote.eot"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/font/summernote.ttf",
+      "PackagePath": "staticwebassets/lib/summernote/dist/font/summernote.ttf"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/font/summernote.woff",
+      "PackagePath": "staticwebassets/lib/summernote/dist/font/summernote.woff"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/font/summernote.woff2",
+      "PackagePath": "staticwebassets/lib/summernote/dist/font/summernote.woff2"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/lang/summernote-it-IT.js",
+      "PackagePath": "staticwebassets/lib/summernote/dist/lang/summernote-it-IT.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/summernote-bs4.min.css",
+      "PackagePath": "staticwebassets/lib/summernote/dist/summernote-bs4.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/summernote-bs4.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/dist/summernote-bs4.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/logo.svg",
+      "PackagePath": "staticwebassets/logo.svg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/style.css",
+      "PackagePath": "staticwebassets/style.css"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.MyCourse.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.MyCourse.props",
+      "PackagePath": "build\\MyCourse.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.MyCourse.props",
+      "PackagePath": "buildMultiTargeting\\MyCourse.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.MyCourse.props",
+      "PackagePath": "buildTransitive\\MyCourse.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
