@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using MyCourse.Models.Services.Applications;
+using MyCourse.Models.Services.Infrastructure;
 
 namespace MyCourse
 {
@@ -15,15 +16,8 @@ namespace MyCourse
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            /*--Con questa istruzione stiamo dicendo ai servizi di ASP.NET Core che
-                devono prepararsi alla gestione di oggetti di tipo ICourseService,
-                quando si incontra un componente come il nostro controller che ha una
-                dipendenza da ICourseService deve costruirlo e 
-                passarlo al controller. Grazie alla dependency injection ASP.NET Core
-                può creare istanze di componenti e iniettarle in questo caso nel
-                controller.
-            */
-            services.AddTransient<ICourseService,CourseService>();
+            services.AddTransient<ICourseService,AdoNetCourseService>();
+            services.AddTransient<IDatabaseAccessor, SqlliteDatabaseAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
