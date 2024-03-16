@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using MyCourse.Models.Services.Applications;
+using Microsoft.EntityFrameworkCore;
+using MyCourse.Models.Services.Application;
 using MyCourse.Models.Services.Infrastructure;
+using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace MyCourse
 {
@@ -16,15 +18,21 @@ namespace MyCourse
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(options => options.EnableEndpointRouting = false);
-            services.AddTransient<ICourseService,AdoNetCourseService>();
-            services.AddTransient<IDatabaseAccessor, SqlliteDatabaseAccessor>();
+            //services.AddTransient<ICourseService,AdoNetCourseService>();
+            services.AddTransient<ICourseService,EfCoreCourseService>();
+            //services.AddTransient<IDatabaseAccessor, SqlliteDatabaseAccessor>();
+            //services.AddScoped<MyCourseDbContext>();
+            //services.AddDbContext<MyCourseDbContext>();
+            services.AddDbContextPool<MyCourseDbContext>(optionsBuilder => {
+                #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlite("Data Source=Data/MyCourse.db");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            if (env.IsEnvironment("Development"))
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }

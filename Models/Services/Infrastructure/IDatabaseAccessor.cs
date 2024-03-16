@@ -1,9 +1,11 @@
 using System;
 using System.Data;
+using System.Threading.Tasks;
 
-namespace MyCourse.Models.Services.Infrastructure;
-
-public interface IDatabaseAccessor
+namespace MyCourse.Models.Services.Infrastructure
 {
-    DataSet Query(string query);
+    public interface IDatabaseAccessor
+    {
+        Task<DataSet> QueryAsync(FormattableString query);
+    }
 }

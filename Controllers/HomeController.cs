@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MyCourse.Controllers;
-
-public class HomeController : Controller
+namespace MyCourse.Controllers
 {
-    public IActionResult Index()
+    public class HomeController : Controller
     {
-        return View();
+        public IActionResult Index()
+        {
+            ViewData["Title"] = "Benvenuto su MyCourse!";
+            return View();
+        }
     }
 }
