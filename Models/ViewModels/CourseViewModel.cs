@@ -1,38 +1,52 @@
 using System;
-using System.Collections.Generic;
-using MyCourse.Models.ValueObjects;
 using System.Data;
+using MyCourse.Models.Entities;
 using MyCourse.Models.Enums;
+using MyCourse.Models.ValueObjects;
 
-
-
-namespace MyCourse.Models.ViewModels;
-
-public class CourseViewModel
+namespace MyCourse.Models.ViewModels
 {
-    public int Id { get; set; }
-    public string? Title { get; set; }
-    public string? ImagePath { get; set; }
-    public string? Author { get; set; }
-    public double Rating { get; set; }
-    public Money? FullPrice { get; set; }
-    public Money? CurrentPrice { get; set; }
-
-    public static CourseViewModel FromDataRow(DataRow row)
+    public class CourseViewModel
     {
-        return new CourseViewModel
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string ImagePath { get; set; }
+        public string Author { get; set; }
+        public double Rating { get; set; }
+        public Money FullPrice { get; set; }
+        public Money CurrentPrice { get; set; }
+
+        public static CourseViewModel FromDataRow(DataRow courseRow)
         {
-            Id = Convert.ToInt32(row["Id"]),
-            Title = row["Title"].ToString(),
-            ImagePath = row["ImagePath"].ToString(),
-            Author = row["Author"].ToString(),
-            Rating = Convert.ToDouble(row["Rating"]),
-            FullPrice =
-                new Money((Currency)Enum.Parse(typeof(Currency), row["FullPrice_Currency"].ToString()),
-                    Convert.ToDecimal(row["FullPrice_Amount"])),
-            CurrentPrice =
-                new Money((Currency)Enum.Parse(typeof(Currency), row["CurrentPrice_Currency"].ToString()),
-                    Convert.ToDecimal(row["CurrentPrice_Amount"]))
-        };
+            var courseViewModel = new CourseViewModel {
+                Title = Convert.ToString(courseRow["Title"]),
+                ImagePath = Convert.ToString(courseRow["ImagePath"]),
+                Author = Convert.ToString(courseRow["Author"]),
+                Rating = Convert.ToDouble(courseRow["Rating"]),
+                FullPrice = new Money(
+                    Enum.Parse<Currency>(Convert.ToString(courseRow["FullPrice_Currency"])),
+                    Convert.ToDecimal(courseRow["FullPrice_Amount"])
+                ),
+                CurrentPrice = new Money(
+                    Enum.Parse<Currency>(Convert.ToString(courseRow["CurrentPrice_Currency"])),
+                    Convert.ToDecimal(courseRow["CurrentPrice_Amount"])
+                ),
+                Id = Convert.ToInt32(courseRow["Id"])
+            };
+            return courseViewModel;
+        }
+
+        public static CourseViewModel FromEntity(Course course)
+        {
+            return new CourseViewModel {
+                Id = course.Id,
+                Title = course.Title,
+                ImagePath = course.ImagePath,
+                Author = course.Author,
+                Rating = course.Rating,
+                CurrentPrice = course.CurrentPrice,
+                FullPrice = course.FullPrice
+            };
+        }
     }
 }

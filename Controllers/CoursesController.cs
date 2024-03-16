@@ -1,30 +1,30 @@
-using Microsoft.AspNetCore.Mvc;
-using MyCourse.Models.Services.Applications;
-using MyCourse.Models.ViewModels;
 using System.Collections.Generic;
-namespace MyCourse.Controllers;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using MyCourse.Models.Services.Application;
+using MyCourse.Models.ViewModels;
 
-public class CoursesController : Controller
+namespace MyCourse.Controllers
 {
-    private readonly ICourseService courseService;
+    public class CoursesController : Controller
+    {
+        private readonly ICourseService courseService;
+        public CoursesController(ICourseService courseService)
+        {
+            this.courseService = courseService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            ViewData["Title"] = "Catalogo dei corsi";
+            List<CourseViewModel> courses = await courseService.GetCoursesAsync();
+            return View(courses);
+        }
 
-    public CoursesController(ICourseService courseService)
-    {
-        this.courseService = courseService;
-    }
-    public IActionResult Index()
-    {
-        /*ASP.NET Core andrà a cercare una View che segue
-         le convenzioni.*/
-        List<CourseViewModel> courses = courseService.GetCourses();
-        return View(courses);
-    }
-    public IActionResult Detail(int id)
-    {
-        /*ASP.NET Core andrà a cercare una View che segue
-         le convenzioni.*/
-        CourseDetailViewModel viewModel = courseService.GetCourse(id);
-        ViewData["Title"] = viewModel.Title;
-        return View(viewModel);
+        public async Task<IActionResult> Detail(int id)
+        {
+            CourseDetailViewModel viewModel = await courseService.GetCourseAsync(id);
+            ViewData["Title"] = viewModel.Title;
+            return View(viewModel);
+        }
     }
 }
