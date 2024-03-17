@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using MyCourse.Models.Options;
 using MyCourse.Models.Services.Infrastructure;
 using MyCourse.Models.ViewModels;
 
@@ -16,8 +18,11 @@ public class AdoNetCourseService : ICourseService
     /*--Abbiamo visto in precedenza che le dipendenze si impostano nel
      costruttore tramite una interfaccia.*/
     private readonly IDatabaseAccessor db;
-    public AdoNetCourseService(IDatabaseAccessor db)
+    private readonly IOptionsMonitor<CoursesOptions> courseOptionsMonitor;
+
+    public AdoNetCourseService(IDatabaseAccessor db, IOptionsMonitor<CoursesOptions> courseOptionsMonitor)
     {
+        this.courseOptionsMonitor = courseOptionsMonitor;
         this.db = db;
     }
     public async Task<CourseDetailViewModel> GetCourseAsync(int id)
