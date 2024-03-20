@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\Entities\" />
+    <Folder Include="Models\Exceptions\" />
     <Folder Include="wwwroot\Courses\" />
   </ItemGroup>
   <ItemGroup>

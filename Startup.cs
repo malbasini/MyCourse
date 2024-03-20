@@ -54,6 +54,10 @@ namespace MyCourse
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+            }
             app.UseStaticFiles();
             //Questo è già sufficente tuttavia usiamo
             //un metodo che mostra un Default Route.
