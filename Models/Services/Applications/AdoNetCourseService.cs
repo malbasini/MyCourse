@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MyCourse.Models.Exceptions;
+using MyCourse.Models.Options;
 using MyCourse.Models.Services.Infrastructure;
 using MyCourse.Models.ViewModels;
 
@@ -16,12 +20,19 @@ public class AdoNetCourseService : ICourseService
     /*--Abbiamo visto in precedenza che le dipendenze si impostano nel
      costruttore tramite una interfaccia.*/
     private readonly IDatabaseAccessor db;
-    public AdoNetCourseService(IDatabaseAccessor db)
+    private readonly ILogger<AdoNetCourseService> logger;
+    private readonly IOptionsMonitor<CoursesOptions> courseOptionsMonitor;
+
+    public AdoNetCourseService(ILogger<AdoNetCourseService> logger, IDatabaseAccessor db, IOptionsMonitor<CoursesOptions> courseOptionsMonitor)
     {
+        this.logger = logger;
+        this.courseOptionsMonitor = courseOptionsMonitor;
         this.db = db;
     }
     public async Task<CourseDetailViewModel> GetCourseAsync(int id)
     {
+        /*Logging strutturato, dati e testo non vengono mischiati ma tenuti separati*/
+        logger.LogInformation("Course {id} requested",id);
         /*--Abbiamo due query, questo lo possiamo fare in quanto l'oggetto SqliteCommand
          è in grado di inviare contemporaneamente due query al database.*/
         FormattableString query = $@"SELECT Id, Title, Description, ImagePath, Author, Rating, FullPrice_Amount, 
@@ -37,7 +48,8 @@ public class AdoNetCourseService : ICourseService
         /*--Se il numero di righè è diverso da 1 vuol dire che c'è qualche problema, ad esempio è stato fornito
         un id sbagilato*/
         if (courseTable.Rows.Count != 1) {
-            throw new InvalidOperationException($"Did not return exactly 1 row for Course {id}");
+            logger.LogWarning("Course {id} not found",id);
+            throw new CourseNotFoundException(id);
         }
         //Una volta fatto il mapping del corso che ritorna indietro un CourseDetailViewModel ci interessiamo alle lezioni.
         var courseRow = courseTable.Rows[0];
