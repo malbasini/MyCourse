@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MyCourse.Models.Services.Application;
 using MyCourse.Models.Services.Infrastructure;
 using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using MyCourse.Models.Options;
 using MyCourse.Models.Enums;
@@ -24,7 +25,17 @@ namespace MyCourse
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddResponseCaching();
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
+                var homeProfile = new CacheProfile();
+                homeProfile.Duration = Configuration.GetValue<int>("ResponseCache:Home:Duration");
+                homeProfile.Location = Configuration.GetValue<ResponseCacheLocation>("ResponseCache:Home:Location");
+                //homeProfile.VaryByQueryKeys = new string[] { "page" };
+                //Configuration.Bind("ResponseCache:Home", homeProfile);
+                options.CacheProfiles.Add("Home", homeProfile);
+            });
             //Usiamo ADO.NET o Entity Framework Core per l'accesso ai dati?
             var persistence = Persistence.AdoNet;
             switch (persistence)
@@ -32,6 +43,7 @@ namespace MyCourse
                 case Persistence.AdoNet:
                     services.AddTransient<ICourseService, AdoNetCourseService>();
                     services.AddTransient<IDatabaseAccessor, SqlliteDatabaseAccessor>();
+                    services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
                     break;
                 case Persistence.EfCore:
                     services.AddTransient<ICourseService, EfCoreCourseService>();
@@ -46,6 +58,7 @@ namespace MyCourse
             //Options
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));
+            services.Configure<MemoryCacheOptions>(Configuration.GetSection("MemoryCache"));
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -59,6 +72,7 @@ namespace MyCourse
                 app.UseExceptionHandler("/Error");
             }
             app.UseStaticFiles();
+            app.UseResponseCaching();
             //Questo è già sufficente tuttavia usiamo
             //un metodo che mostra un Default Route.
             //app.UseMvcWithDefaultRoute()
