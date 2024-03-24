@@ -59,6 +59,7 @@ namespace MyCourse
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));
             services.Configure<MemoryCacheOptions>(Configuration.GetSection("MemoryCache"));
+            services.Configure<IMemoryCacheOptions>(Configuration.GetSection("IMemoryCache"));
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
