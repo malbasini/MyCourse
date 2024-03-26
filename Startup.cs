@@ -37,7 +37,7 @@ namespace MyCourse
                 options.CacheProfiles.Add("Home", homeProfile);
             });
             //Usiamo ADO.NET o Entity Framework Core per l'accesso ai dati?
-            var persistence = Persistence.AdoNet;
+            var persistence = Persistence.EfCore;
             switch (persistence)
             {
                 case Persistence.AdoNet:
@@ -47,6 +47,7 @@ namespace MyCourse
                     break;
                 case Persistence.EfCore:
                     services.AddTransient<ICourseService, EfCoreCourseService>();
+                    services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
                     // Usando AddDbContextPool, il DbContext verrà implicitamente registrato con il ciclo di vita Scoped
                     services.AddDbContextPool<MyCourseDbContext>(optionsBuilder =>
                     {

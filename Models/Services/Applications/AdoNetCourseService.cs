@@ -66,10 +66,10 @@ public class AdoNetCourseService : ICourseService
         return courseDetailViewModel; 
     }
 
-    public async Task<List<CourseViewModel>> GetCoursesAsync()
+    public async Task<List<CourseViewModel>> GetCoursesAsync(string search)
     {
         FormattableString query =
-            $"SELECT Id, Title, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency,CurrentPrice_Amount, CurrentPrice_Currency FROM Courses";
+            $"SELECT Id, Title, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency,CurrentPrice_Amount, CurrentPrice_Currency FROM Courses WHERE Title LIKE {"%" + search + "%"}";
         DataSet dataSet = await db.QueryAsync(query);
         var dataTable = dataSet.Tables[0];
         var courseList = new List<CourseViewModel>();
