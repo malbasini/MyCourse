@@ -70,3 +70,6 @@ h2 {
     font-weight: bold;
 
 }
+section+section {
+    margin-top: 2em;
+}

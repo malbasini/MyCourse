@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,8 @@ using MyCourse.Models.Exceptions;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Infrastructure;
 using MyCourse.Models.ViewModels;
+using MyCourse.Models.ValueObjects;
+using MyCourse.Models.InputModels;
 
 
 namespace MyCourse.Models.Services.Application;
@@ -65,18 +68,56 @@ public class AdoNetCourseService : ICourseService
         }
         return courseDetailViewModel; 
     }
-
-    public async Task<List<CourseViewModel>> GetCoursesAsync(string search)
+    public async Task<List<CourseViewModel>> GetBestRatingCoursesAsync()
     {
-        FormattableString query =
-            $"SELECT Id, Title, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency,CurrentPrice_Amount, CurrentPrice_Currency FROM Courses WHERE Title LIKE {"%" + search + "%"}";
+        CourseListInputModel inputModel = new CourseListInputModel(
+            search: "",
+            page: 1,
+            orderby: "Rating",
+            ascending: false,
+            limit: courseOptionsMonitor.CurrentValue.InHome,
+            orderOptions: courseOptionsMonitor.CurrentValue.Order);
+
+        ListViewModel<CourseViewModel> result = await GetCoursesAsync(inputModel);
+        return result.Results;
+    }
+        
+    public async Task<List<CourseViewModel>> GetMostRecentCoursesAsync()
+    {
+        CourseListInputModel inputModel = new CourseListInputModel(
+            search: "",
+            page: 1,
+            orderby: "Id",
+            ascending: false,
+            limit: courseOptionsMonitor.CurrentValue.InHome,
+            orderOptions: courseOptionsMonitor.CurrentValue.Order);
+
+        ListViewModel<CourseViewModel> result = await GetCoursesAsync(inputModel);
+        return result.Results;
+    }
+
+    public async Task<ListViewModel<CourseViewModel>> GetCoursesAsync(CourseListInputModel model)
+    {
+        string orderby = model.OrderBy == "CurrentPrice" ? "CurrentPrice_Amount" : model.OrderBy;
+        string direction = model.Ascending ? "ASC" : "DESC";
+                                    
+        FormattableString query = $@"SELECT Id, Title, ImagePath, Author, Rating, FullPrice_Amount, FullPrice_Currency, CurrentPrice_Amount, CurrentPrice_Currency FROM Courses WHERE Title LIKE {"%" + model.Search + "%"} ORDER BY {(Sql) orderby} {(Sql) direction} LIMIT {model.Limit} OFFSET {model.Offset}; 
+            SELECT COUNT(*) FROM Courses WHERE Title LIKE {"%" + model.Search + "%"}";
         DataSet dataSet = await db.QueryAsync(query);
         var dataTable = dataSet.Tables[0];
         var courseList = new List<CourseViewModel>();
-        foreach(DataRow courseRow in dataTable.Rows) {
+        foreach (DataRow courseRow in dataTable.Rows)
+        {
             CourseViewModel courseViewModel = CourseViewModel.FromDataRow(courseRow);
             courseList.Add(courseViewModel);
         }
-        return courseList;
+
+        ListViewModel<CourseViewModel> result = new ListViewModel<CourseViewModel>
+        {
+            Results = courseList,
+            TotalCount = Convert.ToInt32(dataSet.Tables[1].Rows[0][0])
+        };
+
+        return result;
     }
 }

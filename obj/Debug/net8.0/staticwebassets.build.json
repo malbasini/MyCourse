@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0ATUD1bMenAXw+6IzDbDT96SRPkggdDt1vfC+4WMRrk=",
+  "Hash": "QxB5lAhoSShRNh9k/OSUN1EZZfBVeWT+R3KOastqfKY=",
   "Source": "MyCourse",
   "BasePath": "_content/MyCourse",
   "Mode": "Default",
@@ -642,6 +642,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/Courses/default.png"
+    },
+    {
+      "Identity": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/images/hero.jpg",
+      "SourceId": "MyCourse",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/",
+      "BasePath": "_content/MyCourse",
+      "RelativePath": "images/hero.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/hero.jpg"
     },
     {
       "Identity": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
