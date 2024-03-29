@@ -75,13 +75,13 @@
         @if(currentPage > 1)
         {
            <li class="page-item">
-               <a class="page-link" asp-route-page="@(currentPage-1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending">Previous</a>
+               <a class="page-link" asp-route-page="@(currentPage-1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending"><i style="font-size:21px" class="fa fa-arrow-alt-circle-left" aria-hidden="true"></i></a>
            </li>   
         }
         @if(currentPage == 1)
         {
             <li class="page-item disabled">
-               <a class="page-link" asp-route-page="@(currentPage-1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending">Previous</a>
+               <a class="page-link" asp-route-page="@(currentPage-1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending"><i style="font-size:21px" class="fa fa-arrow-alt-circle-left" aria-hidden="true"></i></a>
             </li>   
         }
         <!--current page - 4 perchè viglio rappresentare 4 link prima della
@@ -104,13 +104,13 @@
         @if (currentPage < totalPages)
         {
             <li class="page-item">
-                <a class="page-link" asp-route-page="@(currentPage + 1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending">Next</a>
+                <a class="page-link" asp-route-page="@(currentPage + 1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending"><i style="font-size:21px" class="fa fa-arrow-alt-circle-right" aria-hidden="true"></i></a>
             </li>
         }
         @if (currentPage == totalPages)
         {
             <li class="page-item disabled">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" href="#"><i style="font-size:21px" class="fa fa-arrow-alt-circle-right" aria-hidden="true"></i></a>
             </li>
         }
     </ul>
