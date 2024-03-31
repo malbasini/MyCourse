@@ -14,118 +14,15 @@
 </div>
 <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-5"><a asp-route-orderby="Title" asp-route-ascending="@(Model.Input.OrderBy == "Title" ? !Model.Input.Ascending : true)" asp-route-search="@Model.Input.Search">Titolo @if(Model.Input.OrderBy == "Title") { <i class="fas fa-caret-@(Model.Input.Ascending ? "up" : "down")"></i> }</a></div>
-    <div class="col-md-2"><a asp-route-orderby="Rating" asp-route-ascending="@(Model.Input.OrderBy == "Rating" ? !Model.Input.Ascending : true)" asp-route-search="@Model.Input.Search">Valutazione @if(Model.Input.OrderBy == "Rating") { <i class="fas fa-caret-@(Model.Input.Ascending ? "up" : "down")"></i> }</a></div>
-    <div class="col-md-2"><a asp-route-orderby="CurrentPrice" asp-route-ascending="@(Model.Input.OrderBy == "CurrentPrice" ? !Model.Input.Ascending : true)" asp-route-search="@Model.Input.Search">Prezzo @if(Model.Input.OrderBy == "CurrentPrice") { <i class="fas fa-caret-@(Model.Input.Ascending ? "up" : "down")"></i> }</a></div>
+    <div class="col-md-5"><order-link order-by="Title" Input="@Model.Input">Titolo</order-link></div>
+    <div class="col-md-2"><order-link order-by="Rating" Input="@Model.Input">Valutazione</order-link></div>
+    <div class="col-md-2"><order-link order-by="CurrentPrice" Input="@Model.Input">Prezzo</order-link></div>
     <div class="col-md-2"></div>
 </div>
 
 @foreach(CourseViewModel course in Model.Courses.Results)
 {
-<hr>
-<div class="row course">
-    <div class="col-md-1">
-        <img src="@course.ImagePath" width="52" height="52" alt="@course.Title">
-    </div>
-    <div class="col-md-5">
-        <h2>@course.Title</h2>
-        <author>di @course.Author</author>
-    </div>
-    <div class="col-md-2 rating" title="@course.Rating">
-        @for(int i = 1; i <= 5; i++)
-        {
-            if (course.Rating >= i)
-            {
-                <i class="fas fa-star"></i>
-            }
-            else if (course.Rating > i - 1)
-            {
-                <i class="fas fa-star-half-alt"></i>
-            }
-            else
-            {
-                <i class="far fa-star"></i>
-            }
-        }
-    </div>
-    <div class="col-md-2 price">
-        @course.CurrentPrice
-        @if(!course.CurrentPrice.Equals(course.FullPrice)) {
-            <br><s>@course.FullPrice</s>
-        }
-    </div>
-    <div class="col-md-2 d-flex align-items-center">
-      <a class="btn btn-outline-primary" asp-controller="Courses" asp-action="Detail" asp-route-id="@course.Id">Dettaglio</a>
-    </div>
-</div>
+    <partial name="Courses/_CourseLine" model="@course"></partial>
 }
 
-@{
-    /*--Model.Courses.TotalCount sono il numero totale dei corsi corrispondenti
-     ai criteri di ricerca. Dividendo questo valore per Limit (Numero di corsi
-     per pagina) ottengo il numero totale di pagine. Math.Ceiling approssima
-     il valore all'intero superiore. Se TotalCount vale 32 diviso dieci
-     otterrò 3,2. Quindi approssimando all'intero superiore otterrò 4 pagine.*/
-    int totalPages = (int) Math.Ceiling(Model.Courses.TotalCount / (decimal) Model.Input.Limit);
-    int currentPage = Model.Input.Page;
-}
-<nav aria-label="Page navigation example">
-    <ul class="pagination d-flex justify-content-center pagination-sm">
-        
-        @if(currentPage > 1)
-        {
-           <li class="page-item">
-               <a class="page-link" asp-route-page="@(currentPage-1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending"><i style="font-size:21px" class="fa fa-arrow-alt-circle-left" aria-hidden="true"></i></a>
-           </li>   
-        }
-        @if(currentPage == 1)
-        {
-            <li class="page-item disabled">
-               <a class="page-link" asp-route-page="@(currentPage-1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending"><i style="font-size:21px" class="fa fa-arrow-alt-circle-left" aria-hidden="true"></i></a>
-            </li>   
-        }
-        <!--current page - 4 perchè viglio rappresentare 4 link prima della
-        pagina corrente.-->
-        @for (int p = Math.Max(1, currentPage - 4); p <= Math.Min(totalPages, currentPage + 4); p++)
-        {
-            if (p == currentPage)
-            {
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" asp-route-page="@p" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending">@p <span class="sr-only">(current)</span> </a>
-                </li>
-            }
-            else
-            {
-                <li class="page-item">
-                    <a class="page-link" asp-route-page="@p" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending">@p</a>
-                </li>
-            }
-        }
-        @if (currentPage < totalPages)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-route-page="@(currentPage + 1)" asp-route-search="@Model.Input.Search" asp-route-orderby="@Model.Input.OrderBy" asp-route-ascending="@Model.Input.Ascending"><i style="font-size:21px" class="fa fa-arrow-alt-circle-right" aria-hidden="true"></i></a>
-            </li>
-        }
-        @if (currentPage == totalPages)
-        {
-            <li class="page-item disabled">
-                <a class="page-link" href="#"><i style="font-size:21px" class="fa fa-arrow-alt-circle-right" aria-hidden="true"></i></a>
-            </li>
-        }
-    </ul>
-   </nav>     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-    </ul>
-</nav>
+<vc:pagination-bar model="@Model"></vc:pagination-bar>
