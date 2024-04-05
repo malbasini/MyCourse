@@ -81,7 +81,14 @@ public class AdoNetCourseService : ICourseService
         ListViewModel<CourseViewModel> result = await GetCoursesAsync(inputModel);
         return result.Results;
     }
-        
+
+    public async Task<bool> IsTitleAvailableAsync(string title, int excludeId)
+    {
+        DataSet result = await db.QueryAsync($"SELECT COUNT(*) FROM Courses WHERE Title LIKE {title} AND id<>{excludeId}");
+        bool titleAvailable = Convert.ToInt32(result.Tables[0].Rows[0][0]) == 0;
+        return titleAvailable;
+    }
+
     public async Task<List<CourseViewModel>> GetMostRecentCoursesAsync()
     {
         CourseListInputModel inputModel = new CourseListInputModel(

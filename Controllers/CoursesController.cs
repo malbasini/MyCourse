@@ -34,5 +34,23 @@ namespace MyCourse.Controllers
             ViewData["Title"] = viewModel.Title;
             return View(viewModel);
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            ViewData["Title"] = "Nuovo corso";
+            var inputModel = new CourseCreateInputModel();
+            return View(inputModel);
+        }
+        [HttpPost]
+        public IActionResult Create(CourseCreateInputModel inputModel)
+        {
+            /*--Coinvolgere i servizi applicativi per salvare il corso nel database.*/
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> IsTitleAvailable(string title, int id = 0)
+        {
+            bool result = await courseService.IsTitleAvailableAsync(title, id);
+            return Json(result);
+        }
     }
 }

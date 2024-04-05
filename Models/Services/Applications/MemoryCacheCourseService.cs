@@ -37,7 +37,12 @@ namespace MyCourse.Models.Services.Application
                 return courseService.GetBestRatingCoursesAsync();
             });
         }
-        
+
+        public Task<bool> IsTitleAvailableAsync(string title, int excludeId)
+        {
+            return courseService.IsTitleAvailableAsync(title, excludeId);
+        }
+
         public Task<List<CourseViewModel>> GetMostRecentCoursesAsync()
         {
             return memoryCache.GetOrCreateAsync($"MostRecentCourses", cacheEntry => 

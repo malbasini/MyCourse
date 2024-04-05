@@ -52,6 +52,14 @@ namespace MyCourse.Models.Services.Application
             ListViewModel<CourseViewModel> result = await GetCoursesAsync(inputModel);
             return result.Results;
         }
+
+        public async Task<bool> IsTitleAvailableAsync(string title, int excludeId)
+        {
+            //await dbContext.Courses.AnyAsync(course => course.Title == title);
+            bool titleExists = await dbContext.Courses.AnyAsync(course => EF.Functions.Like(course.Title, title) && course.Id != excludeId);
+            return !titleExists;
+        }
+
         public async Task<List<CourseViewModel>> GetMostRecentCoursesAsync()
         {
             CourseListInputModel inputModel = new CourseListInputModel(
