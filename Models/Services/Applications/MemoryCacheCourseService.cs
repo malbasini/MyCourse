@@ -6,7 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 using MyCourse.Models.InputModels;
 using MyCourse.Models.ViewModels;
 
-namespace MyCourse.Models.Services.Application
+namespace MyCourse.Models.Services.Applications
 {
     public class MemoryCacheCourseService : ICachedCourseService
     {
@@ -41,6 +41,11 @@ namespace MyCourse.Models.Services.Application
         public Task<bool> IsTitleAvailableAsync(string title, int excludeId)
         {
             return courseService.IsTitleAvailableAsync(title, excludeId);
+        }
+
+        public Task<CourseDetailViewModel> CreateCourseAsync(CourseCreateInputModel inputModel)
+        {
+            return courseService.CreateCourseAsync(inputModel);
         }
 
         public Task<List<CourseViewModel>> GetMostRecentCoursesAsync()

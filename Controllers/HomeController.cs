@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyCourse.Models.InputModels;
-using MyCourse.Models.Services.Application;
+using MyCourse.Models.Services.Applications;
 using MyCourse.Models.ViewModels;
 
 namespace MyCourse.Controllers

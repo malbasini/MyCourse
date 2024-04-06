@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MyCourse.Models.Services.Application;
+using MyCourse.Models.Services.Applications;
 using MyCourse.Models.Services.Infrastructure;
 using Microsoft.EntityFrameworkCore.Sqlite;
 using Microsoft.Extensions.Caching.Memory;

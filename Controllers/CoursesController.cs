@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyCourse.Models.InputModels;
-using MyCourse.Models.Services.Application;
+using MyCourse.Models.Services.Applications;
 using MyCourse.Models.ViewModels;
 
 namespace MyCourse.Controllers
@@ -42,9 +42,13 @@ namespace MyCourse.Controllers
             return View(inputModel);
         }
         [HttpPost]
-        public IActionResult Create(CourseCreateInputModel inputModel)
+        public async Task<IActionResult> Create(CourseCreateInputModel inputModel)
         {
-            /*--Coinvolgere i servizi applicativi per salvare il corso nel database.*/
+            if (!ModelState.IsValid)
+            {
+                return View(inputModel);
+            }
+            CourseDetailViewModel course = await courseService.CreateCourseAsync(inputModel);
             return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> IsTitleAvailable(string title, int id = 0)

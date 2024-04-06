@@ -12,9 +12,9 @@ using MyCourse.Models.Services.Infrastructure;
 using MyCourse.Models.ViewModels;
 using MyCourse.Models.ValueObjects;
 using MyCourse.Models.InputModels;
+using Microsoft.Data.Sqlite;
 
-
-namespace MyCourse.Models.Services.Application;
+namespace MyCourse.Models.Services.Applications;
 /*Se il nostro servizio applicativo vuole valorizzare i ViewModel dovrà interagire
  con un servizio infrastrutturale che a sua volta accede alle classi di ADO.NET 
  per estrarre le informazioni nel database.*/
@@ -87,6 +87,26 @@ public class AdoNetCourseService : ICourseService
         DataSet result = await db.QueryAsync($"SELECT COUNT(*) FROM Courses WHERE Title LIKE {title} AND id<>{excludeId}");
         bool titleAvailable = Convert.ToInt32(result.Tables[0].Rows[0][0]) == 0;
         return titleAvailable;
+    }
+
+    public async Task<CourseDetailViewModel> CreateCourseAsync(CourseCreateInputModel inputModel)
+    {
+        string title = inputModel.Title;
+        string author = "Mario Rossi";
+
+        try
+        {
+            DataSet dataSet = await db.QueryAsync($@"INSERT INTO Courses (Title, Author, ImagePath, CurrentPrice_Currency, CurrentPrice_Amount, FullPrice_Currency, FullPrice_Amount) VALUES ({title}, {author}, '/Courses/default.png', 'EUR', 0, 'EUR', 0);
+                                                 SELECT last_insert_rowid();");
+
+            int courseId = Convert.ToInt32(dataSet.Tables[0].Rows[0][0]);
+            CourseDetailViewModel course = await GetCourseAsync(courseId);
+            return course;
+        }
+        catch (SqliteException exc) when (exc.SqliteErrorCode == 19)
+        {
+            throw new CourseTitleUnavailableException(title, exc);
+        }
     }
 
     public async Task<List<CourseViewModel>> GetMostRecentCoursesAsync()

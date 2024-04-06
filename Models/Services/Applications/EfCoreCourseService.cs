@@ -10,7 +10,7 @@ using System;
 using MyCourse.Models.Entities;
 using MyCourse.Models.InputModels;
 
-namespace MyCourse.Models.Services.Application
+namespace MyCourse.Models.Services.Applications
 {
     public class EfCoreCourseService : ICourseService
     {
@@ -58,6 +58,14 @@ namespace MyCourse.Models.Services.Application
             //await dbContext.Courses.AnyAsync(course => course.Title == title);
             bool titleExists = await dbContext.Courses.AnyAsync(course => EF.Functions.Like(course.Title, title) && course.Id != excludeId);
             return !titleExists;
+        }
+
+        public async Task<CourseDetailViewModel> CreateCourseAsync(CourseCreateInputModel inputModel)
+        {
+            var course = new Course(inputModel.Title, "Mario Rossi");
+            await dbContext.Courses.AddAsync(course);
+            await dbContext.SaveChangesAsync();
+            return CourseDetailViewModel.FromEntity(course);
         }
 
         public async Task<List<CourseViewModel>> GetMostRecentCoursesAsync()

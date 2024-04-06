@@ -1,4 +1,4 @@
-namespace MyCourse.Models.Services.Application;
+namespace MyCourse.Models.Services.Applications;
 
 public interface ICachedCourseService :ICourseService
 {
