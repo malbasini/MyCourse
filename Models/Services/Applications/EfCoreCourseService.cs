@@ -9,6 +9,8 @@ using MyCourse.Models.ViewModels;
 using System;
 using MyCourse.Models.Entities;
 using MyCourse.Models.InputModels;
+using Microsoft.Data.Sqlite;
+using MyCourse.Models.Exceptions;
 
 namespace MyCourse.Models.Services.Applications
 {
@@ -59,12 +61,21 @@ namespace MyCourse.Models.Services.Applications
             bool titleExists = await dbContext.Courses.AnyAsync(course => EF.Functions.Like(course.Title, title) && course.Id != excludeId);
             return !titleExists;
         }
-
         public async Task<CourseDetailViewModel> CreateCourseAsync(CourseCreateInputModel inputModel)
         {
-            var course = new Course(inputModel.Title, "Mario Rossi");
-            await dbContext.Courses.AddAsync(course);
-            await dbContext.SaveChangesAsync();
+            string title = inputModel.Title;
+            string author = "Mario Rossi";
+
+            var course = new Course(title, author);
+            dbContext.Add(course);
+            try
+            {
+                await dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException exc) when ((exc.InnerException as SqliteException)?.SqliteErrorCode == 19)
+            {
+                throw new CourseTitleUnavailableException(title, exc);
+            }
             return CourseDetailViewModel.FromEntity(course);
         }
 
