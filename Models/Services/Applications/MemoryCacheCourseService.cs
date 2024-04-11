@@ -48,6 +48,16 @@ namespace MyCourse.Models.Services.Applications
             return courseService.CreateCourseAsync(inputModel);
         }
 
+        public Task<CourseEditInputModel> GetCourseForEditingAsync(int id)
+        {
+            return courseService.GetCourseForEditingAsync(id);
+        }
+
+        public Task<CourseDetailViewModel> EditCourseAsync(CourseEditInputModel inputModel)
+        {
+            return courseService.EditCourseAsync(inputModel);
+        }
+
         public Task<List<CourseViewModel>> GetMostRecentCoursesAsync()
         {
             return memoryCache.GetOrCreateAsync($"MostRecentCourses", cacheEntry => 

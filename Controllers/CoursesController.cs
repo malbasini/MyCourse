@@ -59,6 +59,33 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Nuovo corso";
             return View(inputModel);
         }
+        public async Task<IActionResult> Edit(int id)
+        {
+            ViewData["Title"] = "Modifica corso";
+            CourseEditInputModel inputModel = await courseService.GetCourseForEditingAsync(id);
+            
+            return View(inputModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(CourseEditInputModel inputModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    CourseDetailViewModel course = await courseService.EditCourseAsync(inputModel);
+                    TempData["ConfirmationMessage"] = "I dati sono stati salvati con successo";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (CourseTitleUnavailableException)
+                {
+                    ModelState.AddModelError(nameof(CourseEditInputModel.Title), "Questo titolo già esiste");
+                }
+            }
+            ViewData["Title"] = "Modifica corso";
+            return View(inputModel);
+        }
+
         public async Task<IActionResult> IsTitleAvailable(string title, int id = 0)
         {
             bool result = await courseService.IsTitleAvailableAsync(title, id);
