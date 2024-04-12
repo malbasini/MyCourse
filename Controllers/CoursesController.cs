@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyCourse.Models.Exceptions;
@@ -59,12 +60,13 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Nuovo corso";
             return View(inputModel);
         }
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             ViewData["Title"] = "Modifica corso";
             CourseEditInputModel inputModel = await courseService.GetCourseForEditingAsync(id);
-            
             return View(inputModel);
+            
         }
         [HttpPost]
         public async Task<IActionResult> Edit(CourseEditInputModel inputModel)
