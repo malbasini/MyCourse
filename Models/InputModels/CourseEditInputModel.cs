@@ -11,7 +11,7 @@ using MyCourse.Models.ValueObjects;
 
 namespace MyCourse.Models.InputModels
 {
-    public class CourseEditInputModel : IValidatableObject
+    public class CourseEditInputModel :IValidatableObject
     {
         [Required]
         public int Id { get; set; }
@@ -44,10 +44,7 @@ namespace MyCourse.Models.InputModels
         [Required(ErrorMessage = "Il prezzo corrente è obbligatorio"),
          Display(Name = "Prezzo corrente")]
         public Money CurrentPrice { get; set; }
-
-        [Display(Name = "Nuova immagine...")]
-        public IFormFile Image { get; set; }
-
+        
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (FullPrice.Currency != CurrentPrice.Currency)

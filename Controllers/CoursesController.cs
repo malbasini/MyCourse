@@ -50,6 +50,7 @@ namespace MyCourse.Controllers
                 try
                 {
                     CourseDetailViewModel course = await courseService.CreateCourseAsync(inputModel);
+                    TempData["ConfirmationMessage"] = "Corso creato con successo";
                     return RedirectToAction(nameof(Index));
                 }
                 catch (CourseTitleUnavailableException)
@@ -77,7 +78,7 @@ namespace MyCourse.Controllers
                 {
                     CourseDetailViewModel course = await courseService.EditCourseAsync(inputModel);
                     TempData["ConfirmationMessage"] = "I dati sono stati salvati con successo";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Detail),new {id=inputModel.Id});
                 }
                 catch (CourseTitleUnavailableException)
                 {

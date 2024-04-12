@@ -93,10 +93,12 @@ public class AdoNetCourseService : ICourseService
     {
         string title = inputModel.Title;
         string author = "Mario Rossi";
-
+        string description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et minima sunt quia nulla voluptate, illum eum incidunt repudiandae beatae, vero accusantium minus hic eveniet omnis laborum architecto inventore dolores molestias? Placeat sequi sapiente hic culpa optio quisquam est fugiat dolorem itaque non, quasi cum voluptates quidem repudiandae doloribus? Autem mollitia esse odio nihil atque non ea quisquam consequuntur exercitationem? Amet! Non ut itaque qui tempore illum! Amet, accusamus minima. Ut rerum praesentium obcaecati sint, accusantium maxime odio voluptatibus quaerat repudiandae corrupti magnam, non perferendis. Officia recusandae delectus dolor quidem reprehenderit! Dolores eos eveniet quod molestiae praesentium earum fugit similique fugiat? Molestias veniam eos enim! Ad, id. Rem similique explicabo deleniti possimus facilis rerum deserunt minus aperiam suscipit! Ipsa, id laudantium. Rem distinctio ex magni unde doloremque a, quae nesciunt, obcaecati animi perspiciatis earum, vel consectetur pariatur tempora dicta. Quos architecto delectus, quis nostrum repudiandae molestiae quas distinctio atque cupiditate temporibus? Deserunt optio molestias alias aspernatur. Ducimus veniam quibusdam, sit saepe illum officiis obcaecati dolore atque totam consequatur exercitationem facilis similique magnam esse et consectetur non temporibus pariatur quae culpa iure? Asperiores reprehenderit, dolores rerum, impedit perferendis voluptatem vero aspernatur odit ipsa possimus nobis. Corrupti harum velit, totam delectus perspiciatis aut necessitatibus odio quasi quisquam, suscipit culpa laborum numquam, voluptatibus vel. Omnis minima quam explicabo deleniti quos accusamus magni provident soluta ex molestias impedit commodi reiciendis, enim rem assumenda sunt pariatur minus praesentium, exercitationem porro dolor. A nam esse recusandae id?";
+        string email = "tutor@example.com";
+        
         try
         {
-            DataSet dataSet = await db.QueryAsync($@"INSERT INTO Courses (Title, Author, ImagePath, CurrentPrice_Currency, CurrentPrice_Amount, FullPrice_Currency, FullPrice_Amount) VALUES ({title}, {author}, '/Courses/default.png', 'EUR', 0, 'EUR', 0);
+            DataSet dataSet = await db.QueryAsync($@"INSERT INTO Courses (Title, Description, Author, Email, ImagePath, CurrentPrice_Currency, CurrentPrice_Amount, FullPrice_Currency, FullPrice_Amount) VALUES ({title},{description}, {author},{email}, '/Courses/default.png', 'EUR', 0, 'EUR', 0);
                                                  SELECT last_insert_rowid();");
 
             int courseId = Convert.ToInt32(dataSet.Tables[0].Rows[0][0]);

@@ -12,6 +12,8 @@ using MyCourse.Models.InputModels;
 using Microsoft.Data.Sqlite;
 using MyCourse.Models.Exceptions;
 using Microsoft.Extensions.Logging;
+using MyCourse.Models.Enums;
+using MyCourse.Models.ValueObjects;
 
 namespace MyCourse.Models.Services.Applications
 {
@@ -67,8 +69,15 @@ namespace MyCourse.Models.Services.Applications
         {
             string title = inputModel.Title;
             string author = "Mario Rossi";
-
+            
+            string description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et minima sunt quia nulla voluptate, illum eum incidunt repudiandae beatae, vero accusantium minus hic eveniet omnis laborum architecto inventore dolores molestias? Placeat sequi sapiente hic culpa optio quisquam est fugiat dolorem itaque non, quasi cum voluptates quidem repudiandae doloribus? Autem mollitia esse odio nihil atque non ea quisquam consequuntur exercitationem? Amet! Non ut itaque qui tempore illum! Amet, accusamus minima. Ut rerum praesentium obcaecati sint, accusantium maxime odio voluptatibus quaerat repudiandae corrupti magnam, non perferendis. Officia recusandae delectus dolor quidem reprehenderit! Dolores eos eveniet quod molestiae praesentium earum fugit similique fugiat? Molestias veniam eos enim! Ad, id. Rem similique explicabo deleniti possimus facilis rerum deserunt minus aperiam suscipit! Ipsa, id laudantium. Rem distinctio ex magni unde doloremque a, quae nesciunt, obcaecati animi perspiciatis earum, vel consectetur pariatur tempora dicta. Quos architecto delectus, quis nostrum repudiandae molestiae quas distinctio atque cupiditate temporibus? Deserunt optio molestias alias aspernatur. Ducimus veniam quibusdam, sit saepe illum officiis obcaecati dolore atque totam consequatur exercitationem facilis similique magnam esse et consectetur non temporibus pariatur quae culpa iure? Asperiores reprehenderit, dolores rerum, impedit perferendis voluptatem vero aspernatur odit ipsa possimus nobis. Corrupti harum velit, totam delectus perspiciatis aut necessitatibus odio quasi quisquam, suscipit culpa laborum numquam, voluptatibus vel. Omnis minima quam explicabo deleniti quos accusamus magni provident soluta ex molestias impedit commodi reiciendis, enim rem assumenda sunt pariatur minus praesentium, exercitationem porro dolor. A nam esse recusandae id?";
+            string email = "tutor@example.com";
+            
             var course = new Course(title, author);
+            
+            course.ChangeDescription(description);
+            course.ChangeEmail(email);
+            
             dbContext.Add(course);
             try
             {
@@ -154,58 +163,27 @@ namespace MyCourse.Models.Services.Applications
         {
             IQueryable<Course> baseQuery = dbContext.Courses;
 
-            switch(model.OrderBy)
+            baseQuery = (model.OrderBy, model.Ascending) switch
             {
-                case "Title":
-                    if (model.Ascending)
-                    {
-                        baseQuery = baseQuery.OrderBy(course => course.Title);
-                    }
-                    else
-                    {
-                        baseQuery = baseQuery.OrderByDescending(course => course.Title);
-                    }
-                    break;
-                case "Rating":
-                    if (model.Ascending)
-                    {
-                        baseQuery = baseQuery.OrderBy(course => course.Rating);
-                    }
-                    else
-                    {
-                        baseQuery = baseQuery.OrderByDescending(course => course.Rating);
-                    }
-                    break;
-                case "CurrentPrice":
-                    if (model.Ascending)
-                    {
-                        baseQuery = baseQuery.OrderBy(course => course.CurrentPrice.Amount);
-                    }
-                    else
-                    {
-                        baseQuery = baseQuery.OrderByDescending(course => course.CurrentPrice.Amount);
-                    }
-                    break;
-                case "Id":
-                    if (model.Ascending)
-                    {
-                        baseQuery = baseQuery.OrderBy(course => course.Id);
-                    }
-                    else
-                    {
-                        baseQuery = baseQuery.OrderByDescending(course => course.Id);
-                    }
-                    break;
-            }
+                ("Title", true) => baseQuery.OrderBy(course => course.Title),
+                ("Title", false) => baseQuery.OrderByDescending(course => course.Title),
+                ("Rating", true) => baseQuery.OrderBy(course => course.Rating),
+                ("Rating", false) => baseQuery.OrderByDescending(course => course.Rating),
+                ("CurrentPrice", true) => baseQuery.OrderBy(course => (float)course.CurrentPrice.Amount),
+                ("CurrentPrice", false) => baseQuery.OrderByDescending(course => (float)course.CurrentPrice.Amount),
+                ("Id", true) => baseQuery.OrderBy(course => (int)course.Id),
+                ("Id", false) => baseQuery.OrderByDescending(course => (int)course.Id),
+                _ => baseQuery
+            };
 
-            IQueryable<CourseViewModel> queryLinq = baseQuery
+            IQueryable<Course> queryLinq = baseQuery
                 .Where(course => course.Title.Contains(model.Search))
-                .AsNoTracking()
-                .Select(course => CourseViewModel.FromEntity(course)); //Usando metodi statici come FromEntity, la query potrebbe essere inefficiente. Mantenere il mapping nella lambda oppure usare un extension method personalizzato
+                .AsNoTracking();
 
-            List<CourseViewModel> courses = await queryLinq                
+            List<CourseViewModel> courses = await queryLinq
                 .Skip(model.Offset)
                 .Take(model.Limit)
+                .Select(course => CourseViewModel.FromEntity(course)) //Usando metodi statici come FromEntity, la query potrebbe essere inefficiente. Mantenere il mapping nella lambda oppure usare un extension method personalizzato
                 .ToListAsync(); //La query al database viene inviata qui, quando manifestiamo l'intenzione di voler leggere i risultati
 
             int totalCount = await queryLinq.CountAsync();

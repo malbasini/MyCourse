@@ -36,6 +36,7 @@ namespace MyCourse
                 //Configuration.Bind("ResponseCache:Home", homeProfile);
                 options.CacheProfiles.Add("Home", homeProfile);
             });
+            services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
             //Usiamo ADO.NET o Entity Framework Core per l'accesso ai dati?
             var persistence = Persistence.AdoNet;
             switch (persistence)
@@ -43,7 +44,6 @@ namespace MyCourse
                 case Persistence.AdoNet:
                     services.AddTransient<ICourseService, AdoNetCourseService>();
                     services.AddTransient<IDatabaseAccessor, SqlliteDatabaseAccessor>();
-                    services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
                     break;
                 case Persistence.EfCore:
                     services.AddTransient<ICourseService, EfCoreCourseService>();

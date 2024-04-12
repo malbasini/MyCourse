@@ -65,5 +65,6 @@ namespace MyCourse.Models.ValueObjects
         {
             return $"{Currency} {Amount:#.00}";
         }
+        
     }
 }

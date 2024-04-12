@@ -1,35 +1,28 @@
 @model HomeViewModel
-<style>
-        .jumbotron {
-            background-image: url("/images/hero.jpg");
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .jumbotron h1 {
-            font-size: 3.5rem;
-        }
-    </style>
-<div class="mt-4 p-5 bg-dark text-black rounded jumbotron">
+<div class="jumbotron">
     <h1 class="display-4">@ViewData["Title"]</h1>
     <p class="lead">Impara in maniera facile e divertente con i nostri corsi online!<br>
-        Scegli da un vasto catalogo sempre a tua disposizione.
-    </p> 
-    <p><a asp-controller="Courses" asp-action="Index" class="btn btn-dark">Sfoglia il catalogo dei corsi <i class="fas fa-angle-right"></i></a></p>                   
+        Scegli da un vasto catalogo sempre a tua disposizione.</p>
+    <p>
+        <a asp-controller="Courses" asp-action="Index" class="btn btn-dark">Sfoglia il catalogo dei corsi <i class="fas fa-angle-right"></i></a>
+        <br/>
+        <br/>
+    </p>
 </div>
 <br/>
 <section>
     <h2>Aggiunti di recente</h2>
     @foreach (CourseViewModel course in Model.MostRecentCourses)
-    {
+            {
         <partial name="Courses/_CourseLine" model="@course"></partial>
-    }
+            }
 </section>
 
 
 <section>
     <h2>I migliori di sempre</h2>
     @foreach (CourseViewModel course in Model.BestRatingCourses)
-    {
+            {
         <partial name="Courses/_CourseLine" model="@course"></partial>
-    }
+            }
 </section>

@@ -15,7 +15,12 @@ namespace MyCourse.Models.ViewModels
         public double Rating { get; set; }
         public Money FullPrice { get; set; }
         public Money CurrentPrice { get; set; }
-
+        public string? Description { get; set; }
+        public string? Email { get; set; }
+        
+        
+        
+        
         public static CourseViewModel FromDataRow(DataRow courseRow)
         {
             var courseViewModel = new CourseViewModel {
