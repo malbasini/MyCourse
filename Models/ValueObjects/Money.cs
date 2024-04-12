@@ -63,7 +63,7 @@ namespace MyCourse.Models.ValueObjects
         
         public override string ToString()
         {
-            return $"{Currency} {Amount:#.00}";
+            return $"{Currency} {Amount:#0.00}";
         }
         
     }
