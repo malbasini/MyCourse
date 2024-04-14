@@ -23,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Description"></label>
-                    <textarea asp-for="Description" class="form-control" data-summernote rows="18"></textarea>
+                    <textarea asp-for="Description" id="Descrizione" class="form-control" rows="18"></textarea>
                     <span asp-validation-for="Description"></span>
                 </div>
             </div>
@@ -61,8 +61,9 @@
             </div>
         </div>
     </form>
+    @section Scripts
+    {
+        <partial name="_Validation"></partial>
+        <partial name="_Summernote"></partial>
+    }
 </section>
-@section Scripts
-{
-    <partial name="_Validation"></partial>
-}

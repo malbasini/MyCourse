@@ -137,6 +137,86 @@
       "PackagePath": "staticwebassets/images/hero.jpg"
     },
     {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-grid.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-grid.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-reboot.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/css/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.bundle.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/bootstrap-4.6.2-dist/js/bootstrap.min.js.map"
+    },
+    {
       "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
     },
@@ -469,6 +549,10 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.slim.min.js"
     },
     {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/jquery/jquery-3.6.0.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/jquery-3.6.0.min.js"
+    },
+    {
       "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/popper/dist/umd/popper.min.js",
       "PackagePath": "staticwebassets/lib/popper/dist/umd/popper.min.js"
     },
@@ -477,32 +561,648 @@
       "PackagePath": "staticwebassets/lib/qrcodejs/qrcode.min.js"
     },
     {
-      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/font/summernote.eot",
-      "PackagePath": "staticwebassets/lib/summernote/dist/font/summernote.eot"
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/font/summernote.eot",
+      "PackagePath": "staticwebassets/lib/summernote/font/summernote.eot"
     },
     {
-      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/font/summernote.ttf",
-      "PackagePath": "staticwebassets/lib/summernote/dist/font/summernote.ttf"
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/font/summernote.ttf",
+      "PackagePath": "staticwebassets/lib/summernote/font/summernote.ttf"
     },
     {
-      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/font/summernote.woff",
-      "PackagePath": "staticwebassets/lib/summernote/dist/font/summernote.woff"
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/font/summernote.woff",
+      "PackagePath": "staticwebassets/lib/summernote/font/summernote.woff"
     },
     {
-      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/font/summernote.woff2",
-      "PackagePath": "staticwebassets/lib/summernote/dist/font/summernote.woff2"
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/font/summernote.woff2",
+      "PackagePath": "staticwebassets/lib/summernote/font/summernote.woff2"
     },
     {
-      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/lang/summernote-it-IT.js",
-      "PackagePath": "staticwebassets/lib/summernote/dist/lang/summernote-it-IT.js"
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ar-AR.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ar-AR.js"
     },
     {
-      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/summernote-bs4.min.css",
-      "PackagePath": "staticwebassets/lib/summernote/dist/summernote-bs4.min.css"
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ar-AR.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ar-AR.min.js"
     },
     {
-      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/dist/summernote-bs4.min.js",
-      "PackagePath": "staticwebassets/lib/summernote/dist/summernote-bs4.min.js"
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ar-AR.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ar-AR.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-az-AZ.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-az-AZ.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-az-AZ.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-az-AZ.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-az-AZ.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-az-AZ.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-bg-BG.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-bg-BG.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-bg-BG.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-bg-BG.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-bg-BG.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-bg-BG.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ca-ES.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ca-ES.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ca-ES.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ca-ES.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ca-ES.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ca-ES.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-cs-CZ.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-cs-CZ.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-cs-CZ.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-cs-CZ.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-cs-CZ.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-cs-CZ.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-da-DK.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-da-DK.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-da-DK.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-da-DK.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-da-DK.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-da-DK.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-de-DE.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-de-DE.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-de-DE.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-de-DE.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-de-DE.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-de-DE.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-el-GR.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-el-GR.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-el-GR.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-el-GR.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-el-GR.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-el-GR.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-es-ES.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-es-ES.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-es-ES.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-es-ES.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-es-ES.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-es-ES.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-es-EU.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-es-EU.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-es-EU.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-es-EU.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-es-EU.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-es-EU.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fa-IR.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fa-IR.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fa-IR.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fa-IR.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fa-IR.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fa-IR.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fi-FI.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fi-FI.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fi-FI.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fi-FI.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fi-FI.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fi-FI.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fr-FR.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fr-FR.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fr-FR.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fr-FR.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-fr-FR.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-fr-FR.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-gl-ES.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-gl-ES.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-gl-ES.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-gl-ES.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-gl-ES.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-gl-ES.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-he-IL.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-he-IL.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-he-IL.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-he-IL.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-he-IL.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-he-IL.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-hr-HR.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-hr-HR.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-hr-HR.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-hr-HR.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-hr-HR.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-hr-HR.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-hu-HU.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-hu-HU.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-hu-HU.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-hu-HU.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-hu-HU.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-hu-HU.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-id-ID.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-id-ID.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-id-ID.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-id-ID.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-id-ID.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-id-ID.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-it-IT.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-it-IT.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-it-IT.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-it-IT.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-it-IT.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-it-IT.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ja-JP.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ja-JP.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ja-JP.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ja-JP.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ja-JP.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ja-JP.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ko-KR.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ko-KR.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ko-KR.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ko-KR.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ko-KR.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ko-KR.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-lt-LT.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-lt-LT.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-lt-LT.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-lt-LT.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-lt-LT.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-lt-LT.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-lt-LV.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-lt-LV.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-lt-LV.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-lt-LV.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-lt-LV.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-lt-LV.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-mn-MN.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-mn-MN.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-mn-MN.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-mn-MN.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-mn-MN.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-mn-MN.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-nb-NO.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-nb-NO.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-nb-NO.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-nb-NO.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-nb-NO.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-nb-NO.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-nl-NL.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-nl-NL.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-nl-NL.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-nl-NL.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-nl-NL.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-nl-NL.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pl-PL.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pl-PL.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pl-PL.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pl-PL.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pl-PL.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pl-PL.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pt-BR.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pt-BR.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pt-BR.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pt-BR.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pt-BR.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pt-BR.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pt-PT.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pt-PT.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pt-PT.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pt-PT.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-pt-PT.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-pt-PT.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ro-RO.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ro-RO.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ro-RO.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ro-RO.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ro-RO.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ro-RO.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ru-RU.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ru-RU.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ru-RU.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ru-RU.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ru-RU.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ru-RU.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sk-SK.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sk-SK.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sk-SK.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sk-SK.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sk-SK.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sk-SK.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sl-SI.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sl-SI.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sl-SI.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sl-SI.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sl-SI.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sl-SI.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sr-RS-Latin.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sr-RS-Latin.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sr-RS-Latin.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sr-RS-Latin.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sr-RS-Latin.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sr-RS-Latin.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sr-RS.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sr-RS.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sr-RS.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sr-RS.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sr-RS.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sr-RS.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sv-SE.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sv-SE.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sv-SE.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sv-SE.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-sv-SE.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-sv-SE.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ta-IN.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ta-IN.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ta-IN.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ta-IN.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-ta-IN.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-ta-IN.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-th-TH.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-th-TH.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-th-TH.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-th-TH.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-th-TH.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-th-TH.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-tr-TR.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-tr-TR.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-tr-TR.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-tr-TR.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-tr-TR.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-tr-TR.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-uk-UA.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-uk-UA.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-uk-UA.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-uk-UA.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-uk-UA.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-uk-UA.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-uz-UZ.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-uz-UZ.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-uz-UZ.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-uz-UZ.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-uz-UZ.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-uz-UZ.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-vi-VN.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-vi-VN.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-vi-VN.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-vi-VN.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-vi-VN.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-vi-VN.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-zh-CN.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-zh-CN.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-zh-CN.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-zh-CN.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-zh-CN.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-zh-CN.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-zh-TW.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-zh-TW.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-zh-TW.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-zh-TW.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/lang/summernote-zh-TW.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/lang/summernote-zh-TW.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/plugin/databasic/summernote-ext-databasic.css",
+      "PackagePath": "staticwebassets/lib/summernote/plugin/databasic/summernote-ext-databasic.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/plugin/databasic/summernote-ext-databasic.js",
+      "PackagePath": "staticwebassets/lib/summernote/plugin/databasic/summernote-ext-databasic.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/plugin/hello/summernote-ext-hello.js",
+      "PackagePath": "staticwebassets/lib/summernote/plugin/hello/summernote-ext-hello.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/plugin/specialchars/summernote-ext-specialchars.js",
+      "PackagePath": "staticwebassets/lib/summernote/plugin/specialchars/summernote-ext-specialchars.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-bs4.css",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-bs4.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-bs4.js",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-bs4.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-bs4.js.map",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-bs4.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-bs4.min.css",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-bs4.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-bs4.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-bs4.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-bs4.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-bs4.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-bs4.min.js.map",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-bs4.min.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-lite.css",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-lite.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-lite.js",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-lite.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-lite.js.map",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-lite.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-lite.min.css",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-lite.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-lite.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-lite.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-lite.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-lite.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote-lite.min.js.map",
+      "PackagePath": "staticwebassets/lib/summernote/summernote-lite.min.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote.css",
+      "PackagePath": "staticwebassets/lib/summernote/summernote.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote.js",
+      "PackagePath": "staticwebassets/lib/summernote/summernote.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote.js.map",
+      "PackagePath": "staticwebassets/lib/summernote/summernote.js.map"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote.min.css",
+      "PackagePath": "staticwebassets/lib/summernote/summernote.min.css"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote.min.js",
+      "PackagePath": "staticwebassets/lib/summernote/summernote.min.js"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote.min.js.LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/summernote/summernote.min.js.LICENSE.txt"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/lib/summernote/summernote.min.js.map",
+      "PackagePath": "staticwebassets/lib/summernote/summernote.min.js.map"
     },
     {
       "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/logo.svg",
