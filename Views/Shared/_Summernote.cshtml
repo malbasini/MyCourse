@@ -14,9 +14,18 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
-    </environment>
+</environment>
 <script>
-    $(document).ready(function() {
-        $('#Descrizione').summernote();
+    $('#Description').summernote({
+        //https://summernote.org/deep-dive/
+        minHeight: 300,
+        lang: 'it-IT',
+        toolbar: [
+            ['style', ['bold', 'italic']],
+            ['para', ['ul', 'ol']],
+            ['insert', ['video']],
+            ['view', ['codeview']]
+        ]
     });
 </script>
+

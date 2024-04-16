@@ -133,6 +133,10 @@
       "PackagePath": "staticwebassets/Courses/default.png"
     },
     {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/download.jpeg",
+      "PackagePath": "staticwebassets/download.jpeg"
+    },
+    {
       "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/images/hero.jpg",
       "PackagePath": "staticwebassets/images/hero.jpg"
     },

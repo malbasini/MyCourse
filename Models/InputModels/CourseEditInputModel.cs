@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using AngleSharp.Dom;
+using AngleSharp.Html;
+using AngleSharp.Html.Dom;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MyCourse.Controllers;
@@ -45,6 +49,8 @@ namespace MyCourse.Models.InputModels
          Display(Name = "Prezzo corrente")]
         public Money CurrentPrice { get; set; }
         
+        [Display(Name = "Nuova Immagine....")]
+        public IFormFile Image { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (FullPrice.Currency != CurrentPrice.Currency)

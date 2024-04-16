@@ -1,11 +1,11 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using MyCourse.Customizations.TagHelpers;
 using MyCourse.Models.Exceptions;
 using MyCourse.Models.InputModels;
 using MyCourse.Models.Services.Applications;
 using MyCourse.Models.ViewModels;
-
+using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace MyCourse.Controllers
 {
     public class CoursesController : Controller
@@ -95,4 +95,5 @@ namespace MyCourse.Controllers
             return Json(result);
         }
     }
+    
 }

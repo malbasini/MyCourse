@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "g9jgINDs/VOgPyJm5AHaazAfcALLrEbnOhHNB6+kXIU=",
+  "Hash": "3998kcPDjKLW4P/JS0jCrDBXbvminogsHd5TKQE9eJA=",
   "Source": "MyCourse",
   "BasePath": "_content/MyCourse",
   "Mode": "Default",
@@ -642,6 +642,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/Courses/default.png"
+    },
+    {
+      "Identity": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/download.jpeg",
+      "SourceId": "MyCourse",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/",
+      "BasePath": "_content/MyCourse",
+      "RelativePath": "download.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/download.jpeg"
     },
     {
       "Identity": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/images/hero.jpg",
