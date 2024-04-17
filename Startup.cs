@@ -36,9 +36,8 @@ namespace MyCourse
                 //Configuration.Bind("ResponseCache:Home", homeProfile);
                 options.CacheProfiles.Add("Home", homeProfile);
             });
-            services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
             //Usiamo ADO.NET o Entity Framework Core per l'accesso ai dati?
-            var persistence = Persistence.EfCore;
+            var persistence = Persistence.AdoNet;
             switch (persistence)
             {
                 case Persistence.AdoNet:
@@ -55,6 +54,8 @@ namespace MyCourse
                     });
                     break;
             }
+            services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
+            services.AddSingleton<IImagePersister, MagickNetImagePersister>();
             //Options
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));

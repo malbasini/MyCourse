@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3998kcPDjKLW4P/JS0jCrDBXbvminogsHd5TKQE9eJA=",
+  "Hash": "z8bH4eagyEqVXtz1awf9FDd+Sm/byLrrM+Vum3/ncZ4=",
   "Source": "MyCourse",
   "BasePath": "_content/MyCourse",
   "Mode": "Default",
@@ -644,12 +644,12 @@
       "OriginalItemSpec": "wwwroot/Courses/default.png"
     },
     {
-      "Identity": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/download.jpeg",
+      "Identity": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/ikebana 1.jpeg",
       "SourceId": "MyCourse",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/",
       "BasePath": "_content/MyCourse",
-      "RelativePath": "download.jpeg",
+      "RelativePath": "ikebana 1.jpeg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -660,7 +660,26 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/download.jpeg"
+      "OriginalItemSpec": "wwwroot/ikebana 1.jpeg"
+    },
+    {
+      "Identity": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/ikebana 2.jpeg",
+      "SourceId": "MyCourse",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/",
+      "BasePath": "_content/MyCourse",
+      "RelativePath": "ikebana 2.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/ikebana 2.jpeg"
     },
     {
       "Identity": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/images/hero.jpg",

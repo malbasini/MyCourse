@@ -70,6 +70,7 @@ namespace MyCourse.Controllers
             
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(CourseEditInputModel inputModel)
         {
             if (ModelState.IsValid)
@@ -79,6 +80,10 @@ namespace MyCourse.Controllers
                     CourseDetailViewModel course = await courseService.EditCourseAsync(inputModel);
                     TempData["ConfirmationMessage"] = "I dati sono stati salvati con successo";
                     return RedirectToAction(nameof(Detail),new {id=inputModel.Id});
+                }
+                catch (CourseImageInvalidException)
+                {
+                    ModelState.AddModelError(nameof(CourseEditInputModel.Image), "L'immagine selezionata non è valida");
                 }
                 catch (CourseTitleUnavailableException)
                 {

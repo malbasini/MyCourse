@@ -133,8 +133,12 @@
       "PackagePath": "staticwebassets/Courses/default.png"
     },
     {
-      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/download.jpeg",
-      "PackagePath": "staticwebassets/download.jpeg"
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/ikebana 1.jpeg",
+      "PackagePath": "staticwebassets/ikebana 1.jpeg"
+    },
+    {
+      "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/ikebana 2.jpeg",
+      "PackagePath": "staticwebassets/ikebana 2.jpeg"
     },
     {
       "Id": "/Users/marcoalbasini/Documents/Software/MyCourse/wwwroot/images/hero.jpg",

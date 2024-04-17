@@ -22,8 +22,10 @@ namespace MyCourse.Models.Services.Applications
         private readonly MyCourseDbContext dbContext;
         private readonly IOptionsMonitor<CoursesOptions> courseOptionsMonitor;
         private readonly ILogger<EfCoreCourseService> logger;
-        public EfCoreCourseService(MyCourseDbContext dbContext,IOptionsMonitor<CoursesOptions> courseOptionsMonitor,ILogger<EfCoreCourseService> logger)
+        private readonly IImagePersister imagePersister;
+        public EfCoreCourseService(MyCourseDbContext dbContext,IImagePersister imagePersister, IOptionsMonitor<CoursesOptions> courseOptionsMonitor,ILogger<EfCoreCourseService> logger)
         {
+            this.imagePersister = imagePersister;
             this.courseOptionsMonitor = courseOptionsMonitor;
             this.dbContext = dbContext;
             this.logger = logger;
@@ -121,7 +123,7 @@ namespace MyCourse.Models.Services.Applications
             course.ChangePrices(inputModel.FullPrice, inputModel.CurrentPrice);
             course.ChangeDescription(inputModel.Description);
             course.ChangeEmail(inputModel.Email);
-            /*
+            
             if (inputModel.Image != null)
             {
                 try {
@@ -133,7 +135,7 @@ namespace MyCourse.Models.Services.Applications
                     throw new CourseImageInvalidException(inputModel.Id, exc);
                 }
             }
-            */
+            
             //dbContext.Update(course);
             try
             {

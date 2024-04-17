@@ -25,9 +25,11 @@ public class AdoNetCourseService : ICourseService
     private readonly IDatabaseAccessor db;
     private readonly ILogger<AdoNetCourseService> logger;
     private readonly IOptionsMonitor<CoursesOptions> courseOptionsMonitor;
+    private readonly IImagePersister imagePersister;
 
-    public AdoNetCourseService(ILogger<AdoNetCourseService> logger, IDatabaseAccessor db, IOptionsMonitor<CoursesOptions> courseOptionsMonitor)
+    public AdoNetCourseService(ILogger<AdoNetCourseService> logger, IDatabaseAccessor db, IOptionsMonitor<CoursesOptions> courseOptionsMonitor, IImagePersister imagePersister)
     {
+        this.imagePersister = imagePersister;
         this.logger = logger;
         this.courseOptionsMonitor = courseOptionsMonitor;
         this.db = db;
@@ -144,7 +146,6 @@ public class AdoNetCourseService : ICourseService
         {
             throw new CourseTitleUnavailableException(inputModel.Title, exc);
         }
-        /*
         if (inputModel.Image != null)
         {
             try {
@@ -156,7 +157,6 @@ public class AdoNetCourseService : ICourseService
                 throw new CourseImageInvalidException(inputModel.Id, exc);
             }
         }
-        */
         CourseDetailViewModel course = await GetCourseAsync(inputModel.Id);
         return course;
     }
