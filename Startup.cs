@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 using MyCourse.Models.Services.Applications;
 using MyCourse.Models.Services.Infrastructure;
@@ -61,6 +62,7 @@ namespace MyCourse
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));
             services.Configure<MemoryCacheOptions>(Configuration.GetSection("MemoryCache"));
             services.Configure<IMemoryCacheOptions>(Configuration.GetSection("IMemoryCache"));
+            services.Configure<KestrelServerOptions>(Configuration.GetSection("Kestrel"));
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
