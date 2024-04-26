@@ -2,10 +2,14 @@
 <div class="jumbotron">
     <h1 class="display-4">@ViewData["Title"]</h1>
     <p class="lead">Impara in maniera facile e divertente con i nostri corsi online!<br>
-Scegli da un vasto catalogo sempre a tua disposizione.</p>
-    <p><a asp-controller="Courses" asp-action="Index" class="btn btn-primary">Sfoglia il catalogo dei corsi <i class="fas fa-angle-right"></i></a></p>
+        Scegli da un vasto catalogo sempre a tua disposizione.</p>
+    <br/>
+    <br/>
+    <p><a asp-controller="Courses" asp-action="Index" class="btn btn-dark">Sfoglia il catalogo dei corsi <i class="fas fa-angle-right"></i></a></p>
+    <br/>
+    <br/>
 </div>
-
+<br/>
 <section>
     <h2>Aggiunti di recente</h2>
     @foreach (CourseViewModel course in Model.MostRecentCourses)
