@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyCourse.Customizations.ModelBinders;
+using MyCourse.Models.Entities;
 using MyCourse.Models.Enums;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Application.Courses;
@@ -45,7 +46,6 @@ namespace MyCourse
                 options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
 
             });
-            
 
             //Usiamo ADO.NET o Entity Framework Core per l'accesso ai dati?
             var persistence = Persistence.EfCore;
