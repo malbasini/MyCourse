@@ -5,13 +5,13 @@
     "Security": "None",
     "Sender": "MyCourse<noreply@example.org>",
     "Host":"sandbox.smtp.mailtrap.io",
-    "User":"User della registrazione a mailtrap.io",
-    "Password":"Password della registrazione a mailtrap.io"
+    "User":"User della registrazione a https://mailtrap.io",
+    "Password":"Password della registrazione a https://mailtrap.io"
 
   },
   "ReCaptcha": {
-    "SecretKey": "codice su Google ReCaptcha",
-    "SiteKey": "codice su Google ReCaptcha",
+    "SecretKey": "codice su Google ReCaptcha https://www.google.com/recaptcha/admin/",
+    "SiteKey": "codice su Google ReCaptcha https://www.google.com/recaptcha/admin/",
     "Version": "v2"
   }
 }
