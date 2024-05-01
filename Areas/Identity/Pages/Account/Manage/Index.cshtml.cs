@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-
 namespace MyCourse.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
@@ -75,9 +74,9 @@ namespace MyCourse.Areas.Identity.Pages.Account.Manage
             }
 
             //TODO: PERSISTERE IL FULLNAME
-            //Passo1: Recuperare l'istanza di ApplicationUser (in realtà è stato fatto alla riga 65)
+            //Passo1: Recuperare l'istanza di IdentityUser (in realtà è stato fatto alla riga 65)
             //Passo2: Modificare la sua proprietà FullName ottenendo il valore dall'input model
-            //Passo3: Persistere l'ApplicationUser invocando il metodo UpdateAsync dello user manager
+            //Passo3: Persistere l'IdentityUser invocando il metodo UpdateAsync dello user manager
             //Passo4: Consultare la proprietà Success dell'IdentityResult perché se è false, visualizza un errore
 
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);

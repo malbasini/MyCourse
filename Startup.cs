@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -14,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyCourse.Customizations.Identity;
 using MyCourse.Customizations.ModelBinders;
+using MyCourse.Models.Entities;
 using MyCourse.Models.Enums;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Application.Courses;
@@ -34,7 +34,6 @@ namespace MyCourse
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddReCaptcha(Configuration.GetSection("ReCaptcha"));
             services.AddResponseCaching();
             services.AddRazorPages();
             services.AddMvc(options =>
@@ -91,14 +90,11 @@ namespace MyCourse
                 });
                 break;
             }
-            
+
             services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
             services.AddTransient<ICachedLessonService, MemoryCacheLessonService>();
             services.AddSingleton<IImagePersister, MagickNetImagePersister>();
             services.AddSingleton<IEmailSender, MailKitEmailSender>();
-            
-            //Recaptcha
-            
             //Options
             services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));
