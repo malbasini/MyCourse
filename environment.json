@@ -10,7 +10,7 @@
 
   },
   "ReCaptcha": {
-    "SecretKey": "codice su Google ReCaptcha,
+    "SecretKey": "codice su Google ReCaptcha",
     "SiteKey": "codice su Google ReCaptcha",
     "Version": "v2"
   }
