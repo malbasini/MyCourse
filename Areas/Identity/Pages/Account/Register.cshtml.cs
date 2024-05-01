@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,10 +13,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
-using MyCourse.Models.Entities;
-
+using AspNetCore.ReCaptcha;
 namespace MyCourse.Areas.Identity.Pages.Account
 {
+    [ValidateReCaptcha]
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
@@ -46,20 +46,20 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "L'email è obbligatoria")]
-            [EmailAddress(ErrorMessage = "Deve essere un indirizzo email valido")]
+            [Required]
+            [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "La password è obbligatoria")]
-            [StringLength(100, MinimumLength = 8, ErrorMessage = "La password deve essere di almeno {2} e di al massimo {1} caratteri.")]
+            [Required]
+            [StringLength(100, ErrorMessage = "La {0} deve essere di almeno {2} e al massimo {1} caratteri.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Conferma password")]
-            [Compare("Password", ErrorMessage = "La password e la conferma password devono corrispondere.")]
+            [Compare("Password", ErrorMessage = "La password e la conferma password non corrispondono.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -71,12 +71,11 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                //var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email};
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -90,8 +89,8 @@ namespace MyCourse.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Conferma il tuo indirizzo email",
-                        $"Per favore conferma la tua registrazione <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>cliccando questo link</a>.");
+                    await _emailSender.SendEmailAsync(Input.Email, "Confermare la posta elettronica",
+                        $"Conferma il tuo account <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>cliccando qui</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

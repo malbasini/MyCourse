@@ -1,16 +1,22 @@
-@page
+﻿@page
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Accedi";
+    ViewData["Title"] = "Log in";
 }
-
-<h1>@ViewData["Title"]</h1>
+<br>
+<br>
+    <div class="container">
+          <div class="alert alert-success">
+            <h1 style="text-align: center"><b>@ViewData["Title"]</b></h1>
+        </div>
+  </div>   
+<br>
 <div class="row">
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h4>Accedi con un profilo esistente</h4>
+                <h4>Utilizzare un account locale per accedere.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -18,11 +24,13 @@
                     <input asp-for="Input.Email" class="form-control" />
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
+                <br/>
                 <div class="form-group">
                     <label asp-for="Input.Password"></label>
                     <input asp-for="Input.Password" class="form-control" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
+                <br/>
                 <div class="form-group">
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe">
@@ -33,15 +41,18 @@
                 </div>
                 <br/>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-dark">Accedi</button>
+                    <button type="submit" class="btn btn-primary">Log in</button>
                 </div>
                 <br/>
                 <div class="form-group">
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Dimenticato la password?</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Hai dimenticato la password?</a>
                     </p>
                     <p>
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registrati come nuovo utente</a>
+                    </p>
+                    <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reinvia conferma e-mail</a>
                     </p>
                 </div>
             </form>
@@ -49,15 +60,15 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>Usa un altro servizio per accedere</h4>
+            <h4>Utilizzare un altro servizio per accedere.</h4>
             <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
                     <div>
                         <p>
-                            Non sono stati configurati servizi di autenticazione esterni.<br>Leggi <a href="https://go.microsoft.com/fwlink/?LinkID=532715">questo articolo</a>
-                            per i dettagli su come impostare questa applicazione ASP.NET Core per l'accesso con servizi di autenticazione esterni.
+                            Non sono configurati servizi di autenticazione esterna. guardare <a href="https://go.microsoft.com/fwlink/?LinkID=532715">questo articolo</a>
+                            per informazioni dettagliate sull'impostazione di questa applicazione ASP.NET per supportare l'accesso tramite servizi esterni.
                         </p>
                     </div>
                 }
@@ -68,7 +79,36 @@
                             <p>
                                 @foreach (var provider in Model.ExternalLogins)
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Accedi con il tuo profilo @provider.DisplayName">@provider.DisplayName</button>
+                                                if (provider.Name == "Google")
+                                                {
+                                                    <img src="~/images/google.png" style="background-size: cover;background-color:transparent;background-size: 100%;width: 48px;height: 48px;cursor: pointer;border:none;" onclick="document.getElementById('@provider.Name').click();" />
+                                                    <input name="provider" type="submit" id="@provider.Name" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="display:none;" />
+                                                }
+                                                if (provider.Name == "Yahoo")
+                                                {
+                                                    <img src="~/images/yahoo.png" style="background-size: cover;background-color: transparent;background-size: 100%;width: 48px;height: 48px;cursor: pointer;border:none;" onclick="document.getElementById('@provider.Name').click();" />
+                                                    <input name="provider" type="submit" id="@provider.Name" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="display:none;" />
+                                                }
+                                                if (provider.Name == "Twitter")
+                                                {
+                                                    <img src="~/images/twitter.png" style="background-size: cover;background-color: transparent;background-size: 100%;width: 48px;height: 48px;cursor: pointer;border:none;" onclick="document.getElementById('@provider.Name').click();" />
+                                                    <input name="provider" type="submit" id="@provider.Name" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="display:none;" />
+                                                }
+                                                if (provider.Name == "Facebook")
+                                                {
+                                                    <img src="~/images/facebook.png" style="background-size: cover;background-color: transparent;background-size: 100%;width: 48px;height: 48px;cursor: pointer;border:none;" onclick="document.getElementById('@provider.Name').click();" />
+                                                    <input name="provider" type="submit" id="@provider.Name" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="display:none;" />
+                                                }
+                                                if (provider.Name == "GitHub")
+                                                {
+                                                    <img src="~/images/git.png" style="background-size: cover;background-color: transparent;background-size: 100%;width: 48px;height: 48px;cursor: pointer;border:none;" onclick="document.getElementById('@provider.Name').click();" />
+                                                    <input name="provider" type="submit" id="@provider.Name" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="display:none;" />
+                                                }
+                                                if (provider.Name == "Microsoft")
+                                                {
+                                                    <img src="~/images/microsoft.png" style="background-size: cover;background-color: transparent;background-size: 100%;width: 48px;height: 48px;cursor: pointer;border:none;" onclick="document.getElementById('@provider.Name').click();" />
+                                                    <input name="provider" type="submit" id="@provider.Name" value="@provider.Name" title="Log in using your @provider.DisplayName account" style="display:none;" />
+                                                }
                                 }
                             </p>
                         </div>

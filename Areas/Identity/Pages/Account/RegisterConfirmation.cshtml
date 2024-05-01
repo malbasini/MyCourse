@@ -1,4 +1,4 @@
-@page
+﻿@page
 @model RegisterConfirmationModel
 @{
     ViewData["Title"] = "Conferma registrazione";
@@ -8,15 +8,14 @@
 @{
     if (@Model.DisplayConfirmAccountLink)
     {
-    <p>
-    Quest'applicazione sta funzionando in ambiente <strong>Development</strong>, perciò per praticità viene mostrato qui il contenuto dell'email di conferma:<br>
-    <a id="confirm-link" href="@Model.EmailConfirmationUrl">Clicca qui per confermare la tua registrazione</a>
-    </p>
+<p>
+    <a id="confirm-link" href="https://mailtrap.io/">Recarsi al seguente indirizzo per confermare l'account.</a>
+</p>
     }
     else
     {
-    <p>
-    Per favore controlla la tua casella email per confermare la registrazione.
-    </p>
+<p>
+    Controlla la tua e-mail per confermare il tuo account all'indirizzo <a href="https://mailtrap.io">mail trap</a>.
+</p>
     }
 }

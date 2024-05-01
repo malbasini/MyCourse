@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using MyCourse.Models.Entities;
 
 namespace MyCourse.Areas.Identity.Pages.Account
 {
@@ -31,8 +30,8 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "L'email è obbligatoria")]
-            [EmailAddress(ErrorMessage = "Deve essere un indirizzo email valido")]
+            [Required]
+            [EmailAddress]
             public string Email { get; set; }
         }
 
@@ -59,8 +58,8 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reimposta password",
-                    $"Per favore, reimposta la password <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>cliccando questo link</a>.");
+                    "Reset Password",
+                    $"Reimpostare la password <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>cliccando qui</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

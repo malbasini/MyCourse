@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using MyCourse.Models.Entities;
 
 namespace MyCourse.Areas.Identity.Pages.Account
 {
@@ -33,13 +32,13 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "Il codice dell'app authenticator è obbligatorio")]
-            [StringLength(7, MinimumLength = 6, ErrorMessage = "Il codice dell'app authenticator deve essere di almeno {2} e di al massimo {1} caratteri.")]
+            [Required]
+            [StringLength(7, ErrorMessage = "Il {0} deve essere almeno {2} e al massimo {1} caratteri.", MinimumLength = 6)]
             [DataType(DataType.Text)]
-            [Display(Name = "Codice app authenticator")]
+            [Display(Name = "Codice authenticator")]
             public string TwoFactorCode { get; set; }
 
-            [Display(Name = "Ricorda questo dispositivo")]
+            [Display(Name = "Ricorda questa macchina")]
             public bool RememberMachine { get; set; }
         }
 
@@ -50,7 +49,7 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
             if (user == null)
             {
-                throw new InvalidOperationException($"Non è stato possibile trovare l'utente per l'autenticazione due fattori.");
+                throw new InvalidOperationException($"Impossibile caricare l'utente con 2FA.");
             }
 
             ReturnUrl = returnUrl;
@@ -71,7 +70,7 @@ namespace MyCourse.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Non è stato possibile trovare l'utente per l'autenticazione due fattori.");
+                throw new InvalidOperationException($"Impossibile caricare l'utente con 2FA.");
             }
 
             var authenticatorCode = Input.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
@@ -80,18 +79,18 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);
+                _logger.LogInformation("Utente con ID '{UserId}' connesso con 2fa.", user.Id);
                 return LocalRedirect(returnUrl);
             }
             else if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
+                _logger.LogWarning("Utente con ID '{UserId}' account bloccato.", user.Id);
                 return RedirectToPage("./Lockout");
             }
             else
             {
-                _logger.LogWarning("Invalid authenticator code entered for user with ID '{UserId}'.", user.Id);
-                ModelState.AddModelError(string.Empty, "Codice non valido");
+                _logger.LogWarning("Authenticator code non valido per l'utente con ID '{UserId}'.", user.Id);
+                ModelState.AddModelError(string.Empty, "Authenticator code non valido.");
                 return Page();
             }
         }

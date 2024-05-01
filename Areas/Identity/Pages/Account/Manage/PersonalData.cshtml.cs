@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using MyCourse.Models.Entities;
+
 
 namespace MyCourse.Areas.Identity.Pages.Account.Manage
 {

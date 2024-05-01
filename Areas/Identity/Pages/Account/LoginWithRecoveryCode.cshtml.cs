@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using MyCourse.Models.Entities;
 
 namespace MyCourse.Areas.Identity.Pages.Account
 {
@@ -32,9 +31,9 @@ namespace MyCourse.Areas.Identity.Pages.Account
         public class InputModel
         {
             [BindProperty]
-            [Required(ErrorMessage = "Il codice di recupero è obbligatorio")]
+            [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Codice di recupero")]
+            [Display(Name = "Codice di ripristino")]
             public string RecoveryCode { get; set; }
         }
 
@@ -44,7 +43,7 @@ namespace MyCourse.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Non è stato possibile trovare l'utente per l'autenticazione due fattori.");
+                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
             ReturnUrl = returnUrl;
@@ -62,7 +61,7 @@ namespace MyCourse.Areas.Identity.Pages.Account
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new InvalidOperationException($"Non è stato possibile trovare l'utente per l'autenticazione due fattori.");
+                throw new InvalidOperationException($"Impossibile caricare il two-factor authentication user.");
             }
 
             var recoveryCode = Input.RecoveryCode.Replace(" ", string.Empty);
@@ -71,18 +70,18 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);
+                _logger.LogInformation("Utente con ID '{UserId}' connesso con un codice di ripristino.", user.Id);
                 return LocalRedirect(returnUrl ?? Url.Content("~/"));
             }
             if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
+                _logger.LogWarning("Utente con ID '{UserId}' account bloccato.", user.Id);
                 return RedirectToPage("./Lockout");
             }
             else
             {
-                _logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
-                ModelState.AddModelError(string.Empty, "È stato fornito un codice di recupero non valido.");
+                _logger.LogWarning("Codice di ripristino non valido immesso per l'utente con ID '{UserId}' ", user.Id);
+                ModelState.AddModelError(string.Empty, "Codice di ripristino non valido");
                 return Page();
             }
         }

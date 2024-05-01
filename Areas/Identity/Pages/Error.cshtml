@@ -1,0 +1,23 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Errore";
+}
+
+<h1 class="text-danger">Errore.</h1>
+<h2 class="text-danger"> Si è verificato un errore durante l'elaborazione della richiesta.</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>ID richiesta:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+<h3>Modalità di sviluppo</h3>
+<p>
+     Cambia in <strong>Sviluppo</strong>l'ambiente mostrerà informazioni più dettagliate sull'errore che si è verificato.
+</p>
+<p>
+    <strong>L'ambiente di sviluppo non deve essere abilitato nelle applicazioni distribuite</strong>,  in quanto può comportare la visualizzazione di informazioni riservate dalle eccezioni agli utenti finali. Per il debug locale, l'ambiente di sviluppo può essere abilitato impostando il <strong>ASPNETCORE_ENVIRONMENT</strong> variabile di ambiente su <strong>Sviluppo</strong>, e riavviare l'applicazione.
+</p>

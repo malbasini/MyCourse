@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -6,9 +6,6 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using MyCourse.Models.Entities;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
 
 namespace MyCourse.Areas.Identity.Pages.Account
 {
@@ -17,13 +14,11 @@ namespace MyCourse.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _sender;
-        private readonly IHostEnvironment env;
 
-        public RegisterConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender sender, IHostEnvironment env)
+        public RegisterConfirmationModel(UserManager<IdentityUser> userManager, IEmailSender sender)
         {
             _userManager = userManager;
             _sender = sender;
-            this.env = env;
         }
 
         public string Email { get; set; }
@@ -42,12 +37,12 @@ namespace MyCourse.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                return NotFound($"Non è stato possibile trovare l'utente con l'email '{email}'.");
+                return NotFound($"Impossibile caricare l'utente con l'email' {email}'.");
             }
 
             Email = email;
             // Once you add a real email sender, you should remove this code that lets you confirm the account
-            DisplayConfirmAccountLink = env.IsDevelopment();
+            DisplayConfirmAccountLink = true;
             if (DisplayConfirmAccountLink)
             {
                 var userId = await _userManager.GetUserIdAsync(user);

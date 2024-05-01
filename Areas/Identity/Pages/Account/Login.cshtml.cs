@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using MyCourse.Models.Entities;
 
 namespace MyCourse.Areas.Identity.Pages.Account
 {
@@ -43,8 +42,8 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "L'email è obbligatoria")]
-            [EmailAddress(ErrorMessage = "Deve essere un indirizzo email valido")]
+            [Required]
+            [EmailAddress]
             public string Email { get; set; }
 
             [Required]
@@ -62,7 +61,7 @@ namespace MyCourse.Areas.Identity.Pages.Account
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -74,8 +73,10 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl ??= Url.Content("~/");
 
+            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -97,7 +98,7 @@ namespace MyCourse.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Tentativo di accesso fallito.");
+                    ModelState.AddModelError(string.Empty, "Tentativo di accesso non valido.");
                     return Page();
                 }
             }

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using MyCourse.Models.Entities;
 
 namespace MyCourse.Areas.Identity.Pages.Account.Manage
 {
@@ -130,7 +129,7 @@ namespace MyCourse.Areas.Identity.Pages.Account.Manage
 
         private string FormatKey(string unformattedKey)
         {
-            var result = new StringBuilder();
+            StringBuilder result = new();
             int currentPosition = 0;
             while (currentPosition + 4 < unformattedKey.Length)
             {

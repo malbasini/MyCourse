@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
-using MyCourse.Models.Entities;
 
 namespace MyCourse.Areas.Identity.Pages.Account
 {
@@ -28,18 +27,18 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "L'indirizzo email è obbligatorio")]
-            [EmailAddress(ErrorMessage = "Non è un indirizzo email valido")]
+            [Required]
+            [EmailAddress]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = "La password è obbligatoria")]
-            [StringLength(100, MinimumLength = 8, ErrorMessage = "La password deve essere di almeno {2} e di al massimo {1} caratteri.")]
+            [Required]
+            [StringLength(100, ErrorMessage = "La {0} deve essere almeno {2} e al massimo {1} caratteri.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Conferma password")]
-            [Compare("Password", ErrorMessage = "La password e la conferma password devono corrispondere.")]
+            [Compare("Password", ErrorMessage = "La password e la conferma password non coincidono.")]
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
@@ -49,7 +48,7 @@ namespace MyCourse.Areas.Identity.Pages.Account
         {
             if (code == null)
             {
-                return BadRequest("Deve essere fornito un codice per la reimpostazione della password.");
+                return BadRequest("È necessario fornire un codice per la reimpostazione della password.");
             }
             else
             {
