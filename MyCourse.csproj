@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="Customizations\Identity\" />
     <Folder Include="Customizations\ModelBinders\" />
     <Folder Include="Models\Entities\" />
     <Folder Include="Models\Exceptions\" />
