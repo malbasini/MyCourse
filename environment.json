@@ -1,0 +1,17 @@
+{
+  "AllowedHosts": "*",
+  "Smtp": {
+    "Port": 2525,
+    "Security": "None",
+    "Sender": "MyCourse<noreply@example.org>",
+    "Host":"sandbox.smtp.mailtrap.io",
+    "User":"d8fa39dfb8c174",
+    "Password":"4825d478f84b82"
+
+  },
+  "ReCaptcha": {
+    "SecretKey": "6Lc-QaoaAAAAANGeCUJcANdsdf_t-VEXIWbwrPsL",
+    "SiteKey": "6Lc-QaoaAAAAAH4-wXtIPADQ9p_J0KAH2KU1H-nN",
+    "Version": "v2"
+  }
+}
