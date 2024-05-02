@@ -5,12 +5,12 @@
     "Security": "None",
     "Sender": "Scadenze <noreply@example.org>",
      "Host":"sandbox.smtp.mailtrap.io",
-     "User":"consultare file README.md,
-     "Password":"consultare file README.md
+     "User":"consultare file README.md",
+     "Password":"consultare file README.md"
 
   },
   "ReCaptcha": {
-    "SecretKey": "consultare file README.md,
+    "SecretKey": "consultare file README.md",
     "SiteKey": "consultare file README.md",
     "Version": "v2"
   }
