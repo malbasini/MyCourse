@@ -51,7 +51,7 @@ namespace MyCourse
 
             });
             services.AddSingleton<IConfiguration>(provider => new ConfigurationBuilder()
-                .AddJsonFile("environment.json", optional: false, reloadOnChange: false)
+                .AddJsonFile("MyEnv.json", optional: false, reloadOnChange: false)
                 .Build());
             //Usiamo ADO.NET o Entity Framework Core per l'accesso ai dati?
             var persistence = Persistence.EfCore;

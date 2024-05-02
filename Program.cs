@@ -16,7 +16,7 @@ namespace MyCourse
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    config.AddJsonFile("environment.json", optional: false, reloadOnChange: false);
+                    config.AddJsonFile("MyEnv.json", optional: false, reloadOnChange: false);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
