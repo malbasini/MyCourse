@@ -14,20 +14,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using AspNetCore.ReCaptcha;
+using MyCourse.Models.Entities;
+
 namespace MyCourse.Areas.Identity.Pages.Account
 {
     [ValidateReCaptcha]
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
@@ -46,13 +48,19 @@ namespace MyCourse.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            
+            [Required(ErrorMessage = "Il nome completo è oblligatorio")]
+            [StringLength(50, ErrorMessage = "Il {0} deve essere di almeno {2} e al massimo {1} caratteri.", MinimumLength = 3)]
+            [Display(Name = "Nome Completo")]
+            public string FullName { get; set; }
+            
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "La {0} deve essere di almeno {2} e al massimo {1} caratteri.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "La {0} deve essere di almeno {2} e al massimo {1} caratteri.", MinimumLength = 8)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -75,7 +83,7 @@ namespace MyCourse.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser{ UserName = Input.Email, Email = Input.Email ,FullName = Input.FullName};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
