@@ -64,7 +64,7 @@ namespace MyCourse
                 break;
 
                 case Persistence.EfCore:
-                    services.AddDefaultIdentity<IdentityUser>(options =>
+                    services.AddDefaultIdentity<ApplicationUser>(options =>
                         {
                             // Criteri di validazione della password
                             options.Password.RequireDigit = true;
@@ -83,7 +83,7 @@ namespace MyCourse
                             options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                         })
                         .AddEntityFrameworkStores<MyCourseDbContext>()
-                        .AddPasswordValidator<CommonPasswordValidator<IdentityUser>>();
+                        .AddPasswordValidator<CommonPasswordValidator<ApplicationUser>>();
                     services.AddTransient<ICourseService, EfCoreCourseService>();
                     services.AddTransient<ILessonService, EfCoreLessonService>();
                     services.AddDbContextPool<MyCourseDbContext>(optionsBuilder => {
