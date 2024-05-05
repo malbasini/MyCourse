@@ -41,6 +41,12 @@ namespace MyCourse.Models.Services.Infrastructure
                            .HasConversion<float>(); //Questo indica al meccanismo delle migration che la colonna della tabella dovrà essere creata di tipo numerico
                 });
 
+                //Mapping tabella AspNetUsers Courses
+                entity.HasOne(course => course.AuthorUser)
+                    .WithMany(user => user.AuthoredCourses)
+                    .HasForeignKey(course => course.AuthorId);
+                
+                
                 entity.OwnsOne(course => course.FullPrice, builder => {
                     builder.Property(money => money.Currency)
                            .HasConversion<string>();

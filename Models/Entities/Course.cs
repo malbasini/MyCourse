@@ -7,10 +7,10 @@ namespace MyCourse.Models.Entities
 {
     public partial class Course
     {
-        public Course(string title, string author)
+        public Course(string title, string author, string authorId)
         {
             ChangeTitle(title);
-            ChangeAuthor(author);
+            ChangeAuthor(author,authorId);
             Lessons = new HashSet<Lesson>();
             CurrentPrice = new Money(Currency.EUR, 0);
             FullPrice = new Money(Currency.EUR, 0);
@@ -35,13 +35,18 @@ namespace MyCourse.Models.Entities
             Status = status;
         }
 
-        public void ChangeAuthor(string newAuthor)
+        public void ChangeAuthor(string newAuthor, string authorId)
         {
             if (string.IsNullOrWhiteSpace(newAuthor))
             {
                 throw new ArgumentException("The author must have a name");
             }
+            if (string.IsNullOrWhiteSpace(authorId))
+            {
+                throw new ArgumentException("The author must have a Id");
+            }
             Author = newAuthor;
+            AuthorId = authorId;
         }
 
         public void ChangeTitle(string newTitle)
@@ -102,6 +107,8 @@ namespace MyCourse.Models.Entities
         }
 
         public virtual ICollection<Lesson> Lessons { get; private set; }
+        public string AuthorId { get; set; }
+        public virtual ApplicationUser AuthorUser { get; set; }
 
     }
 }
