@@ -3,7 +3,6 @@ using System.IO;
 using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -38,6 +37,7 @@ namespace MyCourse
             services.AddReCaptcha(Configuration.GetSection("ReCaptcha"));
             services.AddResponseCaching();
             services.AddRazorPages();
+
             services.AddMvc(options =>
             {
                 var homeProfile = new CacheProfile();
@@ -50,9 +50,28 @@ namespace MyCourse
                 options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
 
             });
-            services.AddSingleton<IConfiguration>(provider => new ConfigurationBuilder()
-                .AddJsonFile("MyEnv.json", optional: false, reloadOnChange: false)
-                .Build());
+
+            var identityBuilder = services.AddDefaultIdentity<ApplicationUser>(options => {
+                        // Criteri di validazione della password
+                        options.Password.RequireDigit = true;
+                        options.Password.RequiredLength = 8;
+                        options.Password.RequireUppercase = true;
+                        options.Password.RequireLowercase = true;
+                        options.Password.RequireNonAlphanumeric = true;
+                        options.Password.RequiredUniqueChars = 4;
+
+                        // Conferma dell'account
+                        options.SignIn.RequireConfirmedAccount = true;
+
+                        // Blocco dell'account
+                        options.Lockout.AllowedForNewUsers = true;
+                        options.Lockout.MaxFailedAccessAttempts = 5;
+                        options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+
+                    })
+                    .AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
+                    .AddPasswordValidator<CommonPasswordValidator<ApplicationUser>>();
+
             //Usiamo ADO.NET o Entity Framework Core per l'accesso ai dati?
             var persistence = Persistence.EfCore;
             switch (persistence)
@@ -61,29 +80,17 @@ namespace MyCourse
                     services.AddTransient<ICourseService, AdoNetCourseService>();
                     services.AddTransient<ILessonService, AdoNetLessonService>();
                     services.AddTransient<IDatabaseAccessor, SqliteDatabaseAccessor>();
+
+                    //Imposta l'AdoNetUserStore come servizio di persistenza per Identity
+                    identityBuilder.AddUserStore<AdoNetUserStore>();
+
                 break;
 
                 case Persistence.EfCore:
-                    services.AddDefaultIdentity<ApplicationUser>(options =>
-                        {
-                            // Criteri di validazione della password
-                            options.Password.RequireDigit = true;
-                            options.Password.RequiredLength = 8;
-                            options.Password.RequireUppercase = true;
-                            options.Password.RequireLowercase = true;
-                            options.Password.RequireNonAlphanumeric = true;
-                            options.Password.RequiredUniqueChars = 4;
 
-                            // Conferma dell'account
-                            options.SignIn.RequireConfirmedAccount = true;
+                    //Imposta il MyCourseDbContext come servizio di persistenza per Identity
+                    identityBuilder.AddEntityFrameworkStores<MyCourseDbContext>();
 
-                            // Blocco dell'account
-                            options.Lockout.AllowedForNewUsers = true;
-                            options.Lockout.MaxFailedAccessAttempts = 5;
-                            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                        })
-                        .AddEntityFrameworkStores<MyCourseDbContext>()
-                        .AddPasswordValidator<CommonPasswordValidator<ApplicationUser>>();
                     services.AddTransient<ICourseService, EfCoreCourseService>();
                     services.AddTransient<ILessonService, EfCoreLessonService>();
                     services.AddDbContextPool<MyCourseDbContext>(optionsBuilder => {
@@ -97,12 +104,13 @@ namespace MyCourse
             services.AddTransient<ICachedLessonService, MemoryCacheLessonService>();
             services.AddSingleton<IImagePersister, MagickNetImagePersister>();
             services.AddSingleton<IEmailSender, MailKitEmailSender>();
+
             //Options
-            services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<MemoryCacheOptions>(Configuration.GetSection("MemoryCache"));
             services.Configure<KestrelServerOptions>(Configuration.GetSection("Kestrel"));
+            services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -137,11 +145,10 @@ namespace MyCourse
 
             //EndpointRoutingMiddleware
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
-            
-            
+
             app.UseResponseCaching();
 
             //EndpointMiddleware
@@ -149,6 +156,7 @@ namespace MyCourse
                 routeBuilder.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                 routeBuilder.MapRazorPages();
             });
+
         }
     }
 }

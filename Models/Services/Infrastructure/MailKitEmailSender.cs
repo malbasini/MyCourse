@@ -51,8 +51,6 @@ namespace MyCourse.Models.Services.Infrastructure
                 };
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
-
-
             }
             catch (Exception exc)
             {

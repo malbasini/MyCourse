@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Logging;
@@ -21,38 +22,38 @@ namespace MyCourse.Models.Services.Infrastructure
             this.logger = logger;
             this.connectionStringOptions = connectionStringOptions;
         }
-
-        public async Task<int> CommandAsync(FormattableString formattableCommand)
+        private static SqliteCommand GetCommand(FormattableString formattableQuery, SqliteConnection conn)
         {
-            try
+            //Creiamo dei SqliteParameter a partire dalla FormattableString
+            var queryArguments = formattableQuery.GetArguments();
+            var sqliteParameters = new List<SqliteParameter>();
+            for (var i = 0; i < queryArguments.Length; i++)
             {
-                using SqliteConnection conn = await GetOpenedConnection();
-                using SqliteCommand cmd = GetCommand(formattableCommand, conn);
-                int affectedRows = await cmd.ExecuteNonQueryAsync();
-                return affectedRows;
+                if (queryArguments[i] is Sql)
+                {
+                    continue;
+                }
+                var parameter = new SqliteParameter(name: i.ToString(), value: queryArguments[i] ?? DBNull.Value);
+                sqliteParameters.Add(parameter);
+                queryArguments[i] = "@" + i;
             }
-            catch (SqliteException exc) when (exc.SqliteErrorCode == 19)
-            {
-                throw new ConstraintViolationException(exc);
-            }
+            string query = formattableQuery.ToString();
+
+            var cmd = new SqliteCommand(query, conn);
+            //Aggiungiamo i SqliteParameters al SqliteCommand
+            cmd.Parameters.AddRange(sqliteParameters);
+            return cmd;
         }
 
-        public async Task<T> QueryScalarAsync<T>(FormattableString formattableQuery)
+        private async Task<SqliteConnection> GetOpenedConnection()
         {
-            try
-            {
-                using SqliteConnection conn = await GetOpenedConnection();
-                using SqliteCommand cmd = GetCommand(formattableQuery, conn);
-                object result = await cmd.ExecuteScalarAsync();
-                return (T)Convert.ChangeType(result, typeof(T));
-            }
-            catch (SqliteException exc) when (exc.SqliteErrorCode == 19)
-            {
-                throw new ConstraintViolationException(exc);
-            }
+            //Colleghiamoci al database Sqlite, inviamo la query e leggiamo i risultati
+            var conn = new SqliteConnection(connectionStringOptions.CurrentValue.Default);
+            await conn.OpenAsync();
+            return conn;
         }
 
-        public async Task<DataSet> QueryAsync(FormattableString formattableQuery)
+        public async Task<DataSet> QueryAsync(FormattableString formattableQuery, CancellationToken token = default(CancellationToken))
         {
             logger.LogInformation(formattableQuery.Format, formattableQuery.GetArguments());
 
@@ -85,35 +86,34 @@ namespace MyCourse.Models.Services.Infrastructure
 
         }
 
-        private static SqliteCommand GetCommand(FormattableString formattableQuery, SqliteConnection conn)
+        public async Task<T> QueryScalarAsync<T>(FormattableString formattableQuery, CancellationToken token = default(CancellationToken))
         {
-            //Creiamo dei SqliteParameter a partire dalla FormattableString
-            var queryArguments = formattableQuery.GetArguments();
-            var sqliteParameters = new List<SqliteParameter>();
-            for (var i = 0; i < queryArguments.Length; i++)
+            try
             {
-                if (queryArguments[i] is Sql)
-                {
-                    continue;
-                }
-                var parameter = new SqliteParameter(name: i.ToString(), value: queryArguments[i] ?? DBNull.Value);
-                sqliteParameters.Add(parameter);
-                queryArguments[i] = "@" + i;
+                using SqliteConnection conn = await GetOpenedConnection();
+                using SqliteCommand cmd = GetCommand(formattableQuery, conn);
+                object result = await cmd.ExecuteScalarAsync();
+                return (T)Convert.ChangeType(result, typeof(T));
             }
-            string query = formattableQuery.ToString();
-
-            var cmd = new SqliteCommand(query, conn);
-            //Aggiungiamo i SqliteParameters al SqliteCommand
-            cmd.Parameters.AddRange(sqliteParameters);
-            return cmd;
+            catch (SqliteException exc) when (exc.SqliteErrorCode == 19)
+            {
+                throw new ConstraintViolationException(exc);
+            }
         }
 
-        private async Task<SqliteConnection> GetOpenedConnection()
+        public async Task<int> CommandAsync(FormattableString formattableCommand, CancellationToken token = default(CancellationToken))
         {
-            //Colleghiamoci al database Sqlite, inviamo la query e leggiamo i risultati
-            var conn = new SqliteConnection(connectionStringOptions.CurrentValue.Default);
-            await conn.OpenAsync();
-            return conn;
+            try
+            {
+                using SqliteConnection conn = await GetOpenedConnection();
+                using SqliteCommand cmd = GetCommand(formattableCommand, conn);
+                int affectedRows = await cmd.ExecuteNonQueryAsync();
+                return affectedRows;
+            }
+            catch (SqliteException exc) when (exc.SqliteErrorCode == 19)
+            {
+                throw new ConstraintViolationException(exc);
+            }
         }
     }
 }
