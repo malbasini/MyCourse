@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyCourse.Models.Exceptions.Application;
 using MyCourse.Models.InputModels.Courses;
@@ -15,6 +16,7 @@ namespace MyCourse.Controllers
         {
             this.courseService = courseService;
         }
+        [AllowAnonymous]
         public async Task<IActionResult> Index(CourseListInputModel input)
         {
             ViewData["Title"] = "Catalogo dei corsi";
@@ -34,7 +36,6 @@ namespace MyCourse.Controllers
             ViewData["Title"] = viewModel.Title;
             return View(viewModel);
         }
-
         public IActionResult Create()
         {
             ViewData["Title"] = "Nuovo corso";
@@ -62,7 +63,6 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Nuovo corso";
             return View(inputModel);
         }
-
         public async Task<IActionResult> Edit(int id)
         {
             ViewData["Title"] = "Modifica corso";
@@ -106,7 +106,6 @@ namespace MyCourse.Controllers
             TempData["ConfirmationMessage"] = "Il corso è stato eliminato ma potrebbe continuare a comparire negli elenchi per un breve periodo, finché la cache non viene aggiornata.";
             return RedirectToAction(nameof(Index));
         }
-
         public async Task<IActionResult> IsTitleAvailable(string title, int id = 0)
         {
             bool result = await courseService.IsTitleAvailableAsync(title, id);

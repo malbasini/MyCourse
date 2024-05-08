@@ -202,6 +202,7 @@ namespace MyCourse.Models.Services.Application.Courses
             bool titleExists = await dbContext.Courses.AnyAsync(course => EF.Functions.Like(course.Title, title) && course.Id != id);
             return !titleExists;
         }
+        
 
         public async Task<CourseEditInputModel> GetCourseForEditingAsync(int id)
         {
