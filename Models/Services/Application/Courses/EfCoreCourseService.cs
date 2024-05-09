@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyCourse.Models.Entities;
@@ -26,14 +28,28 @@ namespace MyCourse.Models.Services.Application.Courses
         private readonly IOptionsMonitor<CoursesOptions> coursesOptions;
         private readonly IImagePersister imagePersister;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IOptionsMonitor<SmtpOptions> smtp;
+        private readonly ILogger<MailKitEmailSender> loggerMailKit;
+        private readonly IConfiguration configuration;
 
-        public EfCoreCourseService(IHttpContextAccessor httpContextAccessor,ILogger<EfCoreCourseService> logger, IImagePersister imagePersister, MyCourseDbContext dbContext, IOptionsMonitor<CoursesOptions> coursesOptions)
+        public EfCoreCourseService(
+            IConfiguration configuration, 
+            IOptionsMonitor<SmtpOptions> smtp,
+            ILogger<MailKitEmailSender> loggerMailKit, 
+            IHttpContextAccessor httpContextAccessor,
+            ILogger<EfCoreCourseService> logger, 
+            IImagePersister imagePersister, 
+            MyCourseDbContext dbContext, 
+            IOptionsMonitor<CoursesOptions> coursesOptions)
         {
             this.httpContextAccessor = httpContextAccessor;
             this.imagePersister = imagePersister;
             this.coursesOptions = coursesOptions;
             this.logger = logger;
             this.dbContext = dbContext;
+            this.smtp = smtp;
+            this.loggerMailKit = loggerMailKit;
+            this.configuration = configuration;
         }
         public async Task<CourseDetailViewModel> GetCourseAsync(int id)
         {
@@ -202,7 +218,58 @@ namespace MyCourse.Models.Services.Application.Courses
             bool titleExists = await dbContext.Courses.AnyAsync(course => EF.Functions.Like(course.Title, title) && course.Id != id);
             return !titleExists;
         }
-        
+
+        public async Task SendQuestionToCourseAuthorAsync(int courseId, string question)
+        {
+            // Recupero le informazioni del corso
+            Course course = await dbContext.Courses.FindAsync(courseId);
+
+            if (course == null)
+            {
+                logger.LogWarning("Course {id} not found", courseId);
+                throw new CourseNotFoundException(courseId);
+            }
+            //sanitizer question
+            var sanitizer = new HtmlSanitizer();
+            question = sanitizer.Sanitize(question);
+            
+            string courseTitle = course.Title;
+            string courseEmail = course.Email;
+
+            // Recupero le informazioni dell'utente che vuole inviare la domanda
+            string userFullName;
+            string userEmail;
+
+            try
+            {
+                userFullName = httpContextAccessor.HttpContext.User.FindFirst("FullName").Value;
+                userEmail = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Email).Value;
+            }
+            catch (NullReferenceException)
+            {
+                throw new UserUnknownException();
+            }
+            
+
+            // Compongo il testo della domanda
+            string subject = $@"Domanda per il tuo corso ""{courseTitle}""";
+            string message = $@"<p>L'utente {userFullName} (<a href=""{userEmail}"">{userEmail}</a>)
+                                ti ha inviato la seguente domanda per il tuo corso ""{courseTitle}"".</p>
+                                <p>{question}</p>";
+
+            // Invio la domanda
+            try
+            {
+                MailKitEmailSender mailClient = new MailKitEmailSender(smtp, loggerMailKit, configuration);
+                mailClient.MailFrom = userEmail;
+                await mailClient.SendEmailAsync(courseEmail, subject, message);
+            }
+            catch
+            {
+                throw new SendException();
+            }
+        }
+
 
         public async Task<CourseEditInputModel> GetCourseForEditingAsync(int id)
         {

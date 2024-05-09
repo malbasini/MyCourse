@@ -76,7 +76,12 @@ namespace MyCourse.Models.Services.Application.Courses
         {
             return courseService.IsTitleAvailableAsync(title, id);
         }
-        
+
+        public async Task SendQuestionToCourseAuthorAsync(int id, string question)
+        {
+            await courseService.SendQuestionToCourseAuthorAsync(id, question);
+        }
+
         public Task<CourseEditInputModel> GetCourseForEditingAsync(int id)
         {
             return courseService.GetCourseForEditingAsync(id);
