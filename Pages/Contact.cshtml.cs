@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyCourse.Models.Entities;
@@ -8,6 +9,7 @@ using MyCourse.Models.ViewModels.Courses;
 
 namespace MyCourse.Pages
 {
+    [ValidateReCaptcha]
     public class ContactModel : PageModel
     {
         public CourseDetailViewModel Course { get; private set; }

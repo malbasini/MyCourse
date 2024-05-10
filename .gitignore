@@ -1,8 +1,5 @@
-.git
 .idea
 bin
 obj
-Folder.DotSettings.user
-.mono
 MyEnv.json
 README.md

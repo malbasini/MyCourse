@@ -41,7 +41,10 @@ namespace MyCourse.Models.Services.Infrastructure
                 }
 
                 MimeMessage message = new();
-                message.From.Add(MailboxAddress.Parse(MailFrom));
+                if(string.IsNullOrEmpty(MailFrom))
+                    message.From.Add(MailboxAddress.Parse(options.Sender));
+                else
+                    message.From.Add(MailboxAddress.Parse(MailFrom));
                 message.To.Add(MailboxAddress.Parse(recipientEmail));
                 message.Subject = subject;
                 message.Body = new TextPart("html")
