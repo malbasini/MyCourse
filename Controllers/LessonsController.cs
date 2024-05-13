@@ -1,5 +1,8 @@
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyCourse.Customizations.Authorization;
+using MyCourse.Models.Enums;
 using MyCourse.Models.Exceptions.Application;
 using MyCourse.Models.InputModels.Lessons;
 using MyCourse.Models.Services.Application.Lessons;
@@ -7,6 +10,7 @@ using MyCourse.Models.ViewModels.Lessons;
 
 namespace MyCourse.Controllers
 {
+    [AuthorizeRole(Role.Teacher,Role.Administrator)]
     public class LessonsController : Controller
     {
         private readonly ICachedLessonService lessonService;
