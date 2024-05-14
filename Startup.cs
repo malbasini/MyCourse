@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyCourse.Customizations.Identity;
 using MyCourse.Customizations.ModelBinders;
+using MyCourse.Models.Authorization;
 using MyCourse.Models.Entities;
 using MyCourse.Models.Enums;
 using MyCourse.Models.Options;
@@ -46,10 +47,12 @@ namespace MyCourse
 
             services.AddMvc(options =>
             {
+                /*
                 AuthorizationPolicyBuilder policyBuilder = new();
                 AuthorizationPolicy policy = policyBuilder.RequireAuthenticatedUser().Build();
                 AuthorizeFilter filter = new(policy);
                 options.Filters.Add(filter);
+                */
                 
                 
                 var homeProfile = new CacheProfile();
@@ -116,7 +119,23 @@ namespace MyCourse
             services.AddTransient<ICachedLessonService, MemoryCacheLessonService>();
             services.AddSingleton<IImagePersister, MagickNetImagePersister>();
             services.AddSingleton<IEmailSender, MailKitEmailSender>();
+            services.AddScoped<IAuthorizationHandler, CourseAuthorRequirementHandler>();
 
+            //policies
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(nameof(Policy.CourseAuthor), builder =>
+                {
+                    builder.Requirements.Add(new CourseAuthorRequirement());
+                    
+                });
+            });
+            
+            
+            
+            
+            
+            
             //Options
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection("ConnectionStrings"));
@@ -165,9 +184,12 @@ namespace MyCourse
             app.UseResponseCaching();
 
             //EndpointMiddleware
-            app.UseEndpoints(routeBuilder => {
-                routeBuilder.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
-                routeBuilder.MapRazorPages();
+            app.UseEndpoints(routeBuilder =>
+            {
+                routeBuilder.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}")
+                    .RequireAuthorization();
+                routeBuilder.MapRazorPages()
+                    .RequireAuthorization();
             });
 
         }

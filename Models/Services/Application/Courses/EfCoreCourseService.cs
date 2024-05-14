@@ -301,5 +301,19 @@ namespace MyCourse.Models.Services.Application.Courses
             course.ChangeStatus(CourseStatus.Deleted);
             await dbContext.SaveChangesAsync();
         }
+        public Task<string> GetCourseAuthorIdAsync(int courseId)
+        {
+            return dbContext.Courses
+                .Where(course => course.Id == courseId)
+                .Select(course => course.AuthorId)
+                .FirstOrDefaultAsync();
+        }
+
+        public Task<int> GetCourseCountByAuthorIdAsync(string authorId)
+        {
+            return dbContext.Courses
+                .Where(course => course.AuthorId == authorId)
+                .CountAsync();
+        }
     }
 }

@@ -99,5 +99,23 @@ namespace MyCourse.Models.Services.Application.Courses
             await courseService.DeleteCourseAsync(inputModel);
             memoryCache.Remove($"Course{inputModel.Id}");
         }
+
+        public Task<string> GetCourseAuthorIdAsync(int courseId)
+        {
+            return memoryCache.GetOrCreateAsync($"CourseAuthorId{courseId}", cacheEntry => 
+            {
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60)); //Esercizio: provate a recuperare il valore 60 usando il servizio di configurazione
+                return courseService.GetCourseAuthorIdAsync(courseId);
+            });
+        }
+
+        public Task<int> GetCourseCountByAuthorIdAsync(string? authorId)
+        {
+            return memoryCache.GetOrCreateAsync($"CourseCountByAuthorId{authorId}", cacheEntry => 
+            {
+                cacheEntry.SetAbsoluteExpiration(TimeSpan.FromSeconds(60)); //Esercizio: provate a recuperare il valore 60 usando il servizio di configurazione
+                return courseService.GetCourseCountByAuthorIdAsync(authorId);
+            });
+        }
     }
 }

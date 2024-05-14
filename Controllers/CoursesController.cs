@@ -11,7 +11,7 @@ using MyCourse.Models.ViewModels.Courses;
 
 namespace MyCourse.Controllers
 {
-    [AuthorizeRole(Role.Teacher,Role.Administrator)]
+    [AuthorizeRole(Role.Teacher)]
     public class CoursesController : Controller
     {
         private readonly ICourseService courseService;
@@ -66,13 +66,14 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Nuovo corso";
             return View(inputModel);
         }
+        [Authorize(Policy = nameof(Policy.CourseAuthor))]
         public async Task<IActionResult> Edit(int id)
         {
             ViewData["Title"] = "Modifica corso";
             CourseEditInputModel inputModel = await courseService.GetCourseForEditingAsync(id);
             return View(inputModel);
         }
-
+        [Authorize(Policy = nameof(Policy.CourseAuthor))]
         [HttpPost]
         public async Task<IActionResult> Edit(CourseEditInputModel inputModel)
         {
@@ -101,7 +102,7 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Modifica corso";
             return View(inputModel);
         }
-        
+        [Authorize(Policy = nameof(Policy.CourseAuthor))]
         [HttpPost]
         public async Task<IActionResult> Delete(CourseDeleteInputModel inputModel)
         {

@@ -10,7 +10,8 @@ using MyCourse.Models.ViewModels.Lessons;
 
 namespace MyCourse.Controllers
 {
-    [AuthorizeRole(Role.Teacher,Role.Administrator)]
+    [Authorize(Roles = nameof(Role.Teacher))]
+    [Authorize(Policy = nameof(Policy.CourseAuthor))]
     public class LessonsController : Controller
     {
         private readonly ICachedLessonService lessonService;
