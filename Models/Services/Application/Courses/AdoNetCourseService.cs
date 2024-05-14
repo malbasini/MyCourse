@@ -276,5 +276,14 @@ namespace MyCourse.Models.Services.Application.Courses
                 throw new CourseNotFoundException(inputModel.Id);
             }
         }
+        public Task<string> GetCourseAuthorIdAsync(int courseId)
+        {
+            return db.QueryScalarAsync<string>($"SELECT AuthorId FROM Courses WHERE Id={courseId}");
+        }
+
+        public Task<int> GetCourseCountByAuthorIdAsync(string authorId)
+        {
+            return db.QueryScalarAsync<int>($"SELECT COUNT(*) FROM Courses WHERE AuthorId={authorId}");
+        }
     }
 }

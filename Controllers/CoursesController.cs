@@ -1,6 +1,8 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyCourse.Customizations.Authorization;
+using MyCourse.Models.Enums;
 using MyCourse.Models.Exceptions.Application;
 using MyCourse.Models.InputModels.Courses;
 using MyCourse.Models.Services.Application.Courses;
@@ -9,6 +11,7 @@ using MyCourse.Models.ViewModels.Courses;
 
 namespace MyCourse.Controllers
 {
+    [AuthorizeRole(Role.Teacher)]
     public class CoursesController : Controller
     {
         private readonly ICourseService courseService;
@@ -63,13 +66,14 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Nuovo corso";
             return View(inputModel);
         }
+        [Authorize(Policy = nameof(Policy.CourseAuthor))]
         public async Task<IActionResult> Edit(int id)
         {
             ViewData["Title"] = "Modifica corso";
             CourseEditInputModel inputModel = await courseService.GetCourseForEditingAsync(id);
             return View(inputModel);
         }
-
+        [Authorize(Policy = nameof(Policy.CourseAuthor))]
         [HttpPost]
         public async Task<IActionResult> Edit(CourseEditInputModel inputModel)
         {
@@ -98,7 +102,7 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Modifica corso";
             return View(inputModel);
         }
-        
+        [Authorize(Policy = nameof(Policy.CourseAuthor))]
         [HttpPost]
         public async Task<IActionResult> Delete(CourseDeleteInputModel inputModel)
         {
