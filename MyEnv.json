@@ -5,12 +5,12 @@
     "Security": "None",
     "Sender": "MyCourse<noreply@example.org>",
     "Host":"sandbox.smtp.mailtrap.io",
-    "User":"d8fa39dfb8c174",
-    "Password":"4825d478f84b82"
+    "User":"consultare file README.md",
+    "Password":"consultare file README.md"
   },
   "ReCaptcha": {
-    "SecretKey": "6Lc-QaoaAAAAANGeCUJcANdsdf_t-VEXIWbwrPsL",
-    "SiteKey": "6Lc-QaoaAAAAAH4-wXtIPADQ9p_J0KAH2KU1H-nN",
+    "SecretKey": "consultare file README.md",
+    "SiteKey": "consultare file README.md",
     "Version": "v2"
   }
 }
