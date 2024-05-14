@@ -120,6 +120,8 @@ namespace MyCourse
             services.AddSingleton<IImagePersister, MagickNetImagePersister>();
             services.AddSingleton<IEmailSender, MailKitEmailSender>();
             services.AddScoped<IAuthorizationHandler, CourseAuthorRequirementHandler>();
+            services.AddScoped<IAuthorizationHandler, CourseLimitRequirementHandler>();
+
 
             //policies
             services.AddAuthorization(options =>
@@ -129,13 +131,12 @@ namespace MyCourse
                     builder.Requirements.Add(new CourseAuthorRequirement());
                     
                 });
+                options.AddPolicy(nameof(Policy.CourseLimit), builder =>
+                {
+                    builder.Requirements.Add(new CourseLimitRequirement(limit:5));
+                    
+                });
             });
-            
-            
-            
-            
-            
-            
             //Options
             services.Configure<CoursesOptions>(Configuration.GetSection("Courses"));
             services.Configure<ConnectionStringsOptions>(Configuration.GetSection("ConnectionStrings"));
