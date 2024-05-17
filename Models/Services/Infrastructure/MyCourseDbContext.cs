@@ -9,7 +9,6 @@ namespace MyCourse.Models.Services.Infrastructure
 {
     public partial class MyCourseDbContext : IdentityDbContext<ApplicationUser>
     {
-
         public MyCourseDbContext(DbContextOptions<MyCourseDbContext> options)
             : base(options)
         {
@@ -17,6 +16,7 @@ namespace MyCourse.Models.Services.Infrastructure
 
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Lesson> Lessons { get; set; }
+        public virtual DbSet<Subscription> Subscriptions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -59,6 +59,40 @@ namespace MyCourse.Models.Services.Infrastructure
                       .WithOne(lesson => lesson.Course)
                       .HasForeignKey(lesson => lesson.CourseId); //Superflua se la proprietà si chiama CourseId
 
+                //Mapping relazione molti a molti
+                entity.HasMany(course => course.SubscribedUsers)
+                    .WithMany(user => user.SubscribedCourses)
+                    .UsingEntity<Subscription>(
+                        entity => entity.HasOne(subscription => subscription.User).WithMany().HasForeignKey(courseStudent => courseStudent.UserId),
+                        entity => entity.HasOne(subscription => subscription.Course).WithMany().HasForeignKey(courseStudent => courseStudent.CourseId),
+                        entity =>
+                        {
+                            entity.ToTable("Subscriptions");
+                            entity.OwnsOne(subscription => subscription.Paid, builder =>
+                            {
+                                builder.Property(money => money.Currency)
+                                    .HasConversion<string>();
+                                builder.Property(money => money.Amount)
+                                    .HasConversion<float>();
+                            });
+                        }
+                    );
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 //Global Query Filter
                 entity.HasQueryFilter(course => course.Status != CourseStatus.Deleted);
 

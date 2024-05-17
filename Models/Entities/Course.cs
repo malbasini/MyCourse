@@ -109,6 +109,8 @@ namespace MyCourse.Models.Entities
         public virtual ICollection<Lesson> Lessons { get; private set; }
         public string AuthorId { get; set; }
         public virtual ApplicationUser AuthorUser { get; set; }
+        
+        public virtual ICollection<ApplicationUser> SubscribedUsers { get; set; }
 
     }
 }
