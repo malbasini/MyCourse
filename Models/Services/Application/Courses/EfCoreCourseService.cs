@@ -315,5 +315,35 @@ namespace MyCourse.Models.Services.Application.Courses
                 .Where(course => course.AuthorId == authorId)
                 .CountAsync();
         }
+
+        public async Task SubscribeCourseAsync(CourseSubscribeInputModel inputModel)
+        {
+            if (inputModel.UserId != null)
+            {
+                Subscription subscription = new(inputModel.UserId, inputModel.CourseId)
+                {
+                    PaymentDate = inputModel.PaymentDate,
+                    PaymentType = inputModel.PaymentType,
+                    Paid = inputModel.Paid,
+                    TransactionId = inputModel.TransactionId
+                };
+            
+                dbContext.Subscriptions.Add(subscription);
+            }
+
+            try
+            {
+                await dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw new CourseSubscriptionException(inputModel.CourseId);
+            }
+        }
+
+        public Task<bool> IsCourseSubscribedAsync(int courseId, string? userId)
+        {
+            return dbContext.Subscriptions.Where(subscription => subscription.CourseId == courseId && subscription.UserId == userId).AnyAsync();
+        }
     }
 }

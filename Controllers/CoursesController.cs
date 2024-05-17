@@ -1,3 +1,5 @@
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +13,12 @@ using MyCourse.Models.InputModels.Courses;
 using MyCourse.Models.Options;
 using MyCourse.Models.Services.Application.Courses;
 using MyCourse.Models.Services.Infrastructure;
+using MyCourse.Models.ValueObjects;
 using MyCourse.Models.ViewModels;
 using MyCourse.Models.ViewModels.Courses;
 
 namespace MyCourse.Controllers
 {
-    [AuthorizeRole(Role.Teacher)]
     public class CoursesController : Controller
     {
         private readonly ICourseService courseService;
@@ -44,6 +46,7 @@ namespace MyCourse.Controllers
             ViewData["Title"] = viewModel.Title;
             return View(viewModel);
         }
+        [AuthorizeRole(Role.Teacher)]
         public IActionResult Create()
         {
             ViewData["Title"] = "Nuovo corso";
@@ -52,6 +55,7 @@ namespace MyCourse.Controllers
         }
         
         [HttpPost]
+        [AuthorizeRole(Role.Teacher)]
         public async Task<IActionResult> Create(
             CourseCreateInputModel inputModel, 
             [FromServices] IAuthorizationService authorizationService, 
@@ -88,6 +92,7 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Nuovo corso";
             return View(inputModel);
         }
+        [AuthorizeRole(Role.Teacher)]
         [Authorize(Policy = nameof(Policy.CourseAuthor))]
         public async Task<IActionResult> Edit(int id)
         {
@@ -95,6 +100,7 @@ namespace MyCourse.Controllers
             CourseEditInputModel inputModel = await courseService.GetCourseForEditingAsync(id);
             return View(inputModel);
         }
+        [AuthorizeRole(Role.Teacher)]
         [Authorize(Policy = nameof(Policy.CourseAuthor))]
         [HttpPost]
         public async Task<IActionResult> Edit(CourseEditInputModel inputModel)
@@ -124,6 +130,7 @@ namespace MyCourse.Controllers
             ViewData["Title"] = "Modifica corso";
             return View(inputModel);
         }
+        [AuthorizeRole(Role.Teacher)]
         [Authorize(Policy = nameof(Policy.CourseAuthor))]
         [HttpPost]
         public async Task<IActionResult> Delete(CourseDeleteInputModel inputModel)
@@ -132,10 +139,27 @@ namespace MyCourse.Controllers
             TempData["ConfirmationMessage"] = "Il corso è stato eliminato ma potrebbe continuare a comparire negli elenchi per un breve periodo, finché la cache non viene aggiornata.";
             return RedirectToAction(nameof(Index));
         }
+        [AuthorizeRole(Role.Teacher)]
         public async Task<IActionResult> IsTitleAvailable(string title, int id = 0)
         {
             bool result = await courseService.IsTitleAvailableAsync(title, id);
             return Json(result);
+        }
+        public async Task<IActionResult> Subscribe(int id)
+        {
+            CourseSubscribeInputModel inputModel = new()
+            {
+                CourseId = id,
+                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+                TransactionId = String.Empty,
+                PaymentDate = DateTime.UtcNow,
+                PaymentType = "Credit Card",
+                Paid = new Money(Currency.EUR,0m)
+            };
+            if (inputModel == null) throw new ArgumentNullException(nameof(inputModel));
+            await courseService.SubscribeCourseAsync(inputModel);
+            TempData["ConfirmationMessage"] = "Grazie per esserti iscritto, guarda subito la prima lezione!";
+            return RedirectToAction(nameof(Detail), new { id = id });
         }
     }
 }

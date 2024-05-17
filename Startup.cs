@@ -121,6 +121,9 @@ namespace MyCourse
             services.AddSingleton<IEmailSender, MailKitEmailSender>();
             services.AddScoped<IAuthorizationHandler, CourseAuthorRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, CourseLimitRequirementHandler>();
+            services.AddScoped<IAuthorizationHandler, CourseSubscriberRequirementHandler>();
+            services.AddSingleton<IAuthorizationPolicyProvider, MultiAuthorizationPolicyProvider>();
+
 
 
             //policies
@@ -131,6 +134,11 @@ namespace MyCourse
                     builder.Requirements.Add(new CourseAuthorRequirement());
                     
                 });
+                options.AddPolicy(nameof(Policy.CourseSubscriber), builder =>
+                {
+                    builder.Requirements.Add(new CourseSubscriberRequirement());
+                });
+                
                 options.AddPolicy(nameof(Policy.CourseLimit), builder =>
                 {
                     builder.Requirements.Add(new CourseLimitRequirement(limit:5));
