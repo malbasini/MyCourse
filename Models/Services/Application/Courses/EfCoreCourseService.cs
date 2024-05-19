@@ -1,15 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Ganss.Xss;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MyCourse.Controllers;
 using MyCourse.Models.Entities;
 using MyCourse.Models.Enums;
 using MyCourse.Models.Exceptions.Application;
@@ -31,6 +34,8 @@ namespace MyCourse.Models.Services.Application.Courses
         private readonly IOptionsMonitor<SmtpOptions> smtp;
         private readonly ILogger<MailKitEmailSender> loggerMailKit;
         private readonly IConfiguration configuration;
+        private readonly LinkGenerator linkGenerator;
+        private readonly IPaymentGateway paymentGateway;
 
         public EfCoreCourseService(
             IConfiguration configuration, 
@@ -40,7 +45,9 @@ namespace MyCourse.Models.Services.Application.Courses
             ILogger<EfCoreCourseService> logger, 
             IImagePersister imagePersister, 
             MyCourseDbContext dbContext, 
-            IOptionsMonitor<CoursesOptions> coursesOptions)
+            IOptionsMonitor<CoursesOptions> coursesOptions,
+            IPaymentGateway paymentGateway,
+            LinkGenerator linkGenerator)
         {
             this.httpContextAccessor = httpContextAccessor;
             this.imagePersister = imagePersister;
@@ -50,6 +57,8 @@ namespace MyCourse.Models.Services.Application.Courses
             this.smtp = smtp;
             this.loggerMailKit = loggerMailKit;
             this.configuration = configuration;
+            this.paymentGateway = paymentGateway;
+            this.linkGenerator = linkGenerator;
         }
         public async Task<CourseDetailViewModel> GetCourseAsync(int id)
         {
@@ -269,8 +278,6 @@ namespace MyCourse.Models.Services.Application.Courses
                 throw new SendException();
             }
         }
-
-
         public async Task<CourseEditInputModel> GetCourseForEditingAsync(int id)
         {
             IQueryable<CourseEditInputModel> queryLinq = dbContext.Courses
@@ -344,6 +351,36 @@ namespace MyCourse.Models.Services.Application.Courses
         public Task<bool> IsCourseSubscribedAsync(int courseId, string? userId)
         {
             return dbContext.Subscriptions.Where(subscription => subscription.CourseId == courseId && subscription.UserId == userId).AnyAsync();
+        }
+
+        public async Task<string> GetPaymentUrlAsync(int courseId)
+        {
+            CourseDetailViewModel viewModel = await GetCourseAsync(courseId);
+            CoursePayInputModel inputModel = null!;
+            if (httpContextAccessor.HttpContext != null)
+            {
+                inputModel = new()
+                {
+                    CourseId = courseId,
+                    UserId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier),
+                    Description = viewModel.Title,
+                    Price = viewModel.CurrentPrice,
+                    ReturnUrl = linkGenerator.GetUriByAction(httpContextAccessor.HttpContext, action:nameof(CoursesController.Subscribe),
+                        controller:"Courses",
+                        values:new{id=courseId}),
+                    CancelUrl = linkGenerator.GetUriByAction(httpContextAccessor.HttpContext, action:nameof(CoursesController.Detail),
+                        controller:"Courses",
+                        values:new{id=courseId})
+                };
+            }
+
+            Debug.Assert(inputModel != null, nameof(inputModel) + " != null");
+            return await paymentGateway.GetPaymentUrlAsync(inputModel);
+        }
+
+        public Task<CourseSubscribeInputModel> CapturePaymentAsync(int id, string token)
+        {
+            return paymentGateway.CapturePaymentAsync(token);
         }
     }
 }

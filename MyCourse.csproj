@@ -24,5 +24,6 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.3" />
+    <PackageReference Include="PayPalCheckoutSdk" Version="1.0.4" />
   </ItemGroup>
 </Project>

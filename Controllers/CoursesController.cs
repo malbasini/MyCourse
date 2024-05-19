@@ -145,21 +145,17 @@ namespace MyCourse.Controllers
             bool result = await courseService.IsTitleAvailableAsync(title, id);
             return Json(result);
         }
-        public async Task<IActionResult> Subscribe(int id)
+        public async Task<IActionResult> Subscribe(int id, string token)
         {
-            CourseSubscribeInputModel inputModel = new()
-            {
-                CourseId = id,
-                UserId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-                TransactionId = String.Empty,
-                PaymentDate = DateTime.UtcNow,
-                PaymentType = "Credit Card",
-                Paid = new Money(Currency.EUR,0m)
-            };
-            if (inputModel == null) throw new ArgumentNullException(nameof(inputModel));
+            CourseSubscribeInputModel inputModel = await courseService.CapturePaymentAsync(id, token);
             await courseService.SubscribeCourseAsync(inputModel);
             TempData["ConfirmationMessage"] = "Grazie per esserti iscritto, guarda subito la prima lezione!";
             return RedirectToAction(nameof(Detail), new { id = id });
+        }
+        public async Task<IActionResult> Pay(int id)
+        {
+            string paymentUrl = await courseService.GetPaymentUrlAsync(id);
+            return Redirect(paymentUrl);
         }
     }
 }

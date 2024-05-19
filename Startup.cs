@@ -123,7 +123,7 @@ namespace MyCourse
             services.AddScoped<IAuthorizationHandler, CourseLimitRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, CourseSubscriberRequirementHandler>();
             services.AddSingleton<IAuthorizationPolicyProvider, MultiAuthorizationPolicyProvider>();
-
+            services.AddTransient<IPaymentGateway, PaypalPaymentGateway>();
 
 
             //policies
@@ -152,6 +152,7 @@ namespace MyCourse
             services.Configure<KestrelServerOptions>(Configuration.GetSection("Kestrel"));
             services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
             services.Configure<UsersOptions>(Configuration.GetSection("Users"));
+            services.Configure<PaypalOptions>(Configuration.GetSection("Paypal"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
