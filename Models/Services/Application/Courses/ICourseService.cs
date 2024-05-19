@@ -24,6 +24,8 @@ namespace MyCourse.Models.Services.Application.Courses
         Task<bool> IsCourseSubscribedAsync(int courseId, string? userId);
         Task<string> GetPaymentUrlAsync(int id);
         Task<CourseSubscribeInputModel> CapturePaymentAsync(int id, string token);
+        Task<int?> GetCourseVoteAsync(int id);
+        Task VoteCourseAsync(CourseVoteInputModel inputModel);
     }
 
     
