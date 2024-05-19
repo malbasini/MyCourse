@@ -123,6 +123,16 @@ namespace MyCourse.Models.Services.Application.Courses
             return courseService.IsCourseSubscribedAsync(courseId, userId);
         }
 
+        public Task<string> GetPaymentUrlAsync(int id)
+        {
+            return courseService.GetPaymentUrlAsync(id);
+        }
+
+        public Task<CourseSubscribeInputModel> CapturePaymentAsync(int id, string token)
+        {
+            return courseService.CapturePaymentAsync(id,token);
+        }
+
         public Task SubscribeCourseAsync(CourseSubscribeInputModel inputModel)
         {
             return courseService.SubscribeCourseAsync(inputModel);
