@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -26,8 +27,6 @@ namespace MyCourse.Controllers
             ViewData["Title"] = viewModel.Title;
             return View(viewModel);
         }
-        [Authorize(Roles = nameof(Role.Teacher))]
-        [Authorize(Policy = nameof(Policy.CourseAuthor))]
         public IActionResult Create(int id)
         {
             ViewData["Title"] = "Nuova lezione";
@@ -35,9 +34,8 @@ namespace MyCourse.Controllers
             inputModel.CourseId = id;
             return View(inputModel);
         }
-        [Authorize(Roles = nameof(Role.Teacher))]
-        [Authorize(Policy = nameof(Policy.CourseAuthor))]
         [HttpPost]
+        [ValidateReCaptcha]
         public async Task<IActionResult> Create(LessonCreateInputModel inputModel)
         {
             if (ModelState.IsValid)

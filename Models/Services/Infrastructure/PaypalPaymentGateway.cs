@@ -14,7 +14,7 @@ using PayPalHttp;
 
 namespace MyCourse.Models.Services.Infrastructure
 {
-    public class PaypalPaymentGateway : IPaymentGateway
+    public class PaypalPaymentGateway : IPaymentGatewayPayPal
     {
         private readonly IOptionsMonitor<PaypalOptions> options;
 
@@ -44,7 +44,7 @@ namespace MyCourse.Models.Services.Infrastructure
            Infine restituisce l'attributo Href del collegamento, ovvero l'URL a cui l'utente deve essere 
            reindirizzato per procedere con il pagamento:
          */
-        public async Task<string> GetPaymentUrlAsync(CoursePayInputModel inputModel)
+        public async Task<string> GetPaymentUrlAsyncPayPal(CoursePayInputModel inputModel)
         {
             OrderRequest order = new()
             {
@@ -84,29 +84,8 @@ namespace MyCourse.Models.Services.Infrastructure
             LinkDescription link = result.Links.Single(link => link.Rel == "approve");
             return link.Href;
         }
-        /*
-         * CapturePaymentAsync" è un metodo "asincrono" della classe "PaypalPaymentGateway".
-         * Lo scopo di questa classe è interagire con l'API PayPal e implementa l'interfaccia
-         * "IPaymentGateway". Questo metodo restituisce "Task<CourseSubscribeInputModel>",
-         * indicando che si tratta di un metodo asincrono, ovvero progettato per eseguire
-         * operazioni senza bloccare il thread chiamante.
-           
-           Quando viene chiamato questo metodo, verrà avviato un processo di pagamento PayPal 
-           utilizzando l'SDK PayPal per inviare una richiesta di acquisizione. 
-           La richiesta accetta una stringa "token" che identifica potenzialmente il pagamento 
-           da acquisire.
-           
-           Una volta eseguita con successo questa richiesta, ottiene un oggetto PurchaseUnit 
-           dalla prima unità dell'ordine di pagamento e il corrispondente oggetto Capture. 
-           Da lì, analizza le informazioni necessarie del pagamento, come courseId, userId, 
-           importo pagato, TransactionId, paymentDate e dichiara che `PaymentType` è "Paypal".
-           
-           Alla fine restituisce un'istanza `CourseSubscribeInputModel` popolata con questi 
-           dettagli. Se l'elaborazione fallisce in qualsiasi momento 
-           (ad esempio, `client.Execute(request)` potrebbe fallire), 
-           viene lanciato un oggetto di tipo "PaymentGatewayException".
-         */
-        public async Task<CourseSubscribeInputModel> CapturePaymentAsync(string token)
+
+        public async Task<CourseSubscribeInputModel> CapturePaymentAsyncPayPal(string token)
         {
             PayPalEnvironment env = GetPayPalEnvironment(options.CurrentValue);
             PayPalHttpClient client = new PayPalHttpClient(env);
@@ -144,6 +123,28 @@ namespace MyCourse.Models.Services.Infrastructure
                 throw new PaymentGatewayException(exc);
             }
         }
+        /*
+         * CapturePaymentAsync" è un metodo "asincrono" della classe "PaypalPaymentGateway".
+         * Lo scopo di questa classe è interagire con l'API PayPal e implementa l'interfaccia
+         * "IPaymentGateway". Questo metodo restituisce "Task<CourseSubscribeInputModel>",
+         * indicando che si tratta di un metodo asincrono, ovvero progettato per eseguire
+         * operazioni senza bloccare il thread chiamante.
+           
+           Quando viene chiamato questo metodo, verrà avviato un processo di pagamento PayPal 
+           utilizzando l'SDK PayPal per inviare una richiesta di acquisizione. 
+           La richiesta accetta una stringa "token" che identifica potenzialmente il pagamento 
+           da acquisire.
+           
+           Una volta eseguita con successo questa richiesta, ottiene un oggetto PurchaseUnit 
+           dalla prima unità dell'ordine di pagamento e il corrispondente oggetto Capture. 
+           Da lì, analizza le informazioni necessarie del pagamento, come courseId, userId, 
+           importo pagato, TransactionId, paymentDate e dichiara che `PaymentType` è "Paypal".
+           
+           Alla fine restituisce un'istanza `CourseSubscribeInputModel` popolata con questi 
+           dettagli. Se l'elaborazione fallisce in qualsiasi momento 
+           (ad esempio, `client.Execute(request)` potrebbe fallire), 
+           viene lanciato un oggetto di tipo "PaymentGatewayException".
+         */
 
         private PayPalEnvironment GetPayPalEnvironment(PaypalOptions options)
         {

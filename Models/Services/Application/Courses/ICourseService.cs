@@ -22,10 +22,12 @@ namespace MyCourse.Models.Services.Application.Courses
         Task<int> GetCourseCountByAuthorIdAsync(string? authorId);
         Task SubscribeCourseAsync(CourseSubscribeInputModel inputModel);
         Task<bool> IsCourseSubscribedAsync(int courseId, string? userId);
-        Task<string> GetPaymentUrlAsync(int id);
-        Task<CourseSubscribeInputModel> CapturePaymentAsync(int id, string token);
+        Task<CourseSubscribeInputModel> CapturePaymentAsyncStripe(int id, string token);
+        Task<CourseSubscribeInputModel> CapturePaymentAsyncPayPal(int id, string token);
         Task<int?> GetCourseVoteAsync(int id);
         Task VoteCourseAsync(CourseVoteInputModel inputModel);
+        Task<string> GetPaymentUrlAsyncPayPal(int id);
+        Task<string> GetPaymentUrlAsyncStripe(int id);
     }
 
     

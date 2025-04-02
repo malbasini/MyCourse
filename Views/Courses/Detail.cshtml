@@ -1,3 +1,4 @@
+@using Stripe.BillingPortal
 @model CourseDetailViewModel
 @inject IAuthorizationService authService
 @{
@@ -22,20 +23,38 @@
                 <h1>Modifica</h1>
             }
         </div>
-        <div class="col-md-3 d-flex align-items-end">
+        <div class="col-md-3">
             @if (isSubscribed)
             {
-            <span class="alert alert-secondary btn-block">Sei iscritto al corso</span>
+                <span class="alert alert-secondary btn-block">Sei iscritto al corso</span>
             }
             else if (canEdit)
             {
-            <span class="alert alert-secondary btn-block">Sei l'autore del corso</span>
+                <span class="alert alert-secondary btn-block">Sei l'autore del corso</span>
             }
-            else
-            {
-            <a class="btn btn-warning btn-lg btn-block subscribe-course" asp-action="Pay" asp-route-id="@Model.Id">Iscriviti</a>
-            }
-        </div>
+        else
+        {
+            <aside>
+                <form method="post">
+                <div class="mb-auto">
+                    <input class="form-check-input" type="radio" value="1" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        PayPal
+                    </label>
+                </div>
+                <div class="mb-auto">
+                    <input class="form-check-input" type="radio" value="2" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Stripe
+                    </label>
+                </div>
+                <br/>
+                <br/>
+                <button type="submit" class="btn btn-warning btn-lg btn-block subscribe-course" asp-action="Pay" asp-route-id="@Model.Id">Iscriviti</button>
+                </form>
+            </aside>
+        }
+    </div>
     </div>
     <div class="row">
         <div class="col-md-9" html-sanitize>
@@ -52,10 +71,8 @@
                 </div>
                 <img src="@Model.ImagePath" class="img-fluid course-image" alt="@Model.Title" asp-append-version="true">
                 <a asp-page="/Contact" asp-route-id=@Model.Id class="btn btn-block btn-outline-secondary mt-3">Fai una domanda</a>
-                @if (isSubscribed)
-                {
                 <a asp-action="Vote" asp-route-id="@Model.Id" class="btn btn-block btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#voteModal">Valuta il corso</a>
-                }
+                
             </aside>
         </div>
     </div>
@@ -72,7 +89,7 @@
     {
         <hr>
         <div class="row">
-            <div class="col-md-9 d-flex align-items-center">
+            <div class="col-md-3 d-flex align-items-center">
                 @if (isSubscribed || canEdit)
                 {
                     <a asp-controller="Lessons" asp-action="Detail" asp-route-id="@lesson.Id">@lesson.Title</a>
@@ -80,6 +97,12 @@
                 else
                 {
                     <span>@lesson.Title</span>
+                }
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+                @if (isSubscribed || canEdit)
+                {
+                    <span>@Html.Raw(@lesson.Description)</span>
                 }
             </div>
             <div class="col-md-3 d-flex align-items-center justify-content-end lesson-duration">

@@ -1,6 +1,8 @@
 @model CourseCreateInputModel
+@using AspNetCore.ReCaptcha
 <h1>@ViewData["Title"]</h1>
 <form method="post">
+ 
     <div class="row">
         <div class="col-12">
             <!--
@@ -11,14 +13,22 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8 mb-3">
+        <div class="col-md-9 mb-3">
             <input type="text" asp-for="Title" class="form-control form-control-lg" placeholder="Digita un titolo che attiri gli studenti...">
             <span asp-validation-for="Title"></span>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="fas fa-rocket"></i> Crea corso!</button>
         </div>
-    </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-3"></div>
+            <div class="col-md-9">
+                <br/>
+                <recaptcha></recaptcha>
+                <br>
+            </div>
+        </div>
 </form>
 @section Scripts
 {

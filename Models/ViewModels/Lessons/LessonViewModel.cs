@@ -10,12 +10,14 @@ namespace MyCourse.Models.ViewModels.Lessons
         public string Title { get; set; }
         public TimeSpan Duration { get; set; }
 
+        public String Description { get; set; }
         public static LessonViewModel FromDataRow(DataRow dataRow)
         {
             var lessonViewModel = new LessonViewModel {
                 Id = Convert.ToInt32(dataRow["Id"]),
                 Title = Convert.ToString(dataRow["Title"]),
                 Duration = TimeSpan.Parse(Convert.ToString(dataRow["Duration"])),
+                Description = Convert.ToString(dataRow["Description"])
             };
             return lessonViewModel;
         }
@@ -26,7 +28,8 @@ namespace MyCourse.Models.ViewModels.Lessons
             {
                 Id = lesson.Id,
                 Title = lesson.Title,
-                Duration = lesson.Duration
+                Duration = lesson.Duration,
+                Description = lesson.Description,
             };
         }
     }

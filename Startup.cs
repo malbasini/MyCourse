@@ -14,6 +14,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyCourse.Controllers;
 using MyCourse.Customizations.Identity;
 using MyCourse.Customizations.ModelBinders;
 using MyCourse.Models.Authorization;
@@ -28,6 +29,7 @@ namespace MyCourse
 {
     public class Startup
     {
+
         public Startup(IConfiguration configuration) 
         {
             Configuration = configuration;
@@ -53,19 +55,19 @@ namespace MyCourse
                 AuthorizeFilter filter = new(policy);
                 options.Filters.Add(filter);
                 */
-                
-                
+
+
                 var homeProfile = new CacheProfile();
-                //homeProfile.Duration = Configuration.GetValue<int>("ResponseCache:Home:Duration");
-                //homeProfile.Location = Configuration.GetValue<ResponseCacheLocation>("ResponseCache:Home:Location");
-                //homeProfile.VaryByQueryKeys = new string[] { "page" };
+                homeProfile.Duration = Configuration.GetValue<int>("ResponseCache:Home:Duration");
+                homeProfile.Location = Configuration.GetValue<ResponseCacheLocation>("ResponseCache:Home:Location");
+                homeProfile.VaryByQueryKeys = new string[] { "page" };
                 Configuration.Bind("ResponseCache:Home", homeProfile);
                 options.CacheProfiles.Add("Home", homeProfile);
 
                 options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
 
             });
-
+            
             var identityBuilder = services.AddDefaultIdentity<ApplicationUser>(options => {
                         // Criteri di validazione della password
                         options.Password.RequireDigit = true;
@@ -114,7 +116,6 @@ namespace MyCourse
                 });
                 break;
             }
-
             services.AddTransient<ICachedCourseService, MemoryCacheCourseService>();
             services.AddTransient<ICachedLessonService, MemoryCacheLessonService>();
             services.AddSingleton<IImagePersister, MagickNetImagePersister>();
@@ -123,9 +124,8 @@ namespace MyCourse
             services.AddScoped<IAuthorizationHandler, CourseLimitRequirementHandler>();
             services.AddScoped<IAuthorizationHandler, CourseSubscriberRequirementHandler>();
             services.AddSingleton<IAuthorizationPolicyProvider, MultiAuthorizationPolicyProvider>();
-            services.AddTransient<IPaymentGateway, PaypalPaymentGateway>();
-
-
+            services.AddScoped<IPaymentGatewayStripe,StripePaymentGateway>();
+            services.AddScoped<IPaymentGatewayPayPal,PaypalPaymentGateway>();
             //policies
             services.AddAuthorization(options =>
             {
@@ -153,7 +153,9 @@ namespace MyCourse
             services.Configure<SmtpOptions>(Configuration.GetSection("Smtp"));
             services.Configure<UsersOptions>(Configuration.GetSection("Users"));
             services.Configure<PaypalOptions>(Configuration.GetSection("Paypal"));
+            services.Configure<StripeOptions>(Configuration.GetSection("Stripe"));
         }
+        public IServiceCollection Services { get;}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime lifetime)
@@ -201,7 +203,6 @@ namespace MyCourse
                 routeBuilder.MapRazorPages()
                     .RequireAuthorization();
             });
-
         }
     }
 }

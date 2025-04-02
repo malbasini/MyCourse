@@ -1,9 +1,12 @@
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyCourse.Customizations.Authorization;
@@ -56,6 +59,7 @@ namespace MyCourse.Controllers
         
         [HttpPost]
         [AuthorizeRole(Role.Teacher)]
+        [ValidateReCaptcha]
         public async Task<IActionResult> Create(
             CourseCreateInputModel inputModel, 
             [FromServices] IAuthorizationService authorizationService, 
@@ -145,17 +149,36 @@ namespace MyCourse.Controllers
             bool result = await courseService.IsTitleAvailableAsync(title, id);
             return Json(result);
         }
-        public async Task<IActionResult> Subscribe(int id, string token)
+        public async Task<IActionResult> SubscribePayPal(int id, string token)
         {
-            CourseSubscribeInputModel inputModel = await courseService.CapturePaymentAsync(id, token);
+            CourseSubscribeInputModel inputModel = await courseService.CapturePaymentAsyncPayPal(id, token);
             await courseService.SubscribeCourseAsync(inputModel);
             TempData["ConfirmationMessage"] = "Grazie per esserti iscritto, guarda subito la prima lezione!";
             return RedirectToAction(nameof(Detail), new { id = id });
         }
-        public async Task<IActionResult> Pay(int id)
+        
+        public async Task<IActionResult> SubscribeStripe(int id, string token)
         {
-            string paymentUrl = await courseService.GetPaymentUrlAsync(id);
-            return Redirect(paymentUrl);
+            CourseSubscribeInputModel inputModel = await courseService.CapturePaymentAsyncStripe(id, token);
+            await courseService.SubscribeCourseAsync(inputModel);
+            TempData["ConfirmationMessage"] = "Grazie per esserti iscritto, guarda subito la prima lezione!";
+            return RedirectToAction(nameof(Detail), new { id = id });
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> Pay(int id, string flexRadioDefault)
+        {
+            int payment = int.Parse(flexRadioDefault);
+            if (payment.Equals(1))
+            {
+                string paymentUrl = await courseService.GetPaymentUrlAsyncPayPal(id);
+                return Redirect(paymentUrl);
+            }
+            else
+            {
+                string paymentUrl = await courseService.GetPaymentUrlAsyncStripe(id);
+                return Redirect(paymentUrl);
+            }
         }
         [Authorize(Policy = nameof(Policy.CourseSubscriber))]
         public async Task<IActionResult> Vote(int id)

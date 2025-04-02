@@ -123,14 +123,14 @@ namespace MyCourse.Models.Services.Application.Courses
             return courseService.IsCourseSubscribedAsync(courseId, userId);
         }
 
-        public Task<string> GetPaymentUrlAsync(int id)
+        public Task<CourseSubscribeInputModel> CapturePaymentAsyncStripe(int id, string token)
         {
-            return courseService.GetPaymentUrlAsync(id);
+            return courseService.CapturePaymentAsyncStripe(id,token);
         }
 
-        public Task<CourseSubscribeInputModel> CapturePaymentAsync(int id, string token)
+        public Task<CourseSubscribeInputModel> CapturePaymentAsyncPayPal(int id, string token)
         {
-            return courseService.CapturePaymentAsync(id,token);
+            return courseService.CapturePaymentAsyncPayPal(id,token);
         }
 
         public Task<int?> GetCourseVoteAsync(int id)
@@ -141,6 +141,16 @@ namespace MyCourse.Models.Services.Application.Courses
         public Task VoteCourseAsync(CourseVoteInputModel inputModel)
         {
             return courseService.VoteCourseAsync(inputModel);
+        }
+
+        public Task<string> GetPaymentUrlAsyncPayPal(int id)
+        {
+            return courseService.GetPaymentUrlAsyncPayPal(id);
+        }
+
+        public Task<string> GetPaymentUrlAsyncStripe(int id)
+        {
+            return courseService.GetPaymentUrlAsyncStripe(id);
         }
 
         public Task SubscribeCourseAsync(CourseSubscribeInputModel inputModel)

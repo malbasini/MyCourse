@@ -35,7 +35,8 @@ namespace MyCourse.Models.Services.Application.Courses
         private readonly ILogger<MailKitEmailSender> loggerMailKit;
         private readonly IConfiguration configuration;
         private readonly LinkGenerator linkGenerator;
-        private readonly IPaymentGateway paymentGateway;
+        private readonly IPaymentGatewayStripe paymentGatewayStripe;
+        private readonly IPaymentGatewayPayPal paymentGatewayPayPal;
         public AdoNetCourseService(
             IConfiguration configuration, 
             IOptionsMonitor<SmtpOptions> smtp,
@@ -45,7 +46,8 @@ namespace MyCourse.Models.Services.Application.Courses
             IDatabaseAccessor db, 
             IImagePersister imagePersister, 
             IOptionsMonitor<CoursesOptions> coursesOptions,
-            IPaymentGateway paymentGateway,
+            IPaymentGatewayStripe paymentGatewayStripe,
+            IPaymentGatewayPayPal paymentGatewayPayPal,
             LinkGenerator linkGenerator)
         {
             this.httpContextAccessor = httpContextAccessor;
@@ -56,7 +58,8 @@ namespace MyCourse.Models.Services.Application.Courses
             this.smtp = smtp;
             this.loggerMailKit = loggerMailKit;
             this.configuration = configuration;
-            this.paymentGateway = paymentGateway;
+            this.paymentGatewayStripe = paymentGatewayStripe;
+            this.paymentGatewayPayPal = paymentGatewayPayPal;
             this.linkGenerator = linkGenerator;
         }
         public async Task<CourseDetailViewModel> GetCourseAsync(int id)
@@ -310,7 +313,17 @@ namespace MyCourse.Models.Services.Application.Courses
             return db.QueryScalarAsync<bool>($"SELECT COUNT(*) FROM Subscriptions WHERE CourseId={courseId} AND UserId={userId}");
         }
 
-        public async Task<string> GetPaymentUrlAsync(int courseId)
+        public Task<CourseSubscribeInputModel> CapturePaymentAsyncStripe(int id, string token)
+        {
+            return paymentGatewayStripe.CapturePaymentAsyncStripe(token);
+        }
+
+        public Task<CourseSubscribeInputModel> CapturePaymentAsyncPayPal(int id, string token)
+        {
+            return paymentGatewayPayPal.CapturePaymentAsyncPayPal(token);
+        }
+
+        public async Task<string> GetPaymentUrlAsyncPayPal(int courseId)
         {
             CourseDetailViewModel viewModel = await GetCourseAsync(courseId);
             CoursePayInputModel inputModel = null!;
@@ -322,7 +335,7 @@ namespace MyCourse.Models.Services.Application.Courses
                     UserId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier),
                     Description = viewModel.Title,
                     Price = viewModel.CurrentPrice,
-                    ReturnUrl = linkGenerator.GetUriByAction(httpContextAccessor.HttpContext, action:nameof(CoursesController.Subscribe),
+                    ReturnUrl = linkGenerator.GetUriByAction(httpContextAccessor.HttpContext, action:nameof(CoursesController.SubscribePayPal),
                         controller:"Courses",
                         values:new{id=courseId}),
                     CancelUrl = linkGenerator.GetUriByAction(httpContextAccessor.HttpContext, action:nameof(CoursesController.Detail),
@@ -332,12 +345,37 @@ namespace MyCourse.Models.Services.Application.Courses
             }
 
             Debug.Assert(inputModel != null, nameof(inputModel) + " != null");
-            return await paymentGateway.GetPaymentUrlAsync(inputModel);
+            return await paymentGatewayPayPal.GetPaymentUrlAsyncPayPal(inputModel);
+        }
+
+        public async Task<string> GetPaymentUrlAsyncStripe(int courseId)
+        {
+            CourseDetailViewModel viewModel = await GetCourseAsync(courseId);
+            CoursePayInputModel inputModel = null!;
+            if (httpContextAccessor.HttpContext != null)
+            {
+                inputModel = new()
+                {
+                    CourseId = courseId,
+                    UserId = httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier),
+                    Description = viewModel.Title,
+                    Price = viewModel.CurrentPrice,
+                    ReturnUrl = linkGenerator.GetUriByAction(httpContextAccessor.HttpContext, action:nameof(CoursesController.SubscribeStripe),
+                        controller:"Courses",
+                        values:new{id=courseId}),
+                    CancelUrl = linkGenerator.GetUriByAction(httpContextAccessor.HttpContext, action:nameof(CoursesController.Detail),
+                        controller:"Courses",
+                        values:new{id=courseId})
+                };
+            }
+
+            Debug.Assert(inputModel != null, nameof(inputModel) + " != null");
+            return await paymentGatewayStripe.GetPaymentUrlAsyncStripe(inputModel);
         }
 
         public Task<CourseSubscribeInputModel> CapturePaymentAsync(int id, string token)
         {
-            return paymentGateway.CapturePaymentAsync(token);
+            return paymentGatewayStripe.CapturePaymentAsyncStripe(token);
         }
 
         public async Task<int?> GetCourseVoteAsync(int id)
