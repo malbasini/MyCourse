@@ -52,5 +52,10 @@ namespace MyCourse.Models.Services.Application.Lessons
             memoryCache.Remove($"Course{inputModel.CourseId}");
             memoryCache.Remove($"Lesson{inputModel.Id}");
         }
+
+        public bool VerifyExistenceTitle(string title, int courseId)
+        {
+            return lessonService.VerifyExistenceTitle(title, courseId);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authorization;
@@ -40,6 +41,18 @@ namespace MyCourse.Controllers
         {
             if (ModelState.IsValid)
             {
+                string title = inputModel.Title;
+                if (title == String.Empty || title.Length == 0)
+                {
+                    TempData["ConfirmationMessage"] = "Il titotlo è obbligatorio";
+                    return View(inputModel);
+                }
+                bool existsTitle = lessonService.VerifyExistenceTitle(inputModel.Title, inputModel.CourseId);
+                if (existsTitle)
+                {
+                    TempData["ConfirmationMessage"] = "Il titolo è già esistente, scegli un altro titolo!";
+                    return RedirectToAction(nameof(Create), new { id = inputModel.CourseId });
+                }
                 LessonDetailViewModel lesson = await lessonService.CreateLessonAsync(inputModel);
                 TempData["ConfirmationMessage"] = "Ok! La lezione è stata creata, aggiungi anche gli altri dati";
                 return RedirectToAction(nameof(Edit), new { id = lesson.Id });
@@ -66,6 +79,17 @@ namespace MyCourse.Controllers
             {
                 try
                 {
+                    if (inputModel.Duration.Ticks.Equals(0))
+                    {
+                        TempData["ConfirmationMessage"] = "La durata è obbligatoria!";
+                        return View(inputModel);
+                    }
+
+                    if (inputModel.Description == string.Empty || inputModel.Description.Length == 0)
+                    {
+                        TempData["ConfirmationMessage"] = "La descrizione è obbligatoria!";
+                        return View(inputModel);
+                    }
                     LessonDetailViewModel viewModel = await lessonService.EditLessonAsync(inputModel);
                     TempData["ConfirmationMessage"] = "I dati sono stati salvati con successo";
                     return RedirectToAction(nameof(Detail), new { id = viewModel.Id });

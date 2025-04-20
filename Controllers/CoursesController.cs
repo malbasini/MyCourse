@@ -113,6 +113,16 @@ namespace MyCourse.Controllers
             {
                 try
                 {
+                    if (inputModel.CurrentPrice.Amount.Equals(0) || inputModel.CurrentPrice.Amount < 0)
+                    {
+                        TempData["ConfirmationMessage"] = "Il prezzo corrente deve essere maggiore di zero";
+                        return View(inputModel);
+                    }
+                    if (inputModel.FullPrice.Amount.Equals(0) || inputModel.FullPrice.Amount < 0)
+                    {
+                        TempData["ConfirmationMessage"] = "Il prezzo intero deve essere maggiore di zero";
+                        return View(inputModel);
+                    }
                     CourseDetailViewModel course = await courseService.EditCourseAsync(inputModel);
                     TempData["ConfirmationMessage"] = "I dati sono stati salvati con successo";
                     return RedirectToAction(nameof(Detail), new { id = inputModel.Id });

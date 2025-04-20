@@ -11,5 +11,6 @@ namespace MyCourse.Models.Services.Application.Lessons
         Task<LessonDetailViewModel> CreateLessonAsync(LessonCreateInputModel inputModel);
         Task<LessonDetailViewModel> EditLessonAsync(LessonEditInputModel inputModel);
         Task DeleteLessonAsync(LessonDeleteInputModel id);
+        public bool VerifyExistenceTitle(string title, int courseId);
     }
 }

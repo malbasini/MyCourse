@@ -105,5 +105,11 @@ namespace MyCourse.Models.Services.Application.Lessons
             dbContext.Remove(lesson);
             await dbContext.SaveChangesAsync();
         }
+
+        public bool VerifyExistenceTitle(string title, int courseId)
+        {
+            IQueryable<Lesson> exist = dbContext.Lessons.Where(z=>z.Title==title && z.CourseId==courseId);
+            return exist.Any();
+        }
     }
 }

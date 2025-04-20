@@ -91,5 +91,14 @@ namespace MyCourse.Models.Services.Application.Lessons
                 throw new LessonNotFoundException(inputModel.Id);
             }
         }
+        public bool VerifyExistenceTitle(string title, int courseId)
+        {
+            return db.QueryScalarAsync<bool>($"SELECT COUNT(*) FROM Lessons WHERE Title='{title}' AND CourseId={courseId}").Result;
+        }
+        public async Task<LessonDetailViewModel> GetLessonByTitleAsync(string title, int courseId)
+        {
+            FormattableString query = $@"SELECT Id, CourseId, Title, Description, Duration FROM Lessons WHERE Title='{title}' AND CourseId={courseId}";
+            return await GetLessonAsync(await db.QueryScalarAsync<int>(query));
+        }
     }
 }
