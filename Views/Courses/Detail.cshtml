@@ -78,11 +78,12 @@
     </div>
 </section>
 <section class="course-lessons">
-    @if (isSubscribed || canEdit)
+    @if (canEdit)
     {
         <h2>Lezioni</h2>
-        <a class ="btn btn-outline-primary btn-sm" asp-controller = "Lessons" asp-action = "Create" asp-route-id = "@Model.Id" ><i class ="fas fa-plus" ></i > Crea nuova </a>
-        @foreach (var lesson in Model.Lessons)
+        <a class="btn btn-outline-primary btn-sm" asp-controller="Lessons" asp-action="Create" asp-route-id="@Model.Id"><i class="fas fa-plus"></i > Crea nuova </a>
+    }
+    @foreach (var lesson in Model.Lessons)
         {
             <hr>
             <div class="row">
@@ -111,17 +112,18 @@
                 </div>
             </div>
         }
-
-        <hr>
-        <div class="row course-duration">
-            <div class="col-md-9 d-flex align-items-center">
-                Totale
+        @if (isSubscribed || canEdit)
+        {
+            <hr>
+            <div class="row course-duration">
+                <div class="col-md-9 d-flex align-items-center">
+                    Totale
+                </div>
+                <div class="col-md-3 d-flex align-items-center justify-content-end">
+                    <i class="far fa-clock"></i><time>@Model.TotalCourseDuration.ToString("h'h 'm'm 's's'")</time>
+                </div>
             </div>
-            <div class="col-md-3 d-flex align-items-center justify-content-end">
-                <i class="far fa-clock"></i><time>@Model.TotalCourseDuration.ToString("h'h 'm'm 's's'")</time>
-            </div>
-        </div>
-    }
+       }
 </section>
 <!-- Modal -->
 <div class="modal fade" id="voteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
