@@ -33,7 +33,7 @@ namespace MyCourse.Models.Services.Infrastructure
             try
             {
                 //Salvare il file
-                string path = $"/Courses/{courseId}.jpg";
+                string path = $"/Courses/{formFile.FileName}";
                 string physicalPath = Path.Combine(env.WebRootPath, "Courses", $"{courseId}.jpg");
 
                 using Stream inputStream = formFile.OpenReadStream();
