@@ -34,7 +34,7 @@ namespace MyCourse.Models.Services.Infrastructure
             {
                 //Salvare il file
                 string path = $"/Courses/{formFile.FileName}";
-                string physicalPath = Path.Combine(env.WebRootPath, "Courses", $"{courseId}.jpg");
+                string physicalPath = Path.Combine(env.WebRootPath, "Courses", $"{formFile.FileName}");
 
                 using Stream inputStream = formFile.OpenReadStream();
                 using MagickImage image = new MagickImage(inputStream);
