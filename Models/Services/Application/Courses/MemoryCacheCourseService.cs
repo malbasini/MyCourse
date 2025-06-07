@@ -122,6 +122,11 @@ namespace MyCourse.Models.Services.Application.Courses
             return courseService.IsCourseSubscribedAsync(courseId);
         }
 
+        public Task<bool> IsCourseSubscribedAsync(int courseId, string userId)
+        {
+            return courseService.IsCourseSubscribedAsync(courseId, userId);
+        }
+
         public Task<CourseSubscribeInputModel> CapturePaymentAsyncStripe(int id, string token)
         {
             return courseService.CapturePaymentAsyncStripe(id,token);

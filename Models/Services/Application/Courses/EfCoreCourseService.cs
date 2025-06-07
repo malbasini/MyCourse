@@ -356,10 +356,15 @@ namespace MyCourse.Models.Services.Application.Courses
         {
             return await dbContext.Subscriptions.Where(subscription => subscription.CourseId == courseId).AnyAsync();
         }
-        
+
+        public Task<bool> IsCourseSubscribedAsync(int courseId, string userId)
+        {
+            return dbContext.Subscriptions.Where(subscription => subscription.CourseId==courseId && subscription.UserId==userId).AnyAsync();;
+        }
+
         public Task<bool> IsSubscribedAsync(int courseId)
         {
-            return dbContext.Subscriptions.Where(subscription => subscription.CourseId==courseId).AnyAsync();;
+            return dbContext.Subscriptions.Where(subscription => subscription.CourseId==courseId).AnyAsync();
         }
         
 

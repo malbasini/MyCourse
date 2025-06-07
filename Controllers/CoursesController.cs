@@ -155,7 +155,7 @@ namespace MyCourse.Controllers
             bool isSubscribe = await courseService.IsCourseSubscribedAsync(inputModel.Id);
             if (isSubscribe)
             {
-                TempData["Message"] = "Il corso è stato acquistato impossibile eliminarlo!";
+                TempData["Message"] = "Il corso è stato acquistato. Impossibile eliminarlo!";
                 return RedirectToAction(nameof(Detail), new { id = inputModel.Id });
             }
             await courseService.DeleteCourseAsync(inputModel);
