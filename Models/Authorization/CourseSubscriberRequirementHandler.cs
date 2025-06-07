@@ -59,7 +59,7 @@ namespace MyCourse.Models.Authorization
                 }
             }
 
-            bool isSubscribed = await courseService.IsCourseSubscribedAsync(courseId, userId);
+            bool isSubscribed = await courseService.IsCourseSubscribedAsync(courseId);
             if (isSubscribed)
             {
                 context.Succeed(requirement);

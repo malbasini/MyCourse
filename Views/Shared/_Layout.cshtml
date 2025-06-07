@@ -57,6 +57,12 @@
         @TempData["ConfirmationMessage"]
     </div>
     }
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-danger alert-dismissable mt-3" role="alert">
+            @TempData["Message"]
+        </div>
+    }
     @RenderBody()
 </div>
 <environment include="Development">

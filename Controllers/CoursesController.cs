@@ -4,12 +4,15 @@ using System.Threading.Tasks;
 using AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MyCourse.Customizations.Authorization;
+using MyCourse.Models.Entities;
 using MyCourse.Models.Enums;
 using MyCourse.Models.Exceptions.Application;
 using MyCourse.Models.InputModels.Courses;
@@ -149,6 +152,12 @@ namespace MyCourse.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(CourseDeleteInputModel inputModel)
         {
+            bool isSubscribe = await courseService.IsCourseSubscribedAsync(inputModel.Id);
+            if (isSubscribe)
+            {
+                TempData["Message"] = "Il corso è stato acquistato impossibile eliminarlo!";
+                return RedirectToAction(nameof(Detail), new { id = inputModel.Id });
+            }
             await courseService.DeleteCourseAsync(inputModel);
             TempData["ConfirmationMessage"] = "Il corso è stato eliminato ma potrebbe continuare a comparire negli elenchi per un breve periodo, finché la cache non viene aggiornata.";
             return RedirectToAction(nameof(Index));

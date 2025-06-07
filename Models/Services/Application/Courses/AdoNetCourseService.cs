@@ -308,6 +308,11 @@ namespace MyCourse.Models.Services.Application.Courses
             }
         }
 
+        public Task<bool> IsCourseSubscribedAsync(int courseId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> IsCourseSubscribedAsync(int courseId, string? userId)
         {
             return db.QueryScalarAsync<bool>($"SELECT COUNT(*) FROM Subscriptions WHERE CourseId={courseId} AND UserId={userId}");

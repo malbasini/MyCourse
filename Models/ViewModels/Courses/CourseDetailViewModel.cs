@@ -15,6 +15,8 @@ namespace MyCourse.Models.ViewModels.Courses
         public string Title { get; set; }
         public string ImagePath { get; set; }
         public string Author { get; set; }
+        public string AuthorId { get; set; }
+        public string Email { get; set; }
         public double Rating { get; set; }
         public Money FullPrice { get; set; }
         public Money CurrentPrice { get; set; }
@@ -54,7 +56,9 @@ namespace MyCourse.Models.ViewModels.Courses
                 Id = course.Id,
                 Title = course.Title,
                 Description = course.Description,
+                Email = course.Email,
                 Author = course.Author,
+                AuthorId = course.AuthorId,
                 ImagePath = course.ImagePath,
                 Rating = course.Rating,
                 CurrentPrice = course.CurrentPrice,

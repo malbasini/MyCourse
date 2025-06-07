@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using Ganss.Xss;
 using Microsoft.AspNetCore.Http;
@@ -351,10 +352,16 @@ namespace MyCourse.Models.Services.Application.Courses
             }
         }
 
-        public Task<bool> IsCourseSubscribedAsync(int courseId, string? userId)
+        public async Task<bool> IsCourseSubscribedAsync(int courseId)
         {
-            return dbContext.Subscriptions.Where(subscription => subscription.CourseId == courseId && subscription.UserId == userId).AnyAsync();
+            return await dbContext.Subscriptions.Where(subscription => subscription.CourseId == courseId).AnyAsync();
         }
+        
+        public Task<bool> IsSubscribedAsync(int courseId)
+        {
+            return dbContext.Subscriptions.Where(subscription => subscription.CourseId==courseId).AnyAsync();;
+        }
+        
 
         public Task<CourseSubscribeInputModel> CapturePaymentAsyncStripe(int id, string token)
         {
