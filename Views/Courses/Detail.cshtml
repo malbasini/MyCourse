@@ -70,20 +70,25 @@
                     <price current-price="@Model.CurrentPrice" full-price="@Model.FullPrice"></price>
                 </div>
                 <img src="@Model.ImagePath" class="img-fluid course-image" alt="@Model.Title" asp-append-version="true">
-                <a asp-page="/Contact" asp-route-id=@Model.Id class="btn btn-block btn-outline-secondary mt-3">Fai una domanda</a>
-                <a asp-action="Vote" asp-route-id="@Model.Id" class="btn btn-block btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#voteModal">Valuta il corso</a>
-                
+                @if (isSubscribed)
+                {
+                    <a asp-page="/Contact" asp-route-id=@Model.Id class="btn btn-block btn-outline-secondary mt-3">Fai una domanda</a>
+                    <a asp-action="Vote" asp-route-id="@Model.Id" class="btn btn-block btn-outline-secondary mt-2" data-bs-toggle="modal" data-bs-target="#voteModal">Valuta il corso</a>
+                }
+
             </aside>
         </div>
     </div>
 </section>
 <section class="course-lessons">
-    @if (canEdit)
+    @if (canEdit || isSubscribed)
     {
         <h2>Lezioni</h2>
-        <a class="btn btn-outline-primary btn-sm" asp-controller="Lessons" asp-action="Create" asp-route-id="@Model.Id"><i class="fas fa-plus"></i > Crea nuova </a>
-    }
-    @foreach (var lesson in Model.Lessons)
+        if (canEdit)
+        {
+            <a class="btn btn-outline-primary btn-sm" asp-controller="Lessons" asp-action="Create" asp-route-id="@Model.Id"><i class="fas fa-plus"></i> Crea nuova </a>
+        }
+        @foreach (var lesson in Model.Lessons)
         {
             <hr>
             <div class="row">
@@ -112,6 +117,7 @@
                 </div>
             </div>
         }
+
         @if (isSubscribed || canEdit)
         {
             <hr>
@@ -123,7 +129,8 @@
                     <i class="far fa-clock"></i><time>@Model.TotalCourseDuration.ToString("h'h 'm'm 's's'")</time>
                 </div>
             </div>
-       }
+        }
+    }
 </section>
 <!-- Modal -->
 <div class="modal fade" id="voteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
