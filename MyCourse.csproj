@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <UserSecretsId>MyCourse</UserSecretsId>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -13,18 +13,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AspNetCore.ReCaptcha" Version="1.8.2" />
-    <PackageReference Include="HtmlSanitizer" Version="9.1.885-beta" />
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.6.0" />
-    <PackageReference Include="MailKit" Version="4.11.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.0-preview.3.25172.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="10.0.0-preview.3.25172.1" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0-preview.3.25171.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0-preview.3.25171.6">
+    <PackageReference Include="HtmlSanitizer" Version="9.1.887-beta" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.9.1" />
+    <PackageReference Include="MailKit" Version="4.14.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.11" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.11">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.0-preview.3.25171.6" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="9.0.11" />
     <PackageReference Include="PayPalCheckoutSdk" Version="1.0.4" />
     <PackageReference Include="Stripe.net" Version="39.66.0" />
   </ItemGroup>

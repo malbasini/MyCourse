@@ -1,11 +1,10 @@
+namespace MyCourse.Models.Services.Infrastructure;
+
+
 using System;
 using Microsoft.Extensions.Options;
 using Stripe;
 using Stripe.Checkout;
-
-namespace MyCourse.Models.Services.Infrastructure;
-
-
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MyCourse.Models.Enums;

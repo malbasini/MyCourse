@@ -381,9 +381,9 @@ namespace MyCourse.Models.Services.Infrastructure
         {
             DataSet dataSet = await db.QueryAsync($"SELECT * FROM AspNetUserLogins WHERE UserId={user.Id}", token);
             List<UserLoginInfo> userLogins = dataSet.Tables[0].AsEnumerable().Select(row => new UserLoginInfo(
-                providerKey: Convert.ToString(row["ProviderKey"]),
                 loginProvider: Convert.ToString(row["LoginProvider"]),
-                providerDisplayName:Convert.ToString(row["ProviderDisplayName"])
+                providerKey: Convert.ToString(row["ProviderKey"]),
+                displayName:Convert.ToString(row["ProviderDisplayName"])
             )).ToList();
             return userLogins;
         }

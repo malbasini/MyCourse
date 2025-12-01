@@ -5,18 +5,21 @@
     <div class="row">
         <div class="col-4">
             <label asp-for="Input.Email"></label>
+            <hr/>
             <input type="text" asp-for="Input.Email" class="form-control" placeholder="Email">
         </div>
         <div class="col-4">
             <label asp-for="Input.Role"></label>
+            <hr/>
             <select asp-for="Input.Role" asp-items="@Html.GetEnumSelectList<Role>()" class="form-control">
             </select>
         </div>
         <div class="col-4">
             <label>Operazione</label>
+            <hr/>
             <div>
-                <button type="submit" class="btn btn-success" asp-route-inrole="@((int) Model.InRole)" asp-page-handler="Assign">Assegna</button>
-                <button type="submit" class="btn btn-danger" asp-route-inrole="@((int) Model.InRole)" asp-page-handler="Revoke">Revoca</button>
+                <button type="submit" class="btn btn-success" asp-route-inrole="@((int)Model.InRole)" asp-page-handler="Assign">Assegna</button>
+                <button type="submit" class="btn btn-danger" asp-route-inrole="@((int)Model.InRole)" asp-page-handler="Revoke">Revoca</button>
             </div>
         </div>
     </div>
